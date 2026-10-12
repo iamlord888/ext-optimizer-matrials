@@ -1,14 +1,17 @@
 # 超时执行反馈专利材料 / Timeout Execution Feedback Patent Materials
 
-慢候选可能占用大部分调优预算，普通超时取消又会丢失本轮已经产生的算子统计。本材料整理了在取消清理前保留行数和执行状态、判断可用反馈并用于同一 SQL 下一轮候选的方案。
+慢候选可能占用大部分调优预算，超时取消会中断 `EXPLAIN ANALYZE` 的正常结果路径。本材料整理了在取消清理前保留行数和执行状态、判断可用反馈并用于同一 SQL 下一轮候选的方案。
 
-Slow candidates can consume much of the tuning budget, while ordinary timeout cancellation loses operator statistics already produced. These materials describe capturing row counts and execution state before cleanup and using qualified feedback for the next candidate of the same SQL.
+Slow candidates can consume much of the tuning budget, while timeout cancellation interrupts the normal `EXPLAIN ANALYZE` result path. These materials describe capturing row counts and execution state before cleanup and using qualified feedback for the next candidate of the same SQL.
 
 ## 文稿 / Documents
 
 - [专利交底书底稿 / Disclosure draft](design/patent-timeout-feedback-disclosure-draft.md)
 - [七页中文汇报文稿 / Chinese slide text](design/patent-timeout-feedback-idea-slides.md)
 - [英文汇报文稿 / English slide text](design/patent-timeout-feedback-idea-slides-en.md)
+- [PPT 内容与拟保护点修订建议 / Slide and protection recommendations](design/patent-timeout-feedback-protection-review.md)
+- [修订建议英文对照 / Recommendations in English](design/patent-timeout-feedback-protection-review-en.md)
+- [本轮专利原文复核 / Primary patent review](design/patent-timeout-feedback-primary-review-20261012.md)
 - [文稿事实核查 / Manuscript audit](design/patent-timeout-feedback-manuscript-audit.md)
 - [现有技术初步核查 / Prior-art review](design/patent-timeout-feedback-prior-art.md)
 - [专利检索与技术边界 / Patent landscape](design/patent-timeout-feedback-patent-landscape.md)
