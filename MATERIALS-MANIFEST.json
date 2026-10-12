@@ -27,8 +27,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7032,
-      "sha256": "3bb843b92c33268fb2065784a52eaa46f3ca61731df420642bff92146de4c2ad"
+      "bytes": 7232,
+      "sha256": "6c9ebca179e1ce0d7eac73ee7625be1d4591244dd18a85d3011290b43f69baa4"
     },
     {
       "path": "contrib/extopt-gaussdb/extopt--1.0.sql",
@@ -272,8 +272,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-figures/png/fig2-system.png",
-      "bytes": 177452,
-      "sha256": "2198f39a8b3405be35a2535ea770e2e07e2c0d71796c85b15496e4cf3cdff2b6"
+      "bytes": 184659,
+      "sha256": "dae830f5a4bfa91b6cca96d663d9a228e59fe93affa0e7f0cd540ef15a466962"
     },
     {
       "path": "design/patent-timeout-feedback-figures/png/fig3-executor-observation-flow.png",
@@ -317,8 +317,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-figures/pptx/fig2-system.pptx",
-      "bytes": 23176,
-      "sha256": "807c917f3e306750f34389db9e5c55f2bfabcf91d6a999fa8b14ad51691902f8"
+      "bytes": 23501,
+      "sha256": "b709659286447e3b495dcbff73e38c7a2c6d4592eeadda48a7b1e62f6ebcf881"
     },
     {
       "path": "design/patent-timeout-feedback-figures/pptx/fig3-executor-observation-flow.pptx",
@@ -362,8 +362,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-figures/svg/fig2-system.svg",
-      "bytes": 11082,
-      "sha256": "f95c438c5fc480b0a01da57d177cde7a9780474fbcd093d09c906ecdc3f542ad"
+      "bytes": 12004,
+      "sha256": "2c26943401a18612be1c8267b05b7410eb79f67a2d6a2fe6b59dbae56bd325d2"
     },
     {
       "path": "design/patent-timeout-feedback-figures/svg/fig3-executor-observation-flow.svg",
@@ -392,13 +392,13 @@
     },
     {
       "path": "design/patent-timeout-feedback-idea-slides-en.md",
-      "bytes": 13035,
-      "sha256": "42143c28e901a30d13cc5da174c5e1bbd55bb2a071a32ef55646c14ee8b1614e"
+      "bytes": 13136,
+      "sha256": "063fb0d2aab0a167fa5d2b69f4c1f082cf1afd9c4b727654f4596774258fdc26"
     },
     {
       "path": "design/patent-timeout-feedback-idea-slides.md",
-      "bytes": 11863,
-      "sha256": "15cd81f4be154252484ae120ad748f65685f015f9ad853f909567481c6277204"
+      "bytes": 11908,
+      "sha256": "80a80222dd7ac15a3fd8efd412d690abf804d31fae4bc84728fbb6d74abe9001"
     },
     {
       "path": "design/patent-timeout-feedback-manuscript-audit.md",

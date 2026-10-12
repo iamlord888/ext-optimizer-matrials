@@ -30,7 +30,7 @@ Each figure has one current version and the same filename across formats. PNG an
 | 图 / Figure | 内容 / Subject | PNG | 可编辑 PPT / Editable PPT |
 | --- | --- | --- | --- |
 | 1 | 候选 SQL 的限时执行 / Candidate execution deadline | [PNG](design/patent-timeout-feedback-figures/png/fig1-conventional.png) | [PPTX](design/patent-timeout-feedback-figures/pptx/fig1-conventional.pptx) |
-| 2 | 单轮候选与超时反馈循环 / Candidate rounds and timeout feedback | [PNG](design/patent-timeout-feedback-figures/png/fig2-system.png) | [PPTX](design/patent-timeout-feedback-figures/pptx/fig2-system.pptx) |
+| 2 | 单轮候选与行数反馈 / Candidate rounds and row-count feedback | [PNG](design/patent-timeout-feedback-figures/png/fig2-system.png) | [PPTX](design/patent-timeout-feedback-figures/pptx/fig2-system.pptx) |
 | 3 | 算子统计、get_next 与本地 EOF / Operator statistics, get_next and local EOF | [PNG](design/patent-timeout-feedback-figures/png/fig3-executor-observation-flow.png) | [PPTX](design/patent-timeout-feedback-figures/pptx/fig3-executor-observation-flow.pptx) |
 | 4 | 执行器释放前读取统计 / Capture before executor cleanup | [PNG](design/patent-timeout-feedback-figures/png/fig4-capture-window.png) | [PPTX](design/patent-timeout-feedback-figures/pptx/fig4-capture-window.pptx) |
 | 5 | 行数分类和 Rows Hint 更新 / Row classification and Rows Hint updates | [PNG](design/patent-timeout-feedback-figures/png/fig5-evidence.png) | [PPTX](design/patent-timeout-feedback-figures/pptx/fig5-evidence.pptx) |
@@ -39,9 +39,9 @@ Each figure has one current version and the same filename across formats. PNG an
 | 8 | 调优总时长 / Total tuning duration | [PNG](design/patent-timeout-feedback-figures/png/fig8-tuning-duration.png) | [PPTX](design/patent-timeout-feedback-figures/pptx/fig8-tuning-duration.pptx) |
 | 9 | 完整执行时间总和 / Total complete execution time | [PNG](design/patent-timeout-feedback-figures/png/fig9-execution-effect.png) | [PPTX](design/patent-timeout-feedback-figures/pptx/fig9-execution-effect.pptx) |
 
-第 2 张图明确标出第 i 轮候选、超时取证、基数修正和第 i+1 轮候选。第 3 页文稿已简化为遍历算子、读取行数、判定本地 EOF、返回统计四步。
+第 2 张图明确标出第 i 轮候选。正常完成和超时取消都进入算子行数反馈，用于生成第 i+1 轮候选；正常完成还提供运行时间，用于比较最佳已完成候选。第 3 页文稿已简化为遍历算子、读取行数、判定本地 EOF、返回统计四步。
 
-Figure 2 explicitly labels candidate i, timeout capture, cardinality correction and candidate i+1. Slide 3 uses four steps: traverse operators, read row counts, identify local EOF and return statistics.
+Figure 2 shows both normal-completion and timeout statistics entering row-count feedback for candidate i+1. Normal completion also supplies runtime for selecting the best completed candidate. Slide 3 uses four steps: traverse operators, read row counts, identify local EOF and return statistics.
 
 本地查看 HTML：在仓库根目录运行 `python3 -m http.server 4311`，然后打开 `http://127.0.0.1:4311/design/patent-timeout-feedback-figures/html/index.html`。
 

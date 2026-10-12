@@ -77,7 +77,8 @@
 <path d="M 985.65 301.79 L 980.06 306 L 991.24 306 Z" fill="#275C85" stroke-width="0" stroke="none" />
 </g>
 <g id="shape-30" data-name="svg-031-text">
-<text x="1008.94" y="316.78" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#66757F"><tspan fill="#66757F" font-size="11.51">正常结束：执行时间</tspan></text>
+<rect x="1008.94" y="307" width="250" height="15" fill="none" stroke-width="0" stroke="none" />
+<text x="1008.94" y="316.78" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#66757F"><tspan fill="#66757F" font-size="11.51">正常完成：执行时间</tspan></text>
 </g>
 <g id="shape-32" data-name="svg-033-text">
 <rect x="248.7" y="406" width="290" height="21" fill="none" stroke-width="0" stroke="none" />
@@ -130,7 +131,8 @@
 <text x="61.43" y="472.78" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#66757F"><tspan fill="#66757F" font-size="11.51">灰色：候选执行路径</tspan></text>
 </g>
 <g id="shape-50" data-name="svg-051-text">
-<text x="358.63" y="472.78" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#1D7B74"><tspan fill="#1D7B74" font-size="11.51">绿色：超时节点反馈路径</tspan></text>
+<rect x="358.63" y="463" width="320" height="15" fill="none" stroke-width="0" stroke="none" />
+<text x="358.63" y="472.78" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#1D7B74"><tspan fill="#1D7B74" font-size="11.51">绿色：算子行数反馈路径</tspan></text>
 </g>
 <g id="shape-51" data-name="svg-052-text">
 <text x="725.71" y="472.78" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#275C85"><tspan fill="#275C85" font-size="11.51">蓝色：完整时间评价路径</tspan></text>
@@ -138,4 +140,14 @@
 <g id="shape-53" data-name="next-candidate-round">
 <rect x="248.7" y="442" width="270" height="16" fill="none" stroke-width="0" stroke="none" />
 <text x="248.7" y="452.2" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#1D7B74"><tspan fill="#1D7B74" font-size="12">生成第 i+1 轮候选</tspan></text>
+</g>
+<g id="shape-54" data-name="normal-completion-row-feedback">
+<path d="M 876 366.8 L 876 397 L 650 397 L 650 402" fill="none" stroke-width="2.5" stroke="#1D7B74" />
+</g>
+<g id="shape-55" data-name="normal-completion-row-feedback-arrow">
+<path d="M 650 402 L 645.5 396.5 L 654.5 396.5 Z" fill="#1D7B74" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-56" data-name="normal-completion-statistics-label">
+<rect x="700" y="378" width="170" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="700" y="388.2" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#1D7B74"><tspan fill="#1D7B74" font-size="12">正常完成：算子统计</tspan></text>
 </g></svg>

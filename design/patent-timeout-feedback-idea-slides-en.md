@@ -25,9 +25,9 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 3. **On normal completion:** Collect operator statistics and complete runtime, update the next round's inputs, and compare candidate performance.
 4. **On timeout cancellation:** Preserve the original plan and operator observations before executor cleanup, qualify the row counts, and pass accepted feedback to the next candidate after cancellation finishes.
 
-**A timed-out round can contribute cardinality feedback. Complete candidate runtimes come from normally completed executions.**
+**Both normally completed and timed-out candidates can provide row-count feedback. Complete runtimes come from normally completed executions.**
 
-**Suggested visual:** [Figure 2: System and feedback position](patent-timeout-feedback-figures/png/fig2-system.png). Show “candidate i → capture on cancellation → cardinality correction → candidate i+1” alongside the complete-runtime evaluation path.
+**Suggested visual:** [Figure 2: System and feedback position](patent-timeout-feedback-figures/png/fig2-system.png). Show candidate i feeding operator statistics to row-count feedback after either normal completion or timeout cancellation, which supports candidate i+1. Normal completion also supplies runtime for comparing completed candidates.
 
 ## Slide 3 — Technical approach 2: Read and return operator execution statistics
 
