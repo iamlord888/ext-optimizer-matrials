@@ -27,8 +27,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7590,
-      "sha256": "c0c2f149aa48f0244091b6e41477f20b55edec3c51ab7956c08149cef345ea97"
+      "bytes": 7723,
+      "sha256": "adffb3243a3b72d0e2f59f215dbfafed6e1bed52069b51f6accd21f5777e11f6"
     },
     {
       "path": "contrib/extopt-gaussdb/extopt--1.0.sql",
@@ -174,6 +174,11 @@
       "path": "data/patience5-ab-20260928/results/execution-analysis.json",
       "bytes": 957,
       "sha256": "ec7f6233fc57764172b83348b97136416d68fab66138a3e2c909893044ca081c"
+    },
+    {
+      "path": "data/patience5-ab-20260928/results/job-execution-attribution.tsv",
+      "bytes": 8596,
+      "sha256": "2821ff3a2dcfc2f0d12fa48be6a45098f2275c8ea9433ee5846a29db3e0f8552"
     },
     {
       "path": "data/patience5-ab-20260928/results/measurements.tsv",
@@ -399,6 +404,11 @@
       "path": "design/patent-timeout-feedback-idea-slides.md",
       "bytes": 12863,
       "sha256": "1bbc6d11c122acbbb05b3ee65670edd8e8d0e7d10d3c046cbafeb26e6188b439"
+    },
+    {
+      "path": "design/patent-timeout-feedback-job-execution-attribution.md",
+      "bytes": 7209,
+      "sha256": "ff01b149371daa73bca3c99daff77b5dc233f9be8787e9cdcc791a29ae230428"
     },
     {
       "path": "design/patent-timeout-feedback-manuscript-audit.md",

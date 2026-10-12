@@ -65,6 +65,7 @@ For local HTML preview, run the command above from the repository root and open 
 - [实施与验证记录 / Implementation and validation record](design/timeout-feedback-implementation.md)
 - [JOB 对照测试方案 / JOB comparison plan](design/JOB超时反馈对照测试方案.md)
 - [GaussDB 部署记录 / GaussDB deployment record](design/JOB独立GaussDB部署记录.md)
+- [JOB 执行总时间差额分析 / JOB runtime contribution analysis](design/patent-timeout-feedback-job-execution-attribution.md)
 - [逐查询数据工作簿 / Per-query workbook](outputs/job_job_complex_tuning_query_summary_patience5_20260928.xlsx)
 - [测量、调优与事件记录 / Measurement, tuning and event records](data/patience5-ab-20260928/)
 - [文稿引用的实现快照 / Referenced implementation snapshots](contrib/)
