@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="240" viewBox="0 240 1280 240"><rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+<g id="shape-26" data-name="svg-002-rect">
+<rect x="727.07" y="265.61" width="331.23" height="180.55" fill="#EAF4F2" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-2" data-name="svg-003-text">
+<rect x="752.62" y="270.37" width="172" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="752.62" y="280.57" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">执行器对象释放前读取统计</tspan></text>
+</g>
+<g id="shape-3" data-name="svg-004-line">
+<path d="M 191.42 314.79 L 1128.33 314.79" fill="none" stroke-width="2" stroke="#D5DDE2" />
+</g>
+<g id="shape-4" data-name="svg-005-line">
+<path d="M 191.42 313.06 L 727.07 313.06" fill="none" stroke-width="6" stroke="#758591" />
+</g>
+<g id="shape-5" data-name="svg-006-line">
+<path d="M 727.07 313.06 L 1058.3 313.06" fill="none" stroke-width="6" stroke="#1D7B74" />
+</g>
+<g id="shape-6" data-name="svg-007-line">
+<path d="M 1058.3 313.06 L 1128.33 313.06" fill="none" stroke-width="6" stroke="#758591" />
+</g>
+<g id="shape-7" data-name="svg-008-circle">
+<ellipse cx="191.42" cy="313.06" rx="4" ry="4" fill="#758591" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-8" data-name="svg-009-circle">
+<ellipse cx="727.07" cy="313.06" rx="4.5" ry="4.5" fill="#AE664E" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-9" data-name="svg-010-circle">
+<ellipse cx="894.57" cy="313.06" rx="5.5" ry="5.5" fill="#1D7B74" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-10" data-name="svg-011-circle">
+<ellipse cx="1058.3" cy="313.06" rx="4" ry="4" fill="#758591" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-11" data-name="svg-012-text">
+<rect x="104.35" y="246" width="152" height="18" fill="none" stroke-width="0" stroke="none" />
+<text x="104.35" y="257.22" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="13.2" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="13.2" font-weight="bold">ExecutorRun 入口</tspan></text>
+</g>
+<g id="shape-12" data-name="svg-013-text">
+<rect x="165.87" y="264.01" width="149" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="165.87" y="274.21" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">保存 PlanState 指针</tspan></text>
+</g>
+<g id="shape-13" data-name="svg-014-text">
+<rect x="664.61" y="246" width="74" height="18" fill="none" stroke-width="0" stroke="none" />
+<text x="664.61" y="257.22" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="13.2" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="13.2" font-weight="bold">期限触发</tspan></text>
+</g>
+<g id="shape-14" data-name="svg-015-text">
+<rect x="664.61" y="264.01" width="68" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="664.61" y="274.21" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">取消异常</tspan></text>
+</g>
+<g id="shape-15" data-name="svg-016-text">
+<rect x="867.13" y="246" width="45" height="18" fill="none" stroke-width="0" stroke="none" />
+<text x="867.13" y="257.22" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="13.2" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="13.2" font-weight="bold">快照</tspan></text>
+</g>
+<g id="shape-16" data-name="svg-017-text">
+<rect x="1062.08" y="246" width="45" height="18" fill="none" stroke-width="0" stroke="none" />
+<text x="1062.08" y="257.22" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="13.2" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="13.2" font-weight="bold">清理</tspan></text>
+</g>
+<g id="shape-17" data-name="svg-018-text">
+<rect x="40" y="357.15" width="119" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="40" y="367.35" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="12" font-weight="bold">PlanState 指针</tspan></text>
+</g>
+<g id="shape-18" data-name="svg-019-path">
+<path d="M 191.42 365.14 L 1058.3 365.14" fill="none" stroke-width="5" stroke="#275C85" />
+</g>
+<g id="shape-19" data-name="svg-020-text">
+<rect x="205.62" y="374.54" width="269" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="205.62" y="384.74" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">从 QueryDesc.planstate 遍历执行计划</tspan></text>
+</g>
+<g id="shape-20" data-name="svg-021-text">
+<rect x="40" y="408.08" width="136" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="40" y="418.28" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="12" font-weight="bold">Instrumentation</tspan></text>
+</g>
+<g id="shape-21" data-name="svg-022-path">
+<path d="M 191.42 415.48 L 1058.3 415.48" fill="none" stroke-width="5" stroke="#758591" />
+</g>
+<g id="shape-22" data-name="svg-023-circle">
+<ellipse cx="894.57" cy="415.48" rx="5" ry="5" fill="#1D7B74" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-23" data-name="svg-024-text">
+<rect x="205.62" y="425.46" width="219" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="205.62" y="435.66" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">记录返回行数、调用状态和 Loops</tspan></text>
+</g>
+<g id="shape-24" data-name="svg-025-path">
+<path d="M 894.57 320 L 894.57 409.7" fill="none" stroke-width="2.5" stroke="#1D7B74" stroke-dasharray="4 4" />
+</g>
+<g id="shape-25" data-name="svg-026-text">
+<rect x="727.07" y="454.9" width="254" height="18" fill="none" stroke-width="0" stroke="none" />
+<text x="727.07" y="466.12" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="13.2" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="13.2" font-weight="bold">先保存执行统计，再返回查询取消错误</tspan></text>
+</g></svg>

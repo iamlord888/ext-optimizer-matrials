@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="240" viewBox="0 240 1280 240"><rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+<g id="shape-32" data-name="svg-002-text">
+<rect x="40" y="246" width="141" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="40" y="256.2" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#64727C"><tspan fill="#64727C" font-size="12">候选 SQL 的限时执行</tspan></text>
+</g>
+<g id="shape-2" data-name="svg-003-line">
+<path d="M 235.26 271.66 L 1128.15 271.66" fill="none" stroke-width="1.5" stroke="#D8DFE3" />
+</g>
+<g id="shape-3" data-name="svg-004-text">
+<rect x="235.26" y="254.94" width="42" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="235.26" y="265.14" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#64727C"><tspan fill="#64727C" font-size="12">开始</tspan></text>
+</g>
+<g id="shape-4" data-name="svg-005-text">
+<rect x="538.58" y="254.94" width="68" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="538.58" y="265.14" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#64727C"><tspan fill="#64727C" font-size="12">单轮期限</tspan></text>
+</g>
+<g id="shape-5" data-name="svg-006-text">
+<rect x="968.91" y="254.94" width="68" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="968.91" y="265.14" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#64727C"><tspan fill="#64727C" font-size="12">查询结束</tspan></text>
+</g>
+<g id="shape-6" data-name="svg-007-line">
+<path d="M 568.91 278.5 L 568.91 455.73" fill="none" stroke-width="2" stroke="#AE664E" stroke-dasharray="4 4" />
+</g>
+<g id="shape-7" data-name="svg-008-text">
+<rect x="40" y="296.93" width="79" height="19" fill="none" stroke-width="0" stroke="none" />
+<text x="40" y="309.17" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="14.4" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="14.4" font-weight="bold">等待完成</tspan></text>
+</g>
+<g id="shape-8" data-name="svg-009-line">
+<path d="M 235.26 308.48 L 1023.89 308.48" fill="none" stroke-width="9" stroke="#778894" />
+</g>
+<g id="shape-9" data-name="svg-009-line-round-cap">
+<ellipse cx="1023.89" cy="308.48" rx="4.27" ry="2.37" fill="#778894" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-10" data-name="svg-009-line-round-cap">
+<ellipse cx="1023.89" cy="308.48" rx="4.27" ry="2.37" fill="#778894" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-11" data-name="svg-010-circle">
+<ellipse cx="1023.89" cy="308.48" rx="5" ry="5" fill="#275C85" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-12" data-name="svg-011-text">
+<rect x="841.9" y="283.3" width="181" height="18" fill="none" stroke-width="0" stroke="none" />
+<text x="841.9" y="294.52" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="13.2" fill="#24313A"><tspan fill="#24313A" font-size="13.2">EXPLAIN ANALYZE 结果</tspan></text>
+</g>
+<g id="shape-13" data-name="svg-012-text">
+<rect x="841.9" y="319.65" width="159" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="841.9" y="329.85" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#64727C"><tspan fill="#64727C" font-size="12">算子行数和完整执行时间</tspan></text>
+</g>
+<g id="shape-14" data-name="svg-013-line">
+<path d="M 40 345.82 L 1211.56 345.82" fill="none" stroke-width="1.5" stroke="#D8DFE3" />
+</g>
+<g id="shape-15" data-name="svg-014-text">
+<rect x="40" y="366.87" width="110" height="19" fill="none" stroke-width="0" stroke="none" />
+<text x="40" y="379.11" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="14.4" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="14.4" font-weight="bold">直接超时取消</tspan></text>
+</g>
+<g id="shape-16" data-name="svg-015-line">
+<path d="M 235.26 377.9 L 568.91 377.9" fill="none" stroke-width="9" stroke="#778894" />
+</g>
+<g id="shape-17" data-name="svg-015-line-round-cap">
+<ellipse cx="568.91" cy="377.9" rx="4.27" ry="2.37" fill="#778894" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-18" data-name="svg-015-line-round-cap">
+<ellipse cx="568.91" cy="377.9" rx="4.27" ry="2.37" fill="#778894" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-19" data-name="svg-016-path">
+<path d="M 560.38 373.16 L 577.44 382.63 M 577.44 373.16 L 560.38 382.63" fill="none" stroke-width="3" stroke="#AE664E" />
+</g>
+<g id="shape-20" data-name="svg-017-text">
+<rect x="616.3" y="369.55" width="195" height="18" fill="none" stroke-width="0" stroke="none" />
+<text x="616.3" y="380.77" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="13.2" fill="#24313A"><tspan fill="#24313A" font-size="13.2">EXPLAIN ANALYZE 未返回</tspan></text>
+</g>
+<g id="shape-21" data-name="svg-018-text">
+<rect x="616.3" y="389.59" width="172" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="616.3" y="399.79" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#64727C"><tspan fill="#64727C" font-size="12">未返回完整的算子执行统计</tspan></text>
+</g>
+<g id="shape-22" data-name="svg-019-line">
+<path d="M 40 415.76 L 1211.56 415.76" fill="none" stroke-width="1.5" stroke="#D8DFE3" />
+</g>
+<g id="shape-23" data-name="svg-020-text">
+<rect x="40" y="435.77" width="110" height="19" fill="none" stroke-width="0" stroke="none" />
+<text x="40" y="448.01" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="14.4" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="14.4" font-weight="bold">超时部分反馈</tspan></text>
+</g>
+<g id="shape-24" data-name="svg-021-line">
+<path d="M 235.26 447.32 L 568.91 447.32" fill="none" stroke-width="9" stroke="#778894" />
+</g>
+<g id="shape-25" data-name="svg-021-line-round-cap">
+<ellipse cx="568.91" cy="447.32" rx="4.27" ry="2.37" fill="#778894" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-26" data-name="svg-021-line-round-cap">
+<ellipse cx="568.91" cy="447.32" rx="4.27" ry="2.37" fill="#778894" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-27" data-name="svg-022-circle">
+<ellipse cx="568.91" cy="447.32" rx="5.5" ry="5.5" fill="#1D7B74" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-28" data-name="svg-023-path">
+<path d="M 587.87 447.32 L 787.87 447.32" fill="none" stroke-width="3" stroke="#1D7B74" />
+</g>
+<g id="shape-29" data-name="svg-024-path">
+<path d="M 787.87 447.32 L 777.44 443.63 L 777.44 451 Z" fill="#1D7B74" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-30" data-name="svg-025-text">
+<rect x="805.88" y="438.44" width="173" height="18" fill="none" stroke-width="0" stroke="none" />
+<text x="805.88" y="449.66" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="13.2" fill="#24313A"><tspan fill="#24313A" font-size="13.2">可用行数用于下一轮规划</tspan></text>
+</g>
+<g id="shape-31" data-name="svg-026-text">
+<rect x="805.88" y="459.01" width="159" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="805.88" y="469.21" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#64727C"><tspan fill="#64727C" font-size="12">该候选缺少完整执行时间</tspan></text>
+</g></svg>

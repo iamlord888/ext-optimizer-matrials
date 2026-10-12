@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="240" viewBox="0 240 1280 240"><rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+<g id="shape-37" data-name="svg-002-line">
+<path d="M 625.78 246 L 625.78 474" fill="none" stroke-width="2" stroke="#D6DEE2" />
+</g>
+<g id="shape-2" data-name="svg-003-text">
+<text x="40" y="261.74" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15.51" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15.51" font-weight="bold">a　返回 EOF 后仍可能重新扫描</tspan></text>
+</g>
+<g id="shape-3" data-name="svg-004-text">
+<rect x="40" y="269.29" width="258" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="40" y="279.49" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">外侧每返回一行，内侧连接都可能重新执行</tspan></text>
+</g>
+<g id="shape-4" data-name="svg-005-text">
+<rect x="40" y="299.31" width="57" height="17" fill="none" stroke-width="0" stroke="none" />
+<text x="40" y="310.02" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12.6" fill="#24313A"><tspan fill="#24313A" font-size="12.6">外侧行</tspan></text>
+</g>
+<g id="shape-5" data-name="svg-006-text">
+<rect x="40" y="344.83" width="71" height="17" fill="none" stroke-width="0" stroke="none" />
+<text x="40" y="355.54" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12.6" fill="#24313A"><tspan fill="#24313A" font-size="12.6">内侧连接</tspan></text>
+</g>
+<g id="shape-6" data-name="svg-007-line">
+<path d="M 199.24 305.68 L 568.91 305.68" fill="none" stroke-width="2" stroke="#D6DEE2" />
+</g>
+<g id="shape-7" data-name="svg-008-line">
+<path d="M 199.24 351.2 L 568.91 351.2" fill="none" stroke-width="2" stroke="#D6DEE2" />
+</g>
+<g id="shape-8" data-name="svg-009-rect">
+<rect x="210.62" y="298.38" width="140.28" height="14.6" fill="#EAF4F2" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-9" data-name="svg-010-text">
+<rect x="226.73" y="299.74" width="58" height="17" fill="none" stroke-width="0" stroke="none" />
+<text x="226.73" y="310.45" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12.6" fill="#24313A"><tspan fill="#24313A" font-size="12.6">第 1 行</tspan></text>
+</g>
+<g id="shape-10" data-name="svg-011-rect">
+<rect x="399.24" y="298.38" width="140.28" height="14.6" fill="#F4F7F8" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-11" data-name="svg-012-text">
+<rect x="415.36" y="299.74" width="62" height="17" fill="none" stroke-width="0" stroke="none" />
+<text x="415.36" y="310.45" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12.6" fill="#24313A"><tspan fill="#24313A" font-size="12.6">第 2 行</tspan></text>
+</g>
+<g id="shape-12" data-name="svg-013-path">
+<path d="M 210.62 351.2 L 350.9 351.2" fill="none" stroke-width="8" stroke="#1D7B74" />
+</g>
+<g id="shape-13" data-name="svg-014-circle">
+<ellipse cx="350.9" cy="351.2" rx="4" ry="4" fill="#1D7B74" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-14" data-name="svg-015-text">
+<rect x="223.89" y="331.98" width="73" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="223.89" y="342.18" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">输出 2 行</tspan></text>
+</g>
+<g id="shape-15" data-name="svg-016-text">
+<rect x="312.99" y="359.46" width="42" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="312.99" y="369.66" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">EOF</tspan></text>
+</g>
+<g id="shape-16" data-name="svg-017-path">
+<path d="M 399.24 351.2 L 539.53 351.2" fill="none" stroke-width="5" stroke="#9AA7AF" stroke-dasharray="4 4" />
+</g>
+<g id="shape-17" data-name="svg-018-text">
+<rect x="410.62" y="331.98" width="94" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="410.62" y="342.18" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">可能再次输出</tspan></text>
+</g>
+<g id="shape-18" data-name="svg-019-line">
+<path d="M 374.6 287.65 L 374.6 382.54" fill="none" stroke-width="2" stroke="#AE664E" stroke-dasharray="4 4" />
+</g>
+<g id="shape-19" data-name="svg-020-text">
+<rect x="346.16" y="387.37" width="42" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="346.16" y="397.57" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">快照</tspan></text>
+</g>
+<g id="shape-20" data-name="svg-021-line">
+<path d="M 40 417.32 L 578.39 417.32" fill="none" stroke-width="1.5" stroke="#D6DEE2" />
+</g>
+<g id="shape-21" data-name="svg-022-text">
+<text x="40" y="436.58" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="13" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="13" font-weight="bold">本次执行结束后，仍可能重新执行</tspan></text>
+</g>
+<g id="shape-22" data-name="svg-023-text">
+<text x="40" y="452.11" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#65737D"><tspan fill="#65737D" font-size="11.51">下一条外侧行可能触发内侧连接重新执行。</tspan></text>
+</g>
+<g id="shape-23" data-name="svg-024-text">
+<text x="664.64" y="261.74" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15.51" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15.51" font-weight="bold">b　累计行数不能直接比较单次估算</tspan></text>
+</g>
+<g id="shape-24" data-name="svg-025-text">
+<rect x="664.64" y="269.29" width="146" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="664.64" y="279.49" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">内侧算子已执行 20 次</tspan></text>
+</g>
+<g id="shape-25" data-name="svg-026-text">
+<rect x="664.64" y="294.59" width="108" height="17" fill="none" stroke-width="0" stroke="none" />
+<text x="664.64" y="305.3" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12.6" fill="#24313A"><tspan fill="#24313A" font-size="12.6">单次估算　10 行</tspan></text>
+</g>
+<g id="shape-26" data-name="svg-027-rect">
+<rect x="881.71" y="293.66" width="274.88" height="12.88" fill="#9DAAB2" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-27" data-name="svg-028-text">
+<rect x="664.64" y="320.35" width="107" height="17" fill="none" stroke-width="0" stroke="none" />
+<text x="664.64" y="331.06" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12.6" fill="#24313A"><tspan fill="#24313A" font-size="12.6">单次实际　 5 行</tspan></text>
+</g>
+<g id="shape-28" data-name="svg-029-rect">
+<rect x="881.71" y="319.42" width="137.44" height="12.88" fill="#275C85" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-29" data-name="svg-030-line">
+<path d="M 881.71 342.61 L 1156.59 342.61" fill="none" stroke-width="1.5" stroke="#A5B1B9" />
+</g>
+<g id="shape-30" data-name="svg-031-text">
+<rect x="874.12" y="345.29" width="25" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="874.12" y="355.49" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">0</tspan></text>
+</g>
+<g id="shape-31" data-name="svg-032-text">
+<rect x="1137.63" y="345.29" width="30" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="1137.63" y="355.49" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#65737D"><tspan fill="#65737D" font-size="12">10</tspan></text>
+</g>
+<g id="shape-32" data-name="svg-033-text">
+<rect x="664.64" y="373.16" width="229" height="17" fill="none" stroke-width="0" stroke="none" />
+<text x="664.64" y="383.87" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12.6" fill="#24313A"><tspan fill="#24313A" font-size="12.6">累计 ntuples = 20 × 5 = 100 行</tspan></text>
+</g>
+<g id="shape-33" data-name="svg-034-text">
+<rect x="664.64" y="389.91" width="174" height="17" fill="none" stroke-width="0" stroke="none" />
+<text x="664.64" y="400.62" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12.6" fill="#24313A"><tspan fill="#24313A" font-size="12.6">plan_rows = 10 行 / 次</tspan></text>
+</g>
+<g id="shape-34" data-name="svg-035-line">
+<path d="M 664.64 417.32 L 1211.56 417.32" fill="none" stroke-width="1.5" stroke="#D6DEE2" />
+</g>
+<g id="shape-35" data-name="svg-036-text">
+<text x="664.64" y="436.58" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="13" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="13" font-weight="bold">应比较单次实际 5 行与估算 10 行</tspan></text>
+</g>
+<g id="shape-36" data-name="svg-037-text">
+<text x="664.64" y="452.11" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#65737D"><tspan fill="#65737D" font-size="11.51">累计 100 行对应 20 次执行，不能与单次估算 10 行直接比较。</tspan></text>
+</g></svg>

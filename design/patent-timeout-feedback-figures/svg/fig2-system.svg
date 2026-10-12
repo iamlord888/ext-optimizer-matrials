@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="240" viewBox="0 240 1280 240"><rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+<g id="shape-52" data-name="svg-002-rect">
+<rect x="40" y="244" width="1192.55" height="62" fill="#F6F8F9" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-2" data-name="svg-003-rect">
+<rect x="40" y="318" width="1192.55" height="61" fill="#FFFFFF" stroke-width="1" stroke="#D8DFE3" />
+</g>
+<g id="shape-3" data-name="svg-004-rect">
+<rect x="40" y="394" width="1192.55" height="60" fill="#F5FAF9" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-4" data-name="svg-005-text">
+<rect x="60.5" y="249.82" width="68" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="60.5" y="260.02" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#6B7881" font-weight="bold"><tspan fill="#6B7881" font-size="12" font-weight="bold">调优程序</tspan></text>
+</g>
+<g id="shape-5" data-name="svg-006-text">
+<rect x="60.5" y="323.79" width="55" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="60.5" y="333.99" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#6B7881" font-weight="bold"><tspan fill="#6B7881" font-size="12" font-weight="bold">数据库</tspan></text>
+</g>
+<g id="shape-6" data-name="svg-007-text">
+<rect x="60.5" y="398.7" width="68" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="60.5" y="408.9" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#6B7881" font-weight="bold"><tspan fill="#6B7881" font-size="12" font-weight="bold">行数反馈</tspan></text>
+</g>
+<g id="shape-8" data-name="svg-009-text">
+<text x="244.04" y="277.18" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15.51" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15.51" font-weight="bold">Rows Hint 输入</tspan></text>
+</g>
+<g id="shape-9" data-name="svg-010-text">
+<text x="244.04" y="294.2" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#66757F"><tspan fill="#66757F" font-size="12">已有扫描和连接行数</tspan></text>
+</g>
+<g id="shape-11" data-name="svg-012-text">
+<rect x="542.17" y="264" width="290" height="21" fill="none" stroke-width="0" stroke="none" />
+<text x="542.17" y="277.18" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15.51" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15.51" font-weight="bold">生成第 i 轮候选</tspan></text>
+</g>
+<g id="shape-12" data-name="svg-013-text">
+<text x="542.17" y="294.2" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#66757F"><tspan fill="#66757F" font-size="12">SQL + 单轮期限</tspan></text>
+</g>
+<g id="shape-14" data-name="svg-015-text">
+<text x="970.75" y="277.18" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15.51" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15.51" font-weight="bold">最佳已完成候选</tspan></text>
+</g>
+<g id="shape-15" data-name="svg-016-text">
+<text x="970.75" y="294.2" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#66757F"><tspan fill="#66757F" font-size="12">按完整执行时间比较</tspan></text>
+</g>
+<g id="shape-16" data-name="svg-017-path">
+<path d="M 401.49 280.74 L 512.36 280.74" fill="none" stroke-width="2.5" stroke="#738490" />
+</g>
+<g id="shape-17" data-name="svg-018-path">
+<path d="M 512.36 280.74 L 502.11 278.44 L 502.11 283.04 Z" fill="#738490" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-19" data-name="svg-020-text">
+<text x="542.17" y="342.18" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15.51" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15.51" font-weight="bold">优化器</tspan></text>
+</g>
+<g id="shape-20" data-name="svg-021-text">
+<text x="542.17" y="359.2" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#66757F"><tspan fill="#66757F" font-size="12">产生物理计划</tspan></text>
+</g>
+<g id="shape-22" data-name="svg-023-text">
+<text x="857.08" y="342.18" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15.51" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15.51" font-weight="bold">执行器</tspan></text>
+</g>
+<g id="shape-23" data-name="svg-024-text">
+<text x="857.08" y="359.2" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#66757F"><tspan fill="#66757F" font-size="12">记录各算子的返回行数</tspan></text>
+</g>
+<g id="shape-24" data-name="svg-025-path">
+<path d="M 602.73 368.33 L 825.4 368.33" fill="none" stroke-width="2.5" stroke="#738490" />
+</g>
+<g id="shape-25" data-name="svg-026-path">
+<path d="M 825.4 368.32 L 815.16 366.04 L 815.16 370.61 Z" fill="#738490" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-26" data-name="svg-027-path">
+<path d="M 599.01 297.96 L 599.01 332.49" fill="none" stroke-width="2.5" stroke="#738490" />
+</g>
+<g id="shape-27" data-name="svg-028-path">
+<path d="M 599.01 332.49 L 593.42 328.29 L 604.6 328.29 Z" fill="#738490" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-28" data-name="svg-029-path">
+<path d="M 985.65 336.3 L 985.65 301.79" fill="none" stroke-width="2.5" stroke="#275C85" />
+</g>
+<g id="shape-29" data-name="svg-030-path">
+<path d="M 985.65 301.79 L 980.06 306 L 991.24 306 Z" fill="#275C85" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-30" data-name="svg-031-text">
+<text x="1008.94" y="316.78" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#66757F"><tspan fill="#66757F" font-size="11.51">正常结束：执行时间</tspan></text>
+</g>
+<g id="shape-32" data-name="svg-033-text">
+<rect x="248.7" y="406" width="290" height="21" fill="none" stroke-width="0" stroke="none" />
+<text x="248.7" y="419.18" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15.51" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15.51" font-weight="bold">基数修正（Rows Hint）</tspan></text>
+</g>
+<g id="shape-33" data-name="svg-034-text">
+<text x="248.7" y="436.2" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#66757F"><tspan fill="#66757F" font-size="12">精确行数或行数下界</tspan></text>
+</g>
+<g id="shape-35" data-name="svg-036-text">
+<text x="598.07" y="419.18" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15.51" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15.51" font-weight="bold">检查算子行数</tspan></text>
+</g>
+<g id="shape-36" data-name="svg-037-text">
+<text x="598.07" y="436.2" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#66757F"><tspan fill="#66757F" font-size="12">检查执行次数和扫描结束状态</tspan></text>
+</g>
+<g id="shape-38" data-name="svg-039-text">
+<rect x="966.09" y="406" width="270" height="21" fill="none" stroke-width="0" stroke="none" />
+<text x="966.09" y="419.18" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15.51" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15.51" font-weight="bold">超时取证</tspan></text>
+</g>
+<g id="shape-39" data-name="svg-040-text">
+<text x="966.09" y="436.2" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#66757F"><tspan fill="#66757F" font-size="12">节点 ID、A/E 和执行状态</tspan></text>
+</g>
+<g id="shape-40" data-name="svg-041-path">
+<path d="M 913.91 366.8 L 913.91 411.32" fill="none" stroke-width="2.5" stroke="#1D7B74" />
+</g>
+<g id="shape-41" data-name="svg-042-path">
+<path d="M 913.91 411.32 L 908.32 407.92 L 919.5 407.92 Z" fill="#1D7B74" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-42" data-name="svg-043-text">
+<text x="934.41" y="387.78" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#66757F"><tspan fill="#66757F" font-size="11.51">到时取消</tspan></text>
+</g>
+<g id="shape-43" data-name="svg-044-path">
+<path d="M 934.41 428.95 L 844.97 428.95" fill="none" stroke-width="2.5" stroke="#1D7B74" />
+</g>
+<g id="shape-44" data-name="svg-045-path">
+<path d="M 844.97 428.95 L 855.22 427.09 L 855.22 430.8 Z" fill="#1D7B74" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-45" data-name="svg-046-path">
+<path d="M 570.12 428.95 L 491.86 428.95" fill="none" stroke-width="2.5" stroke="#1D7B74" />
+</g>
+<g id="shape-46" data-name="svg-047-path">
+<path d="M 491.86 428.95 L 502.11 427.09 L 502.11 430.8 Z" fill="#1D7B74" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-47" data-name="svg-048-path">
+<path d="M 183.48 420.29 L 133.17 420.29 L 133.17 287.25 L 214.22 287.25" fill="none" stroke-width="2.5" stroke="#1D7B74" />
+</g>
+<g id="shape-48" data-name="svg-049-path">
+<path d="M 214.22 287.25 L 203.98 284.95 L 203.98 289.54 Z" fill="#1D7B74" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-49" data-name="svg-050-text">
+<text x="61.43" y="472.78" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#66757F"><tspan fill="#66757F" font-size="11.51">灰色：候选执行路径</tspan></text>
+</g>
+<g id="shape-50" data-name="svg-051-text">
+<text x="358.63" y="472.78" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#1D7B74"><tspan fill="#1D7B74" font-size="11.51">绿色：超时节点反馈路径</tspan></text>
+</g>
+<g id="shape-51" data-name="svg-052-text">
+<text x="725.71" y="472.78" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.51" fill="#275C85"><tspan fill="#275C85" font-size="11.51">蓝色：完整时间评价路径</tspan></text>
+</g>
+<g id="shape-53" data-name="next-candidate-round">
+<rect x="248.7" y="442" width="270" height="16" fill="none" stroke-width="0" stroke="none" />
+<text x="248.7" y="452.2" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="12" fill="#1D7B74"><tspan fill="#1D7B74" font-size="12">生成第 i+1 轮候选</tspan></text>
+</g></svg>

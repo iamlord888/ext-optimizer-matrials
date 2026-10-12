@@ -1,0 +1,79 @@
+{
+  "job": {
+    "master": {
+      "queries": 113,
+      "delivered": 103,
+      "rc": {
+        "0": 103,
+        "1": 10
+      },
+      "finish_reason": {
+        "Converged": 78,
+        "Error": 2,
+        "Tuning time budget reached": 1,
+        "Last several iters have no significant improvement": 32
+      },
+      "tuning_sum_ms": 2348172.7090000003,
+      "iterations_sum": 569,
+      "partial_iterations_sum": 0,
+      "logs_at_cap": 0,
+      "missing_terminal": 11
+    },
+    "current-timeout-10s": {
+      "queries": 113,
+      "delivered": 103,
+      "rc": {
+        "0": 103,
+        "1": 10
+      },
+      "finish_reason": {
+        "Converged": 77,
+        "Error": 2,
+        "Last several iters have no significant improvement": 24,
+        "Tuning time budget reached": 10
+      },
+      "tuning_sum_ms": 1599409.2040000001,
+      "iterations_sum": 528,
+      "partial_iterations_sum": 183,
+      "logs_at_cap": 0,
+      "missing_terminal": 0
+    }
+  },
+  "job-complex": {
+    "master": {
+      "queries": 30,
+      "delivered": 28,
+      "rc": {
+        "0": 28,
+        "1": 2
+      },
+      "finish_reason": {
+        "Last several iters have no significant improvement": 11,
+        "Converged": 17,
+        "Tuning time budget reached": 2
+      },
+      "tuning_sum_ms": 1001574.7520000001,
+      "iterations_sum": 166,
+      "partial_iterations_sum": 0,
+      "logs_at_cap": 0,
+      "missing_terminal": 3
+    },
+    "current-timeout-10s": {
+      "queries": 30,
+      "delivered": 29,
+      "rc": {
+        "0": 29,
+        "1": 1
+      },
+      "finish_reason": {
+        "Last several iters have no significant improvement": 13,
+        "Converged": 17
+      },
+      "tuning_sum_ms": 582559.104,
+      "iterations_sum": 182,
+      "partial_iterations_sum": 88,
+      "logs_at_cap": 0,
+      "missing_terminal": 0
+    }
+  }
+}

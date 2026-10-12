@@ -1,0 +1,42 @@
+{
+  "job": {
+    "queries": 113,
+    "arms": {
+      "master": {
+        "success": 103,
+        "tuning_sum_ms": 2348172.709,
+        "execution_sum_ms_effective": 189690.55,
+        "iterations_sum": 569
+      },
+      "current-timeout-10s": {
+        "success": 105,
+        "tuning_sum_ms": 1599409.2040000004,
+        "execution_sum_ms_effective": 168350.79399999994,
+        "iterations_sum": 528
+      }
+    },
+    "measurement_status": {
+      "ok": 963
+    }
+  },
+  "job-complex": {
+    "queries": 30,
+    "arms": {
+      "master": {
+        "success": 28,
+        "tuning_sum_ms": 1001574.7520000001,
+        "execution_sum_ms_effective": 48153.005999999994,
+        "iterations_sum": 166
+      },
+      "current-timeout-10s": {
+        "success": 29,
+        "tuning_sum_ms": 582559.104,
+        "execution_sum_ms_effective": 47065.51900000001,
+        "iterations_sum": 182
+      }
+    },
+    "measurement_status": {
+      "ok": 261
+    }
+  }
+}

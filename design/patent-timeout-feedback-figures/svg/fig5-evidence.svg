@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="240" viewBox="0 240 1280 240"><rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+<g id="shape-34" data-name="svg-002-text">
+<text x="40" y="257.9" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#63717A" font-weight="bold"><tspan fill="#63717A" font-size="14" font-weight="bold">算子行数与执行状态</tspan></text>
+</g>
+<g id="shape-2" data-name="svg-003-text">
+<text x="567.16" y="257.9" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#63717A" font-weight="bold"><tspan fill="#63717A" font-size="14" font-weight="bold">反馈类型</tspan></text>
+</g>
+<g id="shape-3" data-name="svg-004-text">
+<text x="857.57" y="257.9" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#63717A" font-weight="bold"><tspan fill="#63717A" font-size="14" font-weight="bold">下一轮 Rows Hint</tspan></text>
+</g>
+<g id="shape-4" data-name="svg-005-line">
+<path d="M 40 269 L 1197.83 269" fill="none" stroke-width="2" stroke="#9DAAB2" />
+</g>
+<g id="shape-5" data-name="svg-006-line">
+<path d="M 536.49 269 L 536.49 442" fill="none" stroke-width="1.5" stroke="#D7DEE2" />
+</g>
+<g id="shape-6" data-name="svg-007-line">
+<path d="M 826.9 269 L 826.9 442" fill="none" stroke-width="1.5" stroke="#D7DEE2" />
+</g>
+<g id="shape-7" data-name="svg-008-rect">
+<rect x="40" y="274" width="1157.83" height="54" fill="#F3F9F8" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-9" data-name="svg-010-text">
+<text x="63" y="289.75" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15" font-weight="bold">扫描或连接已返回全部结果</tspan></text>
+</g>
+<g id="shape-10" data-name="svg-011-text">
+<text x="63" y="306.03" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.8" fill="#24313A"><tspan fill="#24313A" font-size="11.8">该算子已返回 EOF；</tspan></text>
+</g>
+<g id="shape-11" data-name="svg-012-text">
+<text x="63" y="321.03" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.8" fill="#24313A"><tspan fill="#24313A" font-size="11.8">父算子不会再次执行该子树</tspan></text>
+</g>
+<g id="shape-12" data-name="svg-013-text">
+<text x="561.41" y="294.6" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#1D7B74" font-weight="bold"><tspan fill="#1D7B74" font-size="16" font-weight="bold">EXACT(A)</tspan></text>
+</g>
+<g id="shape-13" data-name="svg-014-text">
+<text x="561.41" y="313.9" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="14" font-weight="bold">A = C(k)</tspan></text>
+</g>
+<g id="shape-14" data-name="svg-015-text">
+<text x="852.78" y="293.75" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15" font-weight="bold">Bᵢ₊₁(k) = A</tspan></text>
+</g>
+<g id="shape-15" data-name="svg-016-text">
+<text x="852.78" y="315.05" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="13" fill="#24313A"><tspan fill="#24313A" font-size="13">可修正低估或高估</tspan></text>
+</g>
+<g id="shape-16" data-name="svg-017-rect">
+<rect x="40" y="334" width="1157.83" height="54" fill="#F4F7FA" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-18" data-name="svg-019-text">
+<text x="63" y="349.75" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15" font-weight="bold">尚不能确认已返回全部结果</tspan></text>
+</g>
+<g id="shape-19" data-name="svg-020-text">
+<text x="63" y="366.03" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.8" fill="#24313A"><tspan fill="#24313A" font-size="11.8">已返回行数只增不减；</tspan></text>
+</g>
+<g id="shape-20" data-name="svg-021-text">
+<text x="63" y="381.03" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.8" fill="#24313A"><tspan fill="#24313A" font-size="11.8">A &gt; E，可确认估算行数偏小</tspan></text>
+</g>
+<g id="shape-21" data-name="svg-022-text">
+<text x="561.41" y="354.6" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#275C85" font-weight="bold"><tspan fill="#275C85" font-size="16" font-weight="bold">LOWER_BOUND(A)</tspan></text>
+</g>
+<g id="shape-22" data-name="svg-023-text">
+<text x="561.41" y="373.9" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="14" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="14" font-weight="bold">A ≤ C(k)</tspan></text>
+</g>
+<g id="shape-23" data-name="svg-024-text">
+<text x="852.78" y="353.75" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15" font-weight="bold">Bᵢ₊₁(k) = max(Bᵢ(k), A)</tspan></text>
+</g>
+<g id="shape-24" data-name="svg-025-text">
+<text x="852.78" y="375.05" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="13" fill="#24313A"><tspan fill="#24313A" font-size="13">保留已有精确行数</tspan></text>
+</g>
+<g id="shape-25" data-name="svg-026-rect">
+<rect x="40" y="394" width="1157.83" height="54" fill="#F8F9F9" stroke-width="0" stroke="none" />
+</g>
+<g id="shape-27" data-name="svg-028-text">
+<text x="63" y="409.75" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15" font-weight="bold">不更新行数</tspan></text>
+</g>
+<g id="shape-28" data-name="svg-029-text">
+<text x="63" y="426.03" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.8" fill="#24313A"><tspan fill="#24313A" font-size="11.8">未执行、无法按同次执行比较，或</tspan></text>
+</g>
+<g id="shape-29" data-name="svg-030-text">
+<text x="63" y="441.03" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11.8" fill="#24313A"><tspan fill="#24313A" font-size="11.8">尚未返回全部结果且 A ≤ E</tspan></text>
+</g>
+<g id="shape-30" data-name="svg-031-text">
+<text x="561.41" y="421.6" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="16" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="16" font-weight="bold">NONE</tspan></text>
+</g>
+<g id="shape-31" data-name="svg-032-text">
+<text x="852.78" y="420.75" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="15" fill="#24313A" font-weight="bold"><tspan fill="#24313A" font-size="15" font-weight="bold">Bᵢ₊₁(k) = Bᵢ(k)</tspan></text>
+</g>
+<g id="shape-32" data-name="svg-033-text">
+<text x="40" y="458.35" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="11" fill="#63717A"><tspan fill="#63717A" font-size="11">累计 A 须与相同执行次数的估算 E 比较；仅合并同一扫描或连接的行数。</tspan></text>
+</g>
+<g id="shape-33" data-name="svg-034-text">
+<text x="40" y="473.93" text-anchor="start" xml:space="preserve" font-family="&quot;Microsoft YaHei&quot;, sans-serif" font-size="10.51" fill="#63717A"><tspan fill="#63717A" font-size="10.51">A：已返回行数　E：估算行数　C(k)：最终返回行数　Bᵢ(k)：当前 Rows Hint</tspan></text>
+</g></svg>

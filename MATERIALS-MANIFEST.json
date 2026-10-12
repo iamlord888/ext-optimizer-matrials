@@ -1,0 +1,539 @@
+{
+  "prepared_date": "2026-10-12",
+  "source_repository": "https://gitcode.com/ext-optimizer-group/ext-optimizer",
+  "source_base_commit": "7bca7479cfe77bc19c556ecf33a3f8c590263b53",
+  "source_state": "working tree snapshot; publishing copies normalize local document links and use LF text line endings",
+  "figures": {
+    "png": 9,
+    "svg": 7,
+    "pptx": 9,
+    "html": 2
+  },
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 69,
+      "sha256": "712fa48fc801343ccf69da516c43f760e25fa23a207c68e08a57d3ff0637de44"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 39,
+      "sha256": "aa80e61b32d3a04a72271d4df157792bacde12b90ce3dc3933e5899a4c80693a"
+    },
+    {
+      "path": "COPYRIGHT",
+      "bytes": 1198,
+      "sha256": "3d6af92ff8a4c2cdf69afb1cf44edea727922f5cd0cf8b5f72b11cdecac8fdfd"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7032,
+      "sha256": "3bb843b92c33268fb2065784a52eaa46f3ca61731df420642bff92146de4c2ad"
+    },
+    {
+      "path": "contrib/extopt-gaussdb/extopt--1.0.sql",
+      "bytes": 1443,
+      "sha256": "1818f72b9d21a662698df8395d804e61048139f17613cc9a9bb4db330b0e04b6"
+    },
+    {
+      "path": "contrib/extopt-gaussdb/extopt_partial_api.cpp",
+      "bytes": 757,
+      "sha256": "1c69bacf8157dffdd458e662634f553d8da8feeebaf65ead09cfc7b6d1a61557"
+    },
+    {
+      "path": "contrib/extopt-gaussdb/extopt_partial_capture.cpp",
+      "bytes": 24317,
+      "sha256": "1b9251602a2f66b1763973211c68bb005d8f0ab7f980b4f97ccc8b9347c17160"
+    },
+    {
+      "path": "contrib/extopt-gaussdb/extopt_partial_error.h",
+      "bytes": 1123,
+      "sha256": "a4c299e0e7f4740aaae2dc24525bafec5225b649dfb1125f6dc37a1d541fe235"
+    },
+    {
+      "path": "contrib/extopt-gaussdb/extopt_partial_gaussdb.cpp",
+      "bytes": 27307,
+      "sha256": "a0b8a9685396825e03c27ff8e137480a2000fe4f39c6807f704038ac57effc4f"
+    },
+    {
+      "path": "contrib/extopt-gaussdb/extopt_partial_protocol.h",
+      "bytes": 486,
+      "sha256": "39876c1a03c8d0d609b78f9bfafa18a5e82715d979a2dd833394d0b4790b4fcb"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser.c",
+      "bytes": 16879,
+      "sha256": "d45e5881c18256a59477b7ea326807694d1c9280b62f8aeb5a8daa86506b14e4"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_archive.c",
+      "bytes": 36719,
+      "sha256": "7b0830999ad9b1ce18439114b2f61e14bd443aa30cde861a0959f031f3c9e729"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_connection.c",
+      "bytes": 42743,
+      "sha256": "68adebeee135acb9e9587f99270fc9496b54fcab019537955a729f3f130eb342"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_feedback_policy.c",
+      "bytes": 4005,
+      "sha256": "a88b94da0e8d9f49e9c8f319378620afb1ec7dd70d116235c2ae5002dc32bfc7"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_feedback_round.c",
+      "bytes": 17036,
+      "sha256": "b2d417960d5fda7448cfaf4c6a8a84f76e948cbf30ae04b52d6c19cf40bcb9d4"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_json.c",
+      "bytes": 15821,
+      "sha256": "3a88db563f5e9e50fb53e2d13cbb382f5e843f4192d4c0b6eb8a214f246e96ef"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_option.c",
+      "bytes": 24834,
+      "sha256": "1ac1ed424bcb24864ae01c04a95070b7c47f20b01436688a7d9c1531e25fd63e"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_partial_proof.c",
+      "bytes": 7073,
+      "sha256": "b7db6140771c6fe342ccd1485a956d313d65026df7044c260dbe2667d912d24d"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_partial_snapshot.c",
+      "bytes": 10349,
+      "sha256": "43ac66b9f11a899ab8deb31efcad99ef10d012eb573f804a269bd75ad7f22548"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_plan.h",
+      "bytes": 2919,
+      "sha256": "ad12fc60b39f96594653a8559b5dbe3d0265b6989640acde67ca241338a31de8"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_plan_alias.c",
+      "bytes": 12639,
+      "sha256": "c08d21b9534de6ab3f14b3803749f718c0f190c74eca5ee9b24bd210a1215b31"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_plan_tree.c",
+      "bytes": 18894,
+      "sha256": "47f8ca749e50ebf37f791233a84278453805a7b27dd8def718b57da8479f25e1"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_rows_key.c",
+      "bytes": 5716,
+      "sha256": "01ba067383c1ce9cd4c0364b43c329212429fdf65696dceb0e5701cc26fa3742"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_rows_private.h",
+      "bytes": 2803,
+      "sha256": "51b96da317ce7f25a2f6db1032b075cf91486f4c67905d6155d2680f9caf1673"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_rows_state.c",
+      "bytes": 8001,
+      "sha256": "c6a91daa978963f7e8b690c27c60782f5f7faa9744283f1a5827dc3bd4a81d4e"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_rows_target.c",
+      "bytes": 22841,
+      "sha256": "7c29a4dc9ac803d7a8c2d1c4961cc24b2dfa70b63015fbddc5105c066ec7b365"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_sampling.c",
+      "bytes": 18678,
+      "sha256": "816b994a6bc420b2e2b58c464b0bdcbd7abfb02a4ce10d99807f1d7238a5c71c"
+    },
+    {
+      "path": "contrib/hint_adviser/hint_adviser_summary.h",
+      "bytes": 3174,
+      "sha256": "bbf59cf269bada0f6baee53da3eca1d2902e3103de0ca968d2505087e101e0cb"
+    },
+    {
+      "path": "contrib/hint_adviser/t/feedback_integration.py",
+      "bytes": 9268,
+      "sha256": "8f5eaf74e4eee764e78c1ccb30a9fba4353424b4359c3b8201d376fc66a45d6e"
+    },
+    {
+      "path": "contrib/hint_adviser/t/topology_test.py",
+      "bytes": 6947,
+      "sha256": "eb9a12de36944e54bae52ee854ef67781c0abece701515bb6be18f3373ad8670"
+    },
+    {
+      "path": "contrib/hint_adviser/tuning_agent.py",
+      "bytes": 17436,
+      "sha256": "639843af66f629aece8ffb09ad5f1cfbdbb8f774de5dce73c0c9ccfad4ae49e5"
+    },
+    {
+      "path": "data/patience5-ab-20260928/results/events.tsv",
+      "bytes": 39551,
+      "sha256": "018de85e12a7c2270a8a274626a1807de0c05ea37f9ab2ff9263af2f07b30437"
+    },
+    {
+      "path": "data/patience5-ab-20260928/results/execution-analysis.json",
+      "bytes": 957,
+      "sha256": "ec7f6233fc57764172b83348b97136416d68fab66138a3e2c909893044ca081c"
+    },
+    {
+      "path": "data/patience5-ab-20260928/results/measurements.tsv",
+      "bytes": 330541,
+      "sha256": "1d4280e77a3e8667b2a88255cf3683b5d45df706bc8a653619fc50c2a25cd66f"
+    },
+    {
+      "path": "data/patience5-ab-20260928/results/recovered-current-partial.tsv",
+      "bytes": 811,
+      "sha256": "02b6634ab133f0963119204e1297ab2bee8de0225786e86bc6eab8bfd2f5a0a7"
+    },
+    {
+      "path": "data/patience5-ab-20260928/results/tuning-analysis.json",
+      "bytes": 1855,
+      "sha256": "05b976230862b2459df59de38aaed79a697b57fae77e3de87214ff37c5f02811"
+    },
+    {
+      "path": "data/patience5-ab-20260928/results/tuning-summaries.tsv",
+      "bytes": 62793,
+      "sha256": "11602ec43287456e402d450c6a777063891ee92fa3bbd79e0c84453a1cb31a25"
+    },
+    {
+      "path": "data/patience5-ab-20260928/results/workbook-input.tsv",
+      "bytes": 11929,
+      "sha256": "71b482de3f716262135b06936654bc07b4cab5981b73da89ec6cdcef15f01d0f"
+    },
+    {
+      "path": "data/patience5-ab-20260928/run-manifest.txt",
+      "bytes": 695,
+      "sha256": "45f2d6434aba204a5fdf6aae3a12562f928d88344cf9f911a6b19037c24a5d71"
+    },
+    {
+      "path": "design/JOB独立GaussDB部署记录.md",
+      "bytes": 7999,
+      "sha256": "a920ab4bca31bac46925bb835c744861f7fb0f43d046f90c6218de1f3b602f8f"
+    },
+    {
+      "path": "design/JOB超时反馈对照测试方案.md",
+      "bytes": 25013,
+      "sha256": "7236784fea0bcb70d8da46c9a8d79f69ca6229dd0bb50584aa81b2fa1633ec8f"
+    },
+    {
+      "path": "design/patent-five-method-flow-analysis.md",
+      "bytes": 39292,
+      "sha256": "c046c04c1c13cff23d78333d08e2a6b198910b3f0f2ac76e14b7ddceaeea2452"
+    },
+    {
+      "path": "design/patent-originals/MANIFEST.md",
+      "bytes": 1698,
+      "sha256": "aad7826c31a5438b54c325200c43ad3b90264a3c43e2ee4308d674457056fa7e"
+    },
+    {
+      "path": "design/patent-originals/US11321317B2.pdf",
+      "bytes": 3860240,
+      "sha256": "572f1ce6baf731552ad9b11d8b8b358048705d327b2ceb0ecd32b14c398a35e8"
+    },
+    {
+      "path": "design/patent-originals/US11334538B2.pdf",
+      "bytes": 2790282,
+      "sha256": "1207979dd30890060e4d28384db1940a89f5311477b1568c8b5c059ea06793ac"
+    },
+    {
+      "path": "design/patent-originals/US7493337B2.pdf",
+      "bytes": 2013201,
+      "sha256": "f8e8d6b9fc0ee88ca0294b30cf004c0693f40769a875e80a023da6f9604f81ba"
+    },
+    {
+      "path": "design/patent-originals/US7716215B2.pdf",
+      "bytes": 2196789,
+      "sha256": "42ffb42c682699d749df56bfeaf1d34191cc095a126016bb61070c7f2cfe8a05"
+    },
+    {
+      "path": "design/patent-originals/US9213740B2.pdf",
+      "bytes": 2619177,
+      "sha256": "434bbe8fe1e6194ee628752f8831554028852521987dc2addbec43ff8641b53f"
+    },
+    {
+      "path": "design/patent-timeout-feedback-disclosure-draft.md",
+      "bytes": 56180,
+      "sha256": "db7397d7c492c4a17bd75dbfab62a832f68dcfa9b87c55b64f90c4aa770498d2"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/html/fig3-executor-observation-flow.html",
+      "bytes": 7714,
+      "sha256": "6fe80ebd3e4a628e6aff144b34e003bf2c6350dae4222f6fd452064614eef3d4"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/html/index.html",
+      "bytes": 5654,
+      "sha256": "adcc6e68ce8c47d3d56928b594a55304c40a2c287f17b60ec2aa993341c0ffcc"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/png/fig1-conventional.png",
+      "bytes": 95836,
+      "sha256": "cd02c226593f8889a63eac54c4912e27bc2ec8048e80ee309d43e2155507dd00"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/png/fig2-system.png",
+      "bytes": 177452,
+      "sha256": "2198f39a8b3405be35a2535ea770e2e07e2c0d71796c85b15496e4cf3cdff2b6"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/png/fig3-executor-observation-flow.png",
+      "bytes": 291387,
+      "sha256": "e788cfa16d43e0ebe18afe9c993660af9063f659e9f9519e7a294473afb41f37"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/png/fig4-capture-window.png",
+      "bytes": 102545,
+      "sha256": "0d983ebadbc802822194cff82c7e64b22a3b36c91b6a68dc06f69a95915b21d1"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/png/fig5-evidence.png",
+      "bytes": 200452,
+      "sha256": "818498d40c1cad071a7d206dc5495d4e2506a8bcc3a2f62ee77d9517bcdfc223"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/png/fig6-mixed-states.png",
+      "bytes": 102110,
+      "sha256": "acc76b0b3c7b99708293428f8f917028942124b6f6b053830c3083b929553398"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/png/fig7-reentry-scope.png",
+      "bytes": 140398,
+      "sha256": "dbfcb721e41976220e12b47741a248f00a57be3cd7a3f5e924a9be6bd09543f0"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/png/fig8-tuning-duration.png",
+      "bytes": 95307,
+      "sha256": "f09857caf969fd6f1c0c6f2efda5d0269ed472cca53d02c3315a34270da83ee1"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/png/fig9-execution-effect.png",
+      "bytes": 117736,
+      "sha256": "7f9fce8eaa6e31d5f9c052daa28a1aa2687cfecb7920557957e09a52927977b9"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/pptx/fig1-conventional.pptx",
+      "bytes": 21985,
+      "sha256": "398cd495c5a16b08255ffe1dee70234bd9ba33371e25d90eeef5f0f0315bb7cc"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/pptx/fig2-system.pptx",
+      "bytes": 23176,
+      "sha256": "807c917f3e306750f34389db9e5c55f2bfabcf91d6a999fa8b14ad51691902f8"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/pptx/fig3-executor-observation-flow.pptx",
+      "bytes": 24082,
+      "sha256": "077286c5fdb62680102de0276eb0e450bff70231e0bc248e9624cddfa7ef4f6f"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/pptx/fig4-capture-window.pptx",
+      "bytes": 21660,
+      "sha256": "dfcdb2dcc63168dada02efcc2946a8a619c491ca3bb49d43dd73de94ba9231ba"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/pptx/fig5-evidence.pptx",
+      "bytes": 22137,
+      "sha256": "6ebaf324619d32339f24300a1ee66b604cef8b3b9323128b649a98aad1a467d1"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/pptx/fig6-mixed-states.pptx",
+      "bytes": 22052,
+      "sha256": "133d5242a6dc22c8cc75151676a06da18077907637a5833bbba9159826c5cf42"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/pptx/fig7-reentry-scope.pptx",
+      "bytes": 22531,
+      "sha256": "98d85bf82bf3c55c5c0c05bf2a9fd7b1cc9c46e0d097d9dbcafb690dda2bb96a"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/pptx/fig8-tuning-duration.pptx",
+      "bytes": 21083,
+      "sha256": "3a4aac2b5649c2325328de2bac257fbc709761db050b80a53118cb1f48c495ef"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/pptx/fig9-execution-effect.pptx",
+      "bytes": 22285,
+      "sha256": "af8f1e69cab0e2600810791ccaecdd45cb9c099af40ba5788a8bf1328bcfe5f7"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/svg/fig1-conventional.svg",
+      "bytes": 7870,
+      "sha256": "e6ef945c8f23ef990ca792f367b2715328cd08d99a2cc21f9d8378d9f9250ce5"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/svg/fig2-system.svg",
+      "bytes": 11082,
+      "sha256": "f95c438c5fc480b0a01da57d177cde7a9780474fbcd093d09c906ecdc3f542ad"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/svg/fig3-executor-observation-flow.svg",
+      "bytes": 6122,
+      "sha256": "2d00a0027f6fc26a28c989e16c83f6e80726f56e7f4f628783463d0dcef3ac36"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/svg/fig4-capture-window.svg",
+      "bytes": 6851,
+      "sha256": "c020e8d280d9690431ec3706da80fc256216944a57ac297d161a5ef42b32c0ee"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/svg/fig5-evidence.svg",
+      "bytes": 8350,
+      "sha256": "2cc46d6e16e6fa47b51d56bd19b1d0b48ed3bcde04b28ccf4190805477255c3d"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/svg/fig6-mixed-states.svg",
+      "bytes": 9984,
+      "sha256": "bced651a7aa5868aaea09783e325b3105d7b8e90ff74f65cb713b6ab9cb63441"
+    },
+    {
+      "path": "design/patent-timeout-feedback-figures/svg/fig7-reentry-scope.svg",
+      "bytes": 10145,
+      "sha256": "d589823c0edc4bf5b41fb9580ad8b1d9b6a461576ed1645451d6138ff4974854"
+    },
+    {
+      "path": "design/patent-timeout-feedback-idea-slides-en.md",
+      "bytes": 13035,
+      "sha256": "42143c28e901a30d13cc5da174c5e1bbd55bb2a071a32ef55646c14ee8b1614e"
+    },
+    {
+      "path": "design/patent-timeout-feedback-idea-slides.md",
+      "bytes": 11863,
+      "sha256": "15cd81f4be154252484ae120ad748f65685f015f9ad853f909567481c6277204"
+    },
+    {
+      "path": "design/patent-timeout-feedback-manuscript-audit.md",
+      "bytes": 19429,
+      "sha256": "4590bdab917b2e9383d8798be403dfd32c4f8817bf3dc2e1b77ff71e098f9efb"
+    },
+    {
+      "path": "design/patent-timeout-feedback-overlap-analysis.md",
+      "bytes": 20063,
+      "sha256": "5fc20d705662cc7f04ee6f3ca641eca1f7ef488c82a846571b2d3a870e2249e9"
+    },
+    {
+      "path": "design/patent-timeout-feedback-patent-landscape.md",
+      "bytes": 22577,
+      "sha256": "1d8b578f9105b64603b67839d4982b3b9de582cd8d67c2ca5560db7adfc2c3ee"
+    },
+    {
+      "path": "design/patent-timeout-feedback-prior-art.md",
+      "bytes": 26115,
+      "sha256": "57d513b587263bd4cc82fc6c941cffa204d12676da94572064071cad51b939f8"
+    },
+    {
+      "path": "design/patent-timeout-feedback-products-papers.md",
+      "bytes": 16147,
+      "sha256": "41897c208a9ddde239b70d36097f3363b989f6655bbe37db5a0e570c56b3f8a4"
+    },
+    {
+      "path": "design/patent-translations/README.md",
+      "bytes": 2122,
+      "sha256": "c55e4239c969ac59a2ec7f445750952637db03a9f6b1b3de05ef35d597d4df78"
+    },
+    {
+      "path": "design/patent-translations/核心权利要求与关键段落校译.md",
+      "bytes": 10960,
+      "sha256": "4c2c2c82a23eda3835a785000e50e61c383bb9f8373f4e84812477f6e1582b50"
+    },
+    {
+      "path": "design/timeout-feedback-implementation.md",
+      "bytes": 18712,
+      "sha256": "5513805a280b74ae2dafd6a5b16671e0f8da05cdbf0c3c29143b76465f7a6b8c"
+    },
+    {
+      "path": "design/timeout-feedback-protocol.md",
+      "bytes": 3179,
+      "sha256": "adeaba4f024aac35460e70562da73095225148bbfbe662b5b784abea442e1a23"
+    },
+    {
+      "path": "design/超时EXPLAIN_ANALYZE部分反馈需求串讲.md",
+      "bytes": 25448,
+      "sha256": "8d64f0e47da41e41440677d4d53bc7ceb794b48ff5f54bc877ff3b69e6b00cd0"
+    },
+    {
+      "path": "outputs/job_job_complex_tuning_query_summary_patience5_20260928.xlsx",
+      "bytes": 23455,
+      "sha256": "c465ed1352740db9793615f1d2875b3387d9ab17d4c5afc7c41388975e79a7ba"
+    },
+    {
+      "path": "sources/papers/1601.05748v1.pdf",
+      "bytes": 719253,
+      "sha256": "13908e601693a111268ccaae1073d3ce5158be16b2938d428eb1ccead1c34485"
+    },
+    {
+      "path": "sources/papers/P019.pdf",
+      "bytes": 256168,
+      "sha256": "45c7c8f3ba3325285475226dfea6cfd30f8655baf558d9c18189d7c59e3363ac"
+    },
+    {
+      "path": "sources/papers/balsa-sigmod2022.pdf",
+      "bytes": 1286240,
+      "sha256": "adffe4b310b061c1da403d9d2dfdbf78cfde56884978143cc5f44ce9efe1f0c8"
+    },
+    {
+      "path": "sources/papers/bao_sigrec22.pdf",
+      "bytes": 1593619,
+      "sha256": "b2b87d444c401632edce597c796c629d7a5cf11c5062d074b2e4cb1422e040ef"
+    },
+    {
+      "path": "sources/papers/microsoft-US20050222965A1.pdf",
+      "bytes": 1946659,
+      "sha256": "4384c0848204feeb8efa5e45211bbd1a249b17c0e0969e6a73c81464e57376c0"
+    },
+    {
+      "path": "sources/papers/query-progress-2004.pdf",
+      "bytes": 195364,
+      "sha256": "aab3aa8ae06c3acfa71e12310811e39a18c53835d982818ea9f0d31218037c7b"
+    },
+    {
+      "path": "sources/papers/reopt-kabra-dewitt-1998.pdf",
+      "bytes": 1826069,
+      "sha256": "1f27c41f30a47da27ea9edfa4ea86460cd411a995fce8d4926c1fa639a8d1e2c"
+    },
+    {
+      "path": "sources/papers/robust-sigmod2004.pdf",
+      "bytes": 331153,
+      "sha256": "cfb85aab11a80e5aafb18ee64261432833468b13f90d686e96ad84e58a3f2116"
+    },
+    {
+      "path": "sources/papers/runtime-dynamic-optimization-2023.pdf",
+      "bytes": 10532939,
+      "sha256": "9ddad33395330cc6d2014b951e3c69a57de7d93ec21d749e816d9b91b0262c92"
+    },
+    {
+      "path": "sources/patents/US11321317B2.json",
+      "bytes": 162093,
+      "sha256": "410b5591719852878d48b063d11ec8b6e913ec344a0921aad3b63869da5b1dbe"
+    },
+    {
+      "path": "sources/patents/US11334538B2.json",
+      "bytes": 111371,
+      "sha256": "6f0772070a1624894a3f6241eabe0ca921393cf47d330c639a85bb2ef6d2cf14"
+    },
+    {
+      "path": "sources/patents/US7493337B2.json",
+      "bytes": 85095,
+      "sha256": "159576c9c0f4de8b32ce7789fcea9b6611d3509b77508e6cd317f4a16ae0fef2"
+    },
+    {
+      "path": "sources/patents/US7716215B2.json",
+      "bytes": 77140,
+      "sha256": "bc4874f87ab8d5fd0ebed7362ad21d0009472ccd254ef4001d252bf61a2e3cda"
+    },
+    {
+      "path": "sources/patents/US9213740B2.json",
+      "bytes": 123558,
+      "sha256": "50b71367585bcd8f06f7b63978d11ddadfdb548a5d46febd89ba407884bac694"
+    },
+    {
+      "path": "sources/patents/quote-audit.md",
+      "bytes": 13807,
+      "sha256": "7b7836772cbcb57580f5ceffb0cf6474fc61b71be5536bb086d39a0bbd4357ce"
+    },
+    {
+      "path": "sources/requirements/超时EXPLAIN_ANALYZE需求串讲.md",
+      "bytes": 25481,
+      "sha256": "1c44a4ed8ac678ae96fadce27994eb7bcdcf3666847bac5b029127605b58ce80"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="240" viewBox="0 0 1280 240" role="img" aria-labelledby="figure-title figure-description">
+  <title id="figure-title">读取算子统计并判断 get_next 调用与本地 EOF 状态</title>
+  <desc id="figure-description">执行前从 QueryDesc.planstate 取得顶层算子的执行状态对象，遍历执行计划状态树并保存 PlanState 指针。读取 Plan 的节点 ID 和估算行数，读取 Instrumentation 的累计返回行数、Loops 与计时起点。active 表示是否有正在进行的 get_next 调用。terminal 表示本地已读到 EOF 且当前没有 get_next 调用。服务端返回本轮执行计划的文本和算子统计，客户端对同一 SQL 运行不带 ANALYZE 的 EXPLAIN，核对执行计划后将统计填入计划树的对应节点。</desc>
+  <defs>
+    <marker id="arrow-gray" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 Z" fill="#89979f"></path></marker>
+    <marker id="arrow-green" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 Z" fill="#28746d"></path></marker>
+  </defs>
+  <style>
+    text { font-family: Arial, 'Microsoft YaHei', 'Hiragino Sans GB', 'PingFang SC', sans-serif; fill: #26343d; }
+    .phase { font-size: 17px; font-weight: 700; }
+    .heading { font-size: 16.2px; font-weight: 700; }
+    .body { font-size: 13.4px; }
+    .minor { font-size: 11.4px; fill: #687680; }
+    .code { font-size: 13.4px; }
+    .blue { fill: #2d5f83; }
+    .green { fill: #28746d; }
+    .link { fill: none; stroke: #89979f; stroke-width: 1.5; }
+    .feedback { fill: none; stroke: #28746d; stroke-width: 1.5; }
+  </style>
+  <rect x="0" y="0" width="1280" height="240" fill="#ffffff"></rect>
+
+  <g data-phase="before-execution">
+    <text x="24" y="27" class="phase">1  执行前保存指针</text>
+    <rect x="24" y="54" width="206" height="50" fill="#f7f9fa" stroke="#cbd4da"></rect>
+    <text x="39" y="77" class="heading blue">QueryDesc.planstate</text>
+    <text x="39" y="98" font-size="12.5">顶层算子的执行状态对象</text>
+    <path d="M127 104 V137" class="link" marker-end="url(#arrow-gray)"></path>
+    <rect x="24" y="140" width="206" height="76" fill="#f7f9fa" stroke="#cbd4da"></rect>
+    <text x="39" y="163" font-size="15.4" font-weight="700">PlanState 指针数组</text>
+    <text x="39" y="184" class="body">遍历执行计划状态树</text>
+    <text x="39" y="204" font-size="12.8">逐个取出 PlanState *ps</text>
+    <text x="24" y="235" class="minor">在 ExecutorRun 入口保存</text>
+  </g>
+
+  <path d="M230 177 H248 V78 H263" class="link" marker-end="url(#arrow-gray)"></path>
+  <path d="M248 177 V159 H263" class="link" marker-end="url(#arrow-gray)"></path>
+
+  <g data-phase="read-fields">
+    <text x="266" y="27" class="phase">2  读取计划与执行统计</text>
+    <rect x="266" y="54" width="348" height="50" fill="#f7f9fa" stroke="#cbd4da"></rect>
+    <text x="282" y="77" class="heading blue">Plan（ps-&gt;plan）</text>
+    <text x="282" y="98" font-size="13.3">ID = plan_node_id，E = plan_rows</text>
+    <rect x="266" y="114" width="348" height="102" fill="#f5f9f8" stroke="#cbd4da"></rect>
+    <text x="282" y="136" font-size="14.8" font-weight="700">Instrumentation（instr = ps-&gt;instrument）</text>
+    <text x="282" y="158" class="code">A = instr-&gt;ntuples，Loops = instr-&gt;nloops</text>
+    <text x="282" y="179" class="code">sec = instr-&gt;starttime_seconds</text>
+    <text x="282" y="200" class="code">usec = instr-&gt;starttime_microseconds</text>
+    <text x="266" y="235" class="minor">instr 的适配类型：ExtoptInstrumentationView</text>
+  </g>
+
+  <path d="M614 78 H651" class="link" marker-end="url(#arrow-gray)"></path>
+  <path d="M614 177 H651" class="feedback" marker-end="url(#arrow-green)"></path>
+
+  <g data-phase="derive-state">
+    <text x="654" y="27" class="phase">3  判断调用状态与本地 EOF</text>
+    <rect x="654" y="54" width="310" height="162" fill="#ffffff" stroke="#aebec7"></rect>
+    <text x="670" y="77" font-size="15.4" font-weight="700">ExtoptExecutionEvidence</text>
+    <text x="670" y="103" font-size="13.2">active=false：当前没有 get_next 调用</text>
+    <text x="670" y="124" font-size="13.4">active = (sec != 0 || usec != 0)</text>
+    <text x="670" y="153" font-size="13.5" font-weight="700" class="green">terminal=true：本地已读到 EOF</text>
+    <text x="670" y="175" font-size="13.0">terminal = (instr-&gt;status != 0 &amp;&amp; !active)</text>
+    <text x="670" y="203" font-size="12.5">即：已读到 EOF，且没有 get_next 调用</text>
+    <text x="654" y="235" class="minor">父算子后续仍可能再次调用该算子</text>
+  </g>
+
+  <path d="M964 78 H999" class="link" marker-end="url(#arrow-gray)"></path>
+  <path d="M964 177 H983 V111 H999" class="feedback" marker-end="url(#arrow-green)"></path>
+
+  <g data-phase="return-and-match">
+    <text x="1002" y="27" class="phase">4  返回统计并补全计划树</text>
+    <rect x="1002" y="54" width="254" height="65" fill="#f5f9f8" stroke="#aebec7"></rect>
+    <text x="1018" y="76" font-size="15.3" font-weight="700" class="green">服务端返回本轮执行信息</text>
+    <text x="1018" y="95" font-size="13.0">实际执行的计划文本</text>
+    <text x="1018" y="114" font-size="12.6">节点 ID、A、Loops 与执行状态</text>
+    <path d="M1129 119 V135" class="link" marker-end="url(#arrow-gray)"></path>
+    <rect x="1002" y="138" width="254" height="78" fill="#f7f9fa" stroke="#cbd4da"></rect>
+    <text x="1018" y="158" font-size="15.1" font-weight="700">客户端补全计划树</text>
+    <text x="1018" y="178" font-size="12.3">同一 SQL 的 EXPLAIN 获取计划树</text>
+    <text x="1018" y="196" font-size="12.3">核对节点 ID、算子类型与估算 E</text>
+    <text x="1018" y="213" font-size="12.3">对应节点填入 A、Loops 与状态</text>
+    <text x="1002" y="235" class="minor">仅重新规划，不再次执行 SQL</text>
+  </g>
+</svg>
