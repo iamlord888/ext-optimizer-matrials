@@ -235,6 +235,8 @@ Nested Loop 内侧、参数化 SubPlan、可重入的物化或其它可能被父
 6. **合并并进入下一轮。** 对同一目标保存原始观测值和证据类型。若新证据为 `EXACT`，用其完整值更新目标；若新证据为 `LOWER_BOUND`，取已有有效下界和新下界的较大值，但不覆盖已确认的精确值；若为 `NONE`，保持已有输入。查询语义、数据可见性或目标口径不可比时，拒绝合并或使旧证据失效。
 7. **分离时间评价。** 取消候选的已耗时间可以用于判断其是否已经超过某个明确的淘汰阈值，但不冒充完整运行时间写入最佳候选的完整时间字段。下一轮候选使用步骤 6 的 Rows 输入继续规划，直至满足全局预算或停止条件。
 
+单轮期限按已完成候选的运行时间动态调整：未取得完整运行时间时使用配置上限 `τ₀`；得到同一 SQL 的最佳完整运行时间 `t_best` 后，后续上限取 `min(τ₀, 1.25 × t_best)`。实际期限还受全局剩余预算约束，并保留取消、取证及重新规划所需时间。超时取消的耗时不参与这一计算。当前实验配置 `τ₀=10 秒`，例如最佳完整运行时间为 4 秒时，后续上限为 5 秒。
+
 反馈函数可以写为：
 
 ```text
@@ -297,7 +299,7 @@ B_(i+1)(k) = B_i(k),                     F_i(k) = NONE。
 
 #### 2.4.5 JOB 与 JOB-complex 系统级性能对照
 
-在同一 GaussDB JOB 数据库上，对 JOB 的 113 条 SQL 和 JOB-complex 的 30 条 SQL 比较两个版本：未设置单轮 `EXPLAIN ANALYZE` 时限的“无单轮超时组”，以及每轮设置 10 秒期限并集成部分反馈的“10 秒部分反馈组”。两组均设置 `patience-iters=5`、300 秒调优搜索预算、初始计划验证、相同采样块数和优化器参数；查询采用交替顺序执行。由于两组使用不同代码版本，结果反映集成方案的系统效果，不能把全部差异单独归因于 10 秒参数。[E1]
+在同一 GaussDB JOB 数据库上，对 JOB 的 113 条 SQL 和 JOB-complex 的 30 条 SQL 比较两个版本：未设置单轮 `EXPLAIN ANALYZE` 时限的“无单轮超时组”，以及初始单轮上限设为 10 秒并集成部分反馈的“10 秒部分反馈组”。两组均设置 `patience-iters=5`、300 秒调优搜索预算、初始计划验证、相同采样块数和优化器参数；查询采用交替顺序执行。由于两组使用不同代码版本，结果反映集成方案的系统效果，不能把全部差异单独归因于 10 秒参数。[E1]
 
 调优结束后，原 SQL 与可用优化 SQL 在相同设置下各独立运行三次，主表取预先指定的第 3 次完整执行时间。未产生可用优化 SQL 的查询回填原 SQL。JOB `16b`、`18c` 在 10 秒组中因连续部分轮次未正式交付，但其最后累积 Rows Hint 形成的恢复候选经过 SQL 一致性核对后进行扩展评估，单独标注为恢复候选。286 次调优和 1,224 次独立执行均完成。[E1][E2][E3][E4]
 
@@ -409,5 +411,7 @@ B_(i+1)(k) = B_i(k),                     F_i(k) = NONE。
 - [E5] [调优时长图表的可编辑 PPT](patent-timeout-feedback-figures/pptx/fig8-tuning-duration.pptx)和[执行效果图表的可编辑 PPT](patent-timeout-feedback-figures/pptx/fig9-execution-effect.pptx)。
 
 ## English Summary
+
+Start with a configurable per-candidate timeout cap `T₀`, set to ten seconds in the current experiment. Once a best complete runtime `t_best` is available for the same SQL, reduce the cap for later candidates to `min(T₀, 1.25 × t_best)`. The actual deadline also respects the remaining global budget and reserves time for cancellation, capture, and replanning. Time spent on a cancelled execution does not enter this calculation.
 
 This disclosure concerns iterative query-plan tuning under a per-candidate execution deadline. When a real candidate is cancelled, the original plan tree and supported operator observations are captured before executor cleanup. Each observation is bound to a cardinality target with the same query-block, predicate, join, invocation, and counting scope. A target is classified as `EXACT` only when all relevant invocations have completed and no future re-entry can produce more rows. An unfinished but monotone observation can produce a `LOWER_BOUND` only when its output exceeds an estimate with the same scope; otherwise it produces `NONE`. Accepted evidence informs the next independent candidate, while only normally completed candidates provide complete runtime for best-plan comparison. The disclosure distinguishes local EOF from target completion and cumulative instrumentation output from per-invocation estimates. On the fixed JOB and JOB-complex workloads, the integrated ten-second version reduced aggregate tuning time, while the JOB execution-time result depended on two recovered candidates that were not formally delivered.

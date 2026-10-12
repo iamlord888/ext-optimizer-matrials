@@ -21,11 +21,13 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 **Scope: Successive candidate plans for the same SQL.** Inputs such as Rows Hints change planning estimates and produce new candidates, each with an independent execution context.
 
 1. **Generate a candidate:** Give the optimizer the original SQL and current cardinality feedback.
-2. **Run with a deadline:** Execute the candidate through `EXPLAIN ANALYZE` with a configurable deadline; the experiment used ten seconds.
-3. **On normal completion:** Collect operator statistics and complete runtime, update the next round's inputs, and compare candidate performance.
+2. **Run with a deadline:** Execute the candidate through `EXPLAIN ANALYZE`. Set the initial per-candidate timeout cap `T₀` to ten seconds in the current experiment; this setting is configurable.
+3. **On normal completion:** Collect operator statistics and update row-count feedback. Compare complete runtimes and retain the best candidate.
 4. **On timeout cancellation:** Preserve the original plan and operator observations before executor cleanup, qualify the row counts, and pass accepted feedback to the next candidate after cancellation finishes.
 
-**Both normally completed and timed-out candidates can provide row-count feedback. Complete runtimes come from normally completed executions.**
+**Update the timeout:** Use `T₀` until a complete runtime is available. Once the same SQL has a best complete runtime `t_best`, set the cap for later candidates to **`min(T₀, 1.25 × t_best)`**. For example, a best runtime of four seconds reduces the cap to five seconds.
+
+**Both normally completed and timed-out candidates can provide row-count feedback. Only complete runtimes update the best candidate and timeout cap. The actual deadline also respects the remaining global tuning budget.**
 
 **Suggested visual:** [Figure 2: System and feedback position](patent-timeout-feedback-figures/png/fig2-system.png). Show candidate i feeding operator statistics to row-count feedback after either normal completion or timeout cancellation, which supports candidate i+1. Normal completion also supplies runtime for comparing completed candidates.
 
@@ -95,7 +97,7 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 
 **Mechanism benefits:** When usable observations exist, a timed-out round can still provide row-count evidence. Complete targets can correct overestimation or underestimation; incomplete targets can correct underestimation using proven lower bounds. Slow candidates consequently occupy less tuning time.
 
-**Experiment:** JOB: 113 SQL queries; JOB-complex: 30 queries. Compare no per-candidate deadline against ten-second partial feedback. Both groups used a 300-second global tuning search budget and `patience-iters=5`.
+**Experiment:** JOB: 113 SQL queries; JOB-complex: 30 queries. Compare no per-candidate deadline against ten-second partial feedback. Both groups used a 300-second global tuning search budget and `patience-iters=5`. Ten seconds is the initial per-candidate cap; later limits shrink according to the best complete runtime.
 
 **Aggregate tuning duration:**
 
@@ -117,6 +119,7 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 
 ## Source and presentation notes
 
+- Slide 2 was checked against [`feedback_effective_timeout`](../contrib/hint_adviser/hint_adviser_feedback_round.c) and [requirements walkthrough section 3.1](超时EXPLAIN_ANALYZE部分反馈需求串讲.md). The [experiment configuration](../data/patience5-ab-20260928/run-manifest.txt) sets the configurable initial cap to ten seconds. The global budget also reserves eight seconds for cancellation, capture, and replanning.
 - Slide 3 was checked against server functions [`start_completion_capture`, `collect_execution_evidence`, and `emit_partial_snapshot`](../contrib/extopt-gaussdb/extopt_partial_capture.cpp), [`partial_gaussdb_execution_capture_evidence`](../contrib/extopt-gaussdb/extopt_partial_gaussdb.cpp), and [requirements walkthrough sections 4.4–4.5](<../sources/requirements/超时EXPLAIN_ANALYZE需求串讲.md>). The server snapshot contains the executed plan text and the operator statistics obtained so far. The client obtains the complete JSON plan tree by replanning the same candidate. Operators that have not run do not publish zero-row statistics.
 - Slides 4–5 describe the complete qualification and consumption conditions proposed in the disclosure. The prototype already captures, classifies, and merges feedback. Complete coverage of future operator invocations, normalization across invocations, and semantic consistency across rounds still requires work; aggregate performance comparisons do not establish that these checks are fully validated.
 - Slide 5 was checked against [requirements walkthrough section 4.8](<../sources/requirements/超时EXPLAIN_ANALYZE需求串讲.md>) and the [`rows_hint_merge` implementation](../contrib/hint_adviser/hint_adviser_rows_state.c). Exact values use first-wins within a round and can replace earlier-round exact values. Bounds accumulate by maximum. A new bound exceeding an existing exact value produces only a conflict diagnostic and leaves the exact value intact. Strengthening an internal bound without changing the Hint output does not count as a Rows output change. The example concerns qualified evidence and does not assume that the current plan estimate always equals a historical Hint value.
