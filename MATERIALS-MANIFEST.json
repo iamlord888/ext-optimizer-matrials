@@ -252,8 +252,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-disclosure-draft.md",
-      "bytes": 57099,
-      "sha256": "5ecb5bff665ffe19bba50af8dbf455809bb1abe4ab6eaf811f3c1981da3c4cf8"
+      "bytes": 57465,
+      "sha256": "a091a997d4d51113586742e6907f44780780f458f0ae167cc4ad001ca31cd7a1"
     },
     {
       "path": "design/patent-timeout-feedback-figures/html/fig3-executor-observation-flow.html",
@@ -392,13 +392,13 @@
     },
     {
       "path": "design/patent-timeout-feedback-idea-slides-en.md",
-      "bytes": 14082,
-      "sha256": "5f48569c94b09eac24c33a979477183968e6d5761bcbf3f48b45a0255a015d23"
+      "bytes": 14428,
+      "sha256": "b0a92a137cf94d4ffda6f1587b733d1cf7607663b828bde15f826e04ee40cf43"
     },
     {
       "path": "design/patent-timeout-feedback-idea-slides.md",
-      "bytes": 12687,
-      "sha256": "fb8b4c8cc6c8c5781883aba2878d11c4ddbec93e967e9667c7d2118486600372"
+      "bytes": 12863,
+      "sha256": "1bbc6d11c122acbbb05b3ee65670edd8e8d0e7d10d3c046cbafeb26e6188b439"
     },
     {
       "path": "design/patent-timeout-feedback-manuscript-audit.md",
@@ -417,8 +417,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-primary-review-20261012.md",
-      "bytes": 12968,
-      "sha256": "4a65861ae30721a1a9fd72922f71c1c49df2e9ea8dc79d66908ac06d2686569f"
+      "bytes": 12285,
+      "sha256": "09caac1174092d951a32b0d6f5f768915b94bf8f505fc3f50faaa1245f96103f"
     },
     {
       "path": "design/patent-timeout-feedback-prior-art.md",
@@ -432,13 +432,13 @@
     },
     {
       "path": "design/patent-timeout-feedback-protection-review-en.md",
-      "bytes": 11265,
-      "sha256": "e920d8f3e7f5b9bd271feddbaf8c4324a93880c2dd0829f016f545ffd52d317f"
+      "bytes": 12891,
+      "sha256": "b3f6b375939e838778603056bf4b615ed1591e6166fd7b4fd359ef08eecfc4a0"
     },
     {
       "path": "design/patent-timeout-feedback-protection-review.md",
-      "bytes": 16315,
-      "sha256": "4d5beee3088576a6353de4fe1f13e05ad4676d145ab030145835415b5c98a289"
+      "bytes": 16554,
+      "sha256": "6cad9da8df070c64a378aa975279fc81fa4ab4909b066c29bec6dd2e86519d93"
     },
     {
       "path": "design/patent-translations/README.md",

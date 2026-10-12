@@ -31,16 +31,16 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 
 **Suggested visual:** [Figure 2: System and feedback position](patent-timeout-feedback-figures/png/fig2-system.png). Show candidate i feeding operator statistics to row-count feedback after either normal completion or timeout cancellation, which supports candidate i+1. Normal completion also supplies runtime for comparing completed candidates.
 
-## Slide 3 — Technical approach 2: Read and return operator execution statistics
+## Slide 3 — Technical approach 2: Return operator row counts and execution state on timeout cancellation
 
-**Core operation: On cancellation, read each operator’s row counts and execution state before releasing executor objects, then return them for the next feedback round.**
+**Core operation: On timeout cancellation, read and return operator row counts and execution state before executor cleanup, for subsequent feedback qualification.**
 
-1. **Traverse operators.** Obtain the top-level operator’s `PlanState` from `QueryDesc.planstate`, traverse the execution-state tree and save operator pointers.
-2. **Read row counts.** `PlanState.plan` supplies the node ID and estimated rows E. `PlanState.instrument` supplies cumulative returned rows A and Loops.
-3. **Identify local EOF.** `active=false` means no `get_next` call is in progress. If `Instrumentation.status != 0` also holds, set `terminal=true` to record local EOF.
-4. **Return statistics.** Return the executed plan text and operator statistics. The client runs `EXPLAIN` without `ANALYZE` for the same candidate SQL, checks plan structure and node IDs, and writes the statistics into corresponding nodes.
+1. **Save operator objects:** Obtain the top-level operator's `PlanState` from `QueryDesc.planstate`, traverse the execution-state tree and save operator pointers.
+2. **Read counts:** Read the node ID and estimate E through `PlanState.plan`; read cumulative returned rows A and Loops through `PlanState.instrument`.
+3. **Read execution state:** Derive `active` from the call-start timestamp in `Instrumentation`. `active=false` means no `get_next` call is in progress. If `Instrumentation.status != 0` also holds, record `terminal=true` to indicate local EOF.
+4. **Return round statistics:** Return the executed plan text, operator counts and state so the client can qualify counts and update later cardinality feedback.
 
-**Local EOF ends only the current invocation. The parent may call the operator again.**
+**Local EOF alone does not establish an exact count. Possible further invocations and comparability between actual and estimated counts still require checking.**
 
 **Visual:** [Figure 3: Reading GaussDB operator statistics](patent-timeout-feedback-figures/png/fig3-executor-observation-flow.png). The figure identifies structure fields and state formulas. [Editable PowerPoint](patent-timeout-feedback-figures/pptx/fig3-executor-observation-flow.pptx).
 
@@ -77,21 +77,22 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 
 **Visual:** [Figure 5: Row-count classification and Rows Hint updates](patent-timeout-feedback-figures/png/fig5-evidence.png). [Editable PowerPoint](patent-timeout-feedback-figures/pptx/fig5-evidence.pptx).
 
-## Slide 6 — Proposed protection: Combine timeout capture with iterative feedback for the same SQL
+## Slide 6 — Proposed protection: Qualify operator row counts from bounded execution and merge feedback across rounds
 
 **Proposed chain:**
 
-**Successive candidates for the same SQL → deadline per candidate → capture operator facts on cancellation → qualify row counts → correct cardinality for the next candidate.**
+**Bounded execution of a candidate for the same SQL → capture operator statistics before cancellation cleanup → qualify exact counts, usable bounds or no feedback → merge by type → correct next-round cardinality.**
 
-1. **Link cancellation and capture:** The tuner sets a deadline per candidate. When the deadline triggers cancellation, preserve the original plan, operator execution state, and cumulative output before cleanup.
-2. **Qualify counts per target:** Check target semantics and the number of invocations. Use local completion state and possible future operator invocations to distinguish exact values, usable lower bounds, and unusable observations.
-3. **Feed the next candidate for the same SQL:** Convert accepted observations into cardinality inputs for an independent next candidate, accumulating feedback within one tuning task.
+1. **Preserve statistics on timeout cancellation:** Before executor cleanup, capture operator estimates, returned rows and execution state when the candidate reaches its deadline.
+2. **Qualify feedback counts:** Use execution state, possible further invocations and compatible counting ranges to distinguish exact counts, usable lower bounds and no feedback.
+3. **Merge by feedback type across rounds:** Exact counts can raise or lower the prior value; qualified bounds only raise it; unusable observations preserve it. Exact values take precedence and bounds accumulate by maximum.
+4. **Correct the next independent candidate:** Feed the merged state into the next plan for the same SQL. Normal completion also provides row feedback. Complete runtimes determine the best measured candidate and subsequent adaptive limits.
 
-**Possible dependent limitations:** Raise an incomplete target's estimate only when A > E in the same scope; exact values take precedence over lower bounds; retain the maximum of multiple bounds; a cancellation deadline does not stand in for complete runtime.
+**Possible dependent limitations:** Accept an unfinished count as a bound only when A and E are comparable and A > E. The execution limit respects the configured cap, best complete runtime and remaining tuning budget.
 
-**Relationship to reviewed mechanisms:** The proposed combination uses each candidate's deadline as a trigger for qualified feedback. Oracle also discloses subsequent feedback for identical or equivalent queries. The same-SQL scope should therefore be combined with the deadline, capture timing, and evidence qualification.
+**Relationship to reviewed mechanisms:** The combination connects deadline-triggered cancellation, capture before cleanup, count qualification and evidence-dependent merging. Oracle and Microsoft already disclose feedback for later executions of the same query. Current replanning and plan matching are implementation safeguards, excluded from the proposed protection elements.
 
-**Suggested visual:** Show the proposed chain as a data flow, emphasizing timeout triggering, qualification, and the next candidate for the same SQL.
+**Suggested visual:** Show timeout triggering, count qualification, evidence-dependent merging and cardinality correction for the next candidate.
 
 ## Slide 7 — Technical effects: Reduce waiting and retain feedback from slow candidates
 

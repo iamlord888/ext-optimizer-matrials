@@ -2,7 +2,7 @@
 
 Reviewed on 2026-10-12 against the slide text provided in this conversation, the current source tree, and primary patent texts. [Chinese version](patent-timeout-feedback-protection-review.md). [Primary-source review and claim locations](patent-timeout-feedback-primary-review-20261012.md).
 
-The main workflow is clear. The material needs stronger conditions for using operator counts, explicit precedence between exact values and lower bounds, and more accurate comparisons with existing patents. The proposed technical combination is cancellation-time capture of the executed plan and operator observations, validation against that plan, qualification of counts, and merging into the next candidate's cardinality inputs.
+The main workflow is clear. The material needs stronger conditions for using operator counts, explicit precedence between exact values and lower bounds, and more accurate comparisons with existing patents. The proposed technical combination is deadline-triggered cancellation, capture of operator observations before cleanup, qualification of counts, and merging into the next candidate's cardinality inputs. Replanning and original-plan matching are implementation safeguards retained in the implementation description, outside the proposed protection elements.
 
 ## 1. Content corrections
 
@@ -36,9 +36,18 @@ Remaining design work includes excluding inappropriate repeated invocations, ali
 
 ## 3. Suggested technical slide text
 
-**Technical approach 2: Capture cancellation-time statistics and validate the executed plan.** Save operator objects from `QueryDesc.planstate`; read IDs and estimates through `PlanState.plan` and cumulative output, Loops and state through `PlanState.instrument`; record local EOF; return the executed plan and statistics. Replan the same candidate without `ANALYZE`, validate all corresponding plan structures, then attach statistics or reject the round.
+**Technical approach 2: Return operator row counts and execution state on timeout cancellation.**
 
-The replan reconstructs the cancelled round. The next candidate is generated later with updated feedback. Physical node IDs identify observations within a round; cross-round merging uses the logical scan/join target.
+**Core operation: On timeout cancellation, read and return operator row counts and execution state before executor cleanup, for subsequent feedback qualification.**
+
+1. **Save operator objects:** Obtain the top-level operator's `PlanState` from `QueryDesc.planstate`, traverse the execution-state tree and save operator pointers.
+2. **Read counts:** Read the node ID and estimate E through `PlanState.plan`; read cumulative returned rows A and Loops through `PlanState.instrument`.
+3. **Read execution state:** Derive `active` from the call-start timestamp in `Instrumentation`. `active=false` means no `get_next` call is in progress. If `Instrumentation.status != 0` also holds, record `terminal=true` to indicate local EOF.
+4. **Return round statistics:** Return the executed plan text, operator counts and state so the client can qualify counts and update later cardinality feedback.
+
+**Local EOF alone does not establish an exact count. Possible further invocations and comparability between actual and estimated counts still require checking.**
+
+Current non-executing replanning and plan matching protect statistics attachment. Keep them in the implementation description, outside the proposed protection elements. Replanning reconstructs the cancelled round; the next candidate is generated later with updated feedback. Node IDs identify observations within a round, while cross-round merging uses the query block and logical scan/join target.
 
 **Technical approach 3: Qualify and merge operator row-count feedback.** A and E must cover the same scan or join and comparable invocation counts.
 
@@ -58,17 +67,17 @@ Exact values take precedence; multiple bounds accumulate by maximum; sampling ca
 
 ## 5. Suggested protection slide
 
-**Proposed protection: Validate cancellation-time operator statistics and merge cardinality feedback across rounds.**
+**Proposed protection: Qualify operator row counts from bounded execution and merge feedback across rounds.**
 
-1. **Preserve execution facts before cleanup:** Capture the executed plan, operator counts and state when a candidate reaches its deadline and is cancelled.
-2. **Validate against the executed plan:** Replan the same candidate without running it again. Attach statistics only after the plan structures match; reject contradictory round data.
-3. **Merge by evidence type:** For compatible targets, exact output replaces the prior value, a qualified bound only raises it, and unusable observations preserve it. Exact values take precedence; bounds accumulate by maximum.
-4. **Feed an independent next candidate:** Both normal completion and cancellation may provide count feedback. Complete runtimes determine the best measured candidate and subsequent adaptive limits.
+1. **Preserve statistics on timeout cancellation:** Before executor cleanup, capture operator estimates, returned rows and execution state when a candidate reaches its execution deadline.
+2. **Qualify feedback counts:** Use execution state, possible further invocations and compatible counting ranges to distinguish exact counts, usable lower bounds and no feedback.
+3. **Merge by feedback type across rounds:** Exact counts can raise or lower the prior value; qualified bounds only raise it; unusable observations preserve it. Exact values take precedence and bounds accumulate by maximum.
+4. **Correct the next independent candidate:** Feed the merged state into the next plan for the same SQL. Normal completion can also supply row feedback. Complete runtimes determine the best measured candidate and subsequent adaptive limits.
 
-Further limitations may cover repeated-invocation and counting safeguards, the configured cap, best complete runtime and remaining tuning budget. The strict count safeguards still need additional implementation and validation.
+Further limitations may cover accepting an unfinished count as a bound only when A and E are comparable and A > E, plus the configured cap, best complete runtime and remaining tuning budget. The repeated-invocation and cumulative-count safeguards still need additional implementation and validation.
 
-The technical dependencies matter: cancellation triggers capture; the captured plan supplies the identity basis; successful mapping precedes publication; the evidence type determines the update; the resulting state drives the next independent plan. The specific non-executing reconstruction and whole-plan validation path has clear code support. A broader version could require validation against the executed plan without mandating reconstruction, with the reconstruction path as a further limitation; that broader wording overlaps more with existing feedback mechanisms.
+The main dependencies are deadline-triggered cancellation, capture before cleanup, count qualification, evidence-dependent merging, and cardinality correction for the next independent candidate. Current non-executing replanning, original-plan matching and whole-round rejection protect the implementation against attaching statistics to the wrong reconstructed plan. Keep them in the implementation description; they are not proposed protection elements or necessary method steps. Another implementation could obtain the original structured plan and observations directly. Counts must still refer to the correct scan or join; that requirement does not mandate the current two-plan matching procedure.
 
-Ten seconds, 1.25, enum labels, external services and the same-SQL scope should not independently carry the principal distinction. Use a general multiplier α with 1.25 as an implementation example. `QueryDesc`, `PlanState`, JSON, messages and Rows Hints explain the implementation but need not define the entire general method.
+Important dependent conditions include excluding inappropriate future invocations, aligning per-invocation and cumulative counts or withholding feedback, qualifying A > E bounds, retaining exact values over bounds, accumulating bounds by maximum, and distinguishing unexecuted operators from actual zero output. Timeout control can be a further limitation. Ten seconds, 1.25, enum labels, external services and the same-SQL scope should not independently carry the principal distinction. Use multiplier α with 1.25 as an example. `QueryDesc`, `PlanState`, JSON, messages, replanning and plan matching explain the implementation.
 
-Useful supporting cases are plan changes after replanning, local EOF followed by another required call, cumulative-versus-per-invocation mismatches, and exact/bound/zero-row merge behavior. This review changed no code and ran no database experiments. The reviewed individual patent texts do not explicitly disclose the complete specific processing chain, but that does not establish novelty or inventive step against combinations and other prior art.
+Supporting cases should focus on local EOF followed by another required call, cumulative-versus-per-invocation mismatches, and exact/bound/zero-row merge behavior. A changed replan rejected by the client validates the implementation safeguard. This revision changed no code and ran no database experiments. The revised scope is centered on bounded-execution feedback; its concrete qualification and update rules still need to be assessed against existing partial-execution feedback and lower-bound techniques.
