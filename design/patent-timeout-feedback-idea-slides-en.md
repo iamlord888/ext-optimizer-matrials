@@ -8,13 +8,13 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 
 **Tuning process:** Execute a candidate each round, use operator row counts to correct cardinality inputs, and generate the next candidate. Complete runtimes support candidate comparisons.
 
-**The slow-candidate dilemma:** Continued waiting consumes time available for later iterations and may leave no time for further optimization before the global budget ends. Cancellation interrupts the normal `EXPLAIN ANALYZE` result path; without preserving statistics, observations already produced are difficult to reuse for tuning.
+**The problem with slow candidates:** Continued waiting consumes time available for later iterations and may leave no time for further optimization before the global budget ends. Cancellation interrupts the normal `EXPLAIN ANALYZE` result path; without preserving statistics, observations already produced are difficult to reuse for tuning.
 
 **Useful information can exist before timeout:** Some operators have returned all relevant rows; others remain unfinished but have returned far more rows than estimated. Their state and counting ranges determine whether those observations can inform the next round.
 
 **Idea:** Give each candidate an execution deadline, preserve operator statistics before cancellation cleanup, qualify and merge counts, and feed the next candidate for the same SQL.
 
-**Business objective: Reduce waiting on a slow candidate and leave more time for useful iterations within the global budget, improving the opportunity to discover a better plan.**
+**Business objective: Bound each slow candidate's trial execution and retain its usable operator statistics to reduce overall tuning time, leave time for useful iterations within the global tuning budget, and increase the chance of finding a better execution plan.**
 
 **Suggested visual:** [Figure 1: Execution deadline and feedback timing](patent-timeout-feedback-figures/png/fig1-conventional.png), comparing continued waiting, direct cancellation and preserving feedback on cancellation.
 
@@ -98,9 +98,9 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 
 ## Slide 7 — Business value and validation: Reduce waiting and leave time for useful iterations
 
-**Value 1: Reduce waiting on a candidate and preserve existing feedback.** Bound a slow candidate's trial execution. Retain qualified operator statistics on cancellation for later tuning, reducing the loss of information produced by an expensive execution attempt.
+**Value 1: Bound trial execution, retain usable feedback, and reduce overall tuning time.** Limit the time spent on a slow candidate and use qualified statistics captured before timeout to correct later cardinality inputs. In the workload comparison, aggregate tuning time fell by about 32% on JOB and 42% on JOB-complex relative to the group without a deadline for each candidate.
 
-**Value 2: Leave time for useful iterations within the budget.** When feedback can change cardinality inputs, the time saved can support further candidate trials within the budget, improving the opportunity to discover a better plan. For `16b`, four rounds without a per-candidate cap compare with eleven partial-feedback rounds and a recovered candidate measured at about 10.99 seconds. The uncapped group had already delivered a candidate measured at about 36.38 seconds; the recovered candidate was not formally delivered.
+**Value 2: Leave time for useful iterations within the global budget and increase the chance of finding a better execution plan.** When feedback can change cardinality inputs, the time saved can support later candidate trials. For JOB `16b`, the group without a deadline for each candidate stopped after four rounds under the global budget condition and delivered a candidate with a complete runtime of about 36 seconds. The ten-second group ran eleven partial-feedback rounds and produced a faster recovered candidate, independently measured at about eleven seconds. That recovered candidate was not formally delivered.
 
 **Experiment:** JOB: 113 SQL queries; JOB-complex: 30 queries. Compare no per-candidate deadline against ten-second partial feedback. Both groups used a 300-second global tuning search budget and `patience-iters=5`. Ten seconds is the initial per-candidate cap; later limits shrink according to the best complete runtime.
 

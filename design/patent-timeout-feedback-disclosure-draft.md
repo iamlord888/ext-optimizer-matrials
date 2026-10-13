@@ -20,7 +20,7 @@
 
 本发明针对真实候选 SQL 的单轮限时试运行，在查询取消导致执行器对象清理之前，取得原候选物理计划及已运行节点的运行状态、估算行数和累计输出。方法先将节点观测绑定到下一轮拟修正的同一基数目标，并核对查询块、谓词、连接语义、调用次数和计数范围；随后结合当前执行时期是否到达 `EOF`、父节点是否仍可能重新调用该节点等事实，将观测分为目标完整值、同口径下界和无反馈三类。合格行数被用于下一轮独立候选的基数输入，取消候选的部分耗时则不被冒充为完整执行时间参与最佳候选比较。由此，在不等待慢候选完整结束的情况下，保留具有明确语义的执行反馈，并避免将局部或累计计数误用为最终基数。
 
-本方法的业务目标有两部分：缩短单个慢候选的等待，并保留已产生的可用节点统计；为全局预算内的后续有效迭代争取时间，增加发现更优计划的机会。反馈是否可用和最终候选能否完整验证，决定这些机会能否转为实际交付收益。
+本方法的业务目标是控制慢候选的单轮试运行时间，保留并利用已产生的有效节点统计，以降低整体调优耗时，为全局调优预算内的后续有效迭代争取时间，增加发现更优执行计划的机会。反馈是否可用和最终候选能否完整验证，决定这些机会能否转为实际交付收益。
 
 ## 1 相关技术背景以及最接近的现有技术
 
@@ -341,15 +341,15 @@ B_(i+1)(k) = B_i(k),                     F_i(k) = NONE。
 
 ### 3.2 本发明的业务价值及对应有益效果
 
-本方法面向数据库运维和自动调优平台中的限时慢 SQL 调优任务。业务价值分为两个相互关联的部分：首先减少单个慢候选的等待并保留已产生的可用统计；其次把节省的时间用于后续有效迭代，增加在全局预算内发现更优候选的机会。
+本方法面向数据库运维和自动调优平台中的限时慢 SQL 调优任务，旨在控制慢候选的单轮试运行时间，保留并利用已产生的有效节点统计，以降低整体调优耗时，为全局调优预算内的后续有效迭代争取时间，增加发现更优执行计划的机会。以下从单轮试运行的时间投入和后续迭代的探索机会两个方面说明业务价值。
 
-#### 3.2.1 缩短单个候选的等待，保留已投入执行成本产生的信息
+#### 3.2.1 控制单轮试运行时间，保留有效反馈，降低整体调优耗时
 
 一个候选长时间未结束时，持续等待会占用后续候选的规划和验证时间。直接取消能够结束等待，但如果没有取得和使用本轮节点统计，试运行已经产生的行数信息就无法继续用于调优。本方法在候选达到期限时取消执行，同时在执行器清理前取得已有统计；有合格行数时，将其用于下一轮基数修正。业务上的作用是控制一次慢候选试运行占用的时间，并保留这次执行尝试可供后续利用的信息。复用对象是节点行数与执行状态，不是中间数据表，也不是从取消位置恢复原查询。
 
 现有固定工作负载对照中，集成部分反馈的版本将 JOB 调优总时长从 2,348.17 秒降至 1,599.41 秒，减少 748.76 秒（31.89%）；JOB-complex 从 1,001.57 秒降至 582.56 秒，减少 419.02 秒（41.84%）。这支持相应批次调优任务更快完成的观察。对照使用不同代码版本，不能将全部差异单独归因于时限参数。候选期限约束试运行执行，整轮还包含规划、取消清理和统计处理等开销。[E1][E2][E3]
 
-#### 3.2.2 为预算内的后续有效迭代争取时间，增加发现更优计划的机会
+#### 3.2.2 为全局预算内的后续有效迭代争取时间，增加发现更优计划的机会
 
 当新的合格统计能够改变下一轮基数输入时，慢候选无需完整结束即可为后续规划提供反馈。相比把剩余时间集中用于等待当前候选，这让调优器有机会在全局预算内继续尝试其他候选。业务目标是提高有限调优窗口内的有效探索机会；有无新反馈、候选耗时和停止条件共同决定实际轮次，不能保证所有 SQL 的轮次都会增加。
 
@@ -436,7 +436,7 @@ IBM、Oracle、Microsoft 和 Sybase 已公开相关执行反馈、部分统计�
 
 ## English Summary
 
-The business value has two parts: reduce waiting on a slow candidate while preserving usable operator statistics, and leave time for useful subsequent iterations within the global budget. Integrated workload tests reduced aggregate tuning duration by 31.89% on JOB and 41.84% on JOB-complex. More rounds or better delivery are conditional: total JOB rounds decreased from 569 to 528, while 16b increased from four rounds to eleven partial-feedback rounds and produced a faster recovered candidate. That candidate was not formally delivered, and formal JOB execution results do not establish a general final-plan quality improvement. CPU, I/O and production-concurrency benefits remain unmeasured.
+The business objective is to bound each slow candidate's trial execution and retain its usable operator statistics to reduce overall tuning time, leave time for useful iterations within the global tuning budget, and increase the chance of finding a better execution plan. Integrated workload tests reduced aggregate tuning duration by 31.89% on JOB and 41.84% on JOB-complex. More rounds or better delivery are conditional: total JOB rounds decreased from 569 to 528, while 16b increased from four rounds to eleven partial-feedback rounds and produced a faster recovered candidate. That candidate was not formally delivered, and formal JOB execution results do not establish a general final-plan quality improvement. CPU, I/O and production-concurrency benefits remain unmeasured.
 
 Start with a configurable per-candidate timeout cap `T₀`, set to ten seconds in the current experiment. Once a best complete runtime `t_best` is available for the same SQL, reduce the cap for later candidates to `min(T₀, 1.25 × t_best)`. The actual deadline also respects the remaining global budget and reserves time for cancellation, capture, and replanning. Time spent on a cancelled execution does not enter this calculation.
 
