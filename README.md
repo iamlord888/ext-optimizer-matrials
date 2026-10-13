@@ -4,6 +4,10 @@
 
 Slow candidates can consume much of the tuning budget, while timeout cancellation interrupts the normal `EXPLAIN ANALYZE` result path. These materials describe capturing row counts and execution state before cleanup and using qualified feedback for the next candidate of the same SQL.
 
+业务价值分为两部分：缩短单个慢候选的等待，并保留已有的可用节点统计；为全局预算内的后续有效迭代争取时间，增加发现更优候选的机会。实测支持固定工作负载的调优总时长下降，候选轮次和最终交付效果仍需分别评价。
+
+The business value has two parts: reduce waiting on a slow candidate while retaining usable statistics, and leave time for useful subsequent iterations within the global budget. Workload tests support shorter aggregate tuning duration; iteration counts and final delivery quality require separate evaluation.
+
 ## 文稿 / Documents
 
 - [专利交底书底稿 / Disclosure draft](design/patent-timeout-feedback-disclosure-draft.md)

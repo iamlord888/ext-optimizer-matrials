@@ -2,19 +2,21 @@
 
 Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). Seven slides: one background slide, four technical approach slides, one proposed protection slide, and one technical effects slide. [Chinese version](patent-timeout-feedback-idea-slides.md).
 
-## Slide 1 — Background: Slow candidates delay execution-feedback tuning
+## Slide 1 — Business context: Slow candidates delay automated SQL tuning
 
-**Cardinality estimates influence plan selection.** The optimizer uses estimated scan and join row counts to choose access paths, join order, and join methods. Estimation errors can produce candidates that run for a long time.
+**Business setting:** Database operations teams and automated tuning platforms need to find faster plans for a batch of slow SQL queries within a limited tuning window.
 
-**Execution feedback supports repeated tuning of the same SQL.** Each round executes a candidate, uses observed operator row counts to correct cardinality inputs, and generates the next candidate. Row counts inform planning; complete runtimes support performance comparisons.
+**Tuning process:** Execute a candidate each round, use operator row counts to correct cardinality inputs, and generate the next candidate. Complete runtimes support candidate comparisons.
 
-**Slow candidates create a dilemma.** Waiting for completion may consume much of the tuning budget. Cancelling at a deadline interrupts the normal `EXPLAIN ANALYZE` result path and makes operator statistics difficult to use promptly.
+**The slow-candidate dilemma:** Continued waiting consumes time available for later iterations and may leave no time for further optimization before the global budget ends. Cancellation interrupts the normal `EXPLAIN ANALYZE` result path; without preserving statistics, observations already produced are difficult to reuse for tuning.
 
-**A cancelled round may already contain useful information.** Some scans have finished; some joins are still running but have emitted far more rows than estimated; other operators have not started. These observations require interpretation according to execution state.
+**Useful information can exist before timeout:** Some operators have returned all relevant rows; others remain unfinished but have returned far more rows than estimated. Their state and counting ranges determine whether those observations can inform the next round.
 
-**Idea: Give each candidate for the same SQL an execution deadline, preserve operator facts when cancellation occurs, and use qualified row counts in the next round.**
+**Idea:** Give each candidate an execution deadline, preserve operator statistics before cancellation cleanup, qualify and merge counts, and feed the next candidate for the same SQL.
 
-**Suggested visual:** [Figure 1: Execution deadline and feedback timing](patent-timeout-feedback-figures/png/fig1-conventional.png), comparing waiting for completion, ordinary cancellation, and capture on cancellation.
+**Business objective: Reduce waiting on a slow candidate and leave more time for useful iterations within the global budget, improving the opportunity to discover a better plan.**
+
+**Suggested visual:** [Figure 1: Execution deadline and feedback timing](patent-timeout-feedback-figures/png/fig1-conventional.png), comparing continued waiting, direct cancellation and preserving feedback on cancellation.
 
 ## Slide 2 — Technical approach 1: Iterative tuning with a deadline per candidate
 
@@ -94,9 +96,11 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 
 **Suggested visual:** Show timeout triggering, count qualification, evidence-dependent merging and cardinality correction for the next candidate.
 
-## Slide 7 — Technical effects: Reduce waiting and retain feedback from slow candidates
+## Slide 7 — Business value and validation: Reduce waiting and leave time for useful iterations
 
-**Mechanism benefits:** When usable observations exist, a timed-out round can still provide row-count evidence. Complete targets can correct overestimation or underestimation; incomplete targets can correct underestimation using proven lower bounds. Slow candidates consequently occupy less tuning time.
+**Value 1: Reduce waiting on a candidate and preserve existing feedback.** Bound a slow candidate's trial execution. Retain qualified operator statistics on cancellation for later tuning, reducing the loss of information produced by an expensive execution attempt.
+
+**Value 2: Leave time for useful iterations within the budget.** When feedback can change cardinality inputs, the time saved can support further candidate trials within the budget, improving the opportunity to discover a better plan. For `16b`, four rounds without a per-candidate cap compare with eleven partial-feedback rounds and a recovered candidate measured at about 10.99 seconds. The uncapped group had already delivered a candidate measured at about 36.38 seconds; the recovered candidate was not formally delivered.
 
 **Experiment:** JOB: 113 SQL queries; JOB-complex: 30 queries. Compare no per-candidate deadline against ten-second partial feedback. Both groups used a 300-second global tuning search budget and `patience-iters=5`. Ten seconds is the initial per-candidate cap; later limits shrink according to the best complete runtime.
 
@@ -124,4 +128,5 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 - Slide 3 was checked against server functions [`start_completion_capture`, `collect_execution_evidence`, and `emit_partial_snapshot`](../contrib/extopt-gaussdb/extopt_partial_capture.cpp), [`partial_gaussdb_execution_capture_evidence`](../contrib/extopt-gaussdb/extopt_partial_gaussdb.cpp), and [requirements walkthrough sections 4.4–4.5](<../sources/requirements/超时EXPLAIN_ANALYZE需求串讲.md>). The server snapshot contains the executed plan text and the operator statistics obtained so far. The client obtains the complete JSON plan tree by replanning the same candidate. Operators that have not run do not publish zero-row statistics.
 - Slides 4–5 describe the complete qualification and consumption conditions proposed in the disclosure. The prototype already captures, classifies, and merges feedback. Complete coverage of future operator invocations, normalization across invocations, and semantic consistency across rounds still requires work; aggregate performance comparisons do not establish that these checks are fully validated.
 - Slide 5 was checked against [requirements walkthrough section 4.8](<../sources/requirements/超时EXPLAIN_ANALYZE需求串讲.md>) and the [`rows_hint_merge` implementation](../contrib/hint_adviser/hint_adviser_rows_state.c). Exact values use first-wins within a round and can replace earlier-round exact values. Bounds accumulate by maximum. A new bound exceeding an existing exact value produces only a conflict diagnostic and leaves the exact value intact. Strengthening an internal bound without changing the Hint output does not count as a Rows output change. The example concerns qualified evidence and does not assume that the current plan estimate always equals a historical Hint value.
+- Business value separates reduced candidate waiting from opportunities for useful subsequent iterations. Total rounds need not increase: JOB had 569 → 528 and JOB-complex 166 → 182. Resource usage has not been independently measured. See the [per-query analysis](patent-timeout-feedback-job-execution-attribution.md) for the distinction between recovered and delivered 16b candidates.
 - Experimental values were recalculated from the [per-query input records](../data/patience5-ab-20260928/results/workbook-input.tsv). Complete candidate runtimes use the third independent execution selected in the disclosure.

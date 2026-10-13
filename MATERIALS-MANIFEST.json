@@ -1,5 +1,5 @@
 {
-  "prepared_date": "2026-10-12",
+  "prepared_date": "2026-10-13",
   "source_repository": "https://gitcode.com/ext-optimizer-group/ext-optimizer",
   "source_base_commit": "7bca7479cfe77bc19c556ecf33a3f8c590263b53",
   "source_state": "working tree snapshot; publishing copies normalize local document links and use LF text line endings",
@@ -27,8 +27,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7723,
-      "sha256": "adffb3243a3b72d0e2f59f215dbfafed6e1bed52069b51f6accd21f5777e11f6"
+      "bytes": 8338,
+      "sha256": "e17cd37f215ee32d13e42045657836ad282eab2b6eefe1a696791289cf403451"
     },
     {
       "path": "contrib/extopt-gaussdb/extopt--1.0.sql",
@@ -257,8 +257,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-disclosure-draft.md",
-      "bytes": 57465,
-      "sha256": "a091a997d4d51113586742e6907f44780780f458f0ae167cc4ad001ca31cd7a1"
+      "bytes": 61964,
+      "sha256": "f36f119991b4273c728b83effb980a40392cb3e7d09acd10bf772f5a7ca2af68"
     },
     {
       "path": "design/patent-timeout-feedback-figures/html/fig3-executor-observation-flow.html",
@@ -397,13 +397,13 @@
     },
     {
       "path": "design/patent-timeout-feedback-idea-slides-en.md",
-      "bytes": 14428,
-      "sha256": "b0a92a137cf94d4ffda6f1587b733d1cf7607663b828bde15f826e04ee40cf43"
+      "bytes": 15467,
+      "sha256": "1ee3c19ea1089dbd9263549042a0c6da6170e11b3e2539b30d12fd1899db91b8"
     },
     {
       "path": "design/patent-timeout-feedback-idea-slides.md",
-      "bytes": 12863,
-      "sha256": "1bbc6d11c122acbbb05b3ee65670edd8e8d0e7d10d3c046cbafeb26e6188b439"
+      "bytes": 13645,
+      "sha256": "a00f131ce990611992e995b2fae0be948f5cf37c2ca32119343ec8dd112fa7dc"
     },
     {
       "path": "design/patent-timeout-feedback-job-execution-attribution.md",
