@@ -1,4 +1,8 @@
-# 超时执行反馈专利材料 / Timeout Execution Feedback Patent Materials
+# 限时执行部分反馈专利材料 / Time-Limited Execution Feedback Patent Materials
+
+**专利名称：一种基于限时执行部分反馈的查询执行计划迭代优化方法。**
+
+**Patent title: An Iterative Query Execution Plan Optimization Method Based on Partial Feedback from Time-Limited Execution.**
 
 慢候选可能占用大部分调优预算，超时取消会中断 `EXPLAIN ANALYZE` 的正常结果路径。本材料整理了在取消清理前保留行数和执行状态、判断可用反馈并用于同一 SQL 下一轮候选的方案。
 
@@ -16,7 +20,7 @@ The business objective is to bound each slow candidate's trial execution and ret
 - [PPT 内容与拟保护点修订建议 / Slide and protection recommendations](design/patent-timeout-feedback-protection-review.md)
 - [修订建议英文对照 / Recommendations in English](design/patent-timeout-feedback-protection-review-en.md)
 - [本轮专利原文复核 / Primary patent review](design/patent-timeout-feedback-primary-review-20261012.md)
-- [文稿事实核查 / Manuscript audit](design/patent-timeout-feedback-manuscript-audit.md)
+- [文稿一致性与事实核查 / Manuscript consistency and fact audit](design/patent-timeout-feedback-manuscript-audit.md)
 - [现有技术初步核查 / Prior-art review](design/patent-timeout-feedback-prior-art.md)
 - [专利检索与技术边界 / Patent landscape](design/patent-timeout-feedback-patent-landscape.md)
 - [论文和数据库产品核查 / Papers and database products](design/patent-timeout-feedback-products-papers.md)

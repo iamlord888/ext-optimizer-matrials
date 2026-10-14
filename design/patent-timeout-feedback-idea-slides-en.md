@@ -1,4 +1,4 @@
-# Timeout Execution Feedback Idea: Slide Text
+# An Iterative Query Execution Plan Optimization Method Based on Partial Feedback from Time-Limited Execution: Slide Text
 
 Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). Seven slides: one background slide, four technical approach slides, one proposed protection slide, and one technical effects slide. [Chinese version](patent-timeout-feedback-idea-slides.md).
 
@@ -13,6 +13,8 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 **Useful information can exist before timeout:** Some operators have returned all relevant rows; others remain unfinished but have returned far more rows than estimated. Their state and counting ranges determine whether those observations can inform the next round.
 
 **Idea:** Give each candidate an execution deadline, preserve operator statistics before cancellation cleanup, qualify and merge counts, and feed the next candidate for the same SQL.
+
+**Partial feedback:** Usable operator statistics from a candidate whose execution has not completed, including qualified exact counts and lower bounds.
 
 **Business objective: Bound each slow candidate's trial execution and retain its usable operator statistics to reduce overall tuning time, leave time for useful iterations within the global tuning budget, and increase the chance of finding a better execution plan.**
 
@@ -38,7 +40,7 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 **Core operation: On timeout cancellation, read and return operator row counts and execution state before executor cleanup, for subsequent feedback qualification.**
 
 1. **Save operator objects:** Obtain the top-level operator's `PlanState` from `QueryDesc.planstate`, traverse the execution-state tree and save operator pointers.
-2. **Read counts:** Read the node ID and estimate E through `PlanState.plan`; read cumulative returned rows A and Loops through `PlanState.instrument`.
+2. **Read counts:** Read `Plan.plan_node_id` and `Plan.plan_rows` through `PlanState.plan` for the node ID and estimate E. Read `Instrumentation.ntuples` and `nloops` through `PlanState.instrument` for cumulative returned rows A and Loops.
 3. **Read execution state:** Derive `active` from the call-start timestamp in `Instrumentation`. `active=false` means no `get_next` call is in progress. If `Instrumentation.status != 0` also holds, record `terminal=true` to indicate local EOF.
 4. **Return round statistics:** Return the executed plan text, operator counts and state so the client can qualify counts and update later cardinality feedback.
 
@@ -52,7 +54,7 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 
 **Distinguish rows from one invocation from cumulative rows.** Actual and estimated counts must represent the same number of executions. If A accumulates output from several invocations, E must cover those same invocations.
 
-**Check whether the parent will execute the child again.** EOF ends the current invocation. Inspect parent-child calls to establish that the scan or join has returned all relevant results.
+**Check whether the parent will execute the child again.** EOF ends the current invocation. Check whether continuing the candidate could request further output from that scan or join before treating its relevant results as complete.
 
 **Examples:**
 
@@ -61,9 +63,9 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 
 **Visual:** [Figure 7: Repeated execution and cumulative row counts](patent-timeout-feedback-figures/png/fig7-reentry-scope.png). [Editable PowerPoint](patent-timeout-feedback-figures/pptx/fig7-reentry-scope.pptx).
 
-## Slide 5 — Technical approach 4: Select usable row counts and update Rows Hints
+## Slide 5 — Technical approach 4: Qualify and merge operator row-count feedback
 
-**Rules: Exact counts replace; bounds only raise; unusable counts leave the Hint unchanged.** A is output returned by cancellation. E is estimated output for the same number of executions.
+**Rules: Exact counts replace; bounds only raise; unusable counts leave the Hint unchanged.** A is output returned by the statistics collection point. E is estimated output for the same number of executions. These conditions apply to both normally completed and cancelled candidates.
 
 | Check result | Feedback | Next-round update |
 | --- | --- | --- |
@@ -71,7 +73,7 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 | All results are not yet confirmed, returned rows only increase, and A > E | **Row-count bound `LOWER_BOUND`** | Without an exact count, retain the greater of the existing Hint and A; otherwise retain the exact count |
 | Not executed, actual and estimated counts cannot cover the same executions, or not finished with A ≤ E | **No update `NONE`** | Preserve the Hint |
 
-**Merge rules:** Retain the maximum of multiple bounds. Sampling does not replace exact counts or bounds. Within one round, the first exact count for a scan or join in plan-tree traversal order wins.
+**Merge rules:** Retain the maximum of multiple bounds. Sampling does not replace adopted exact counts or bounds. Within one round, the first exact count for a scan or join in plan-tree traversal order wins.
 
 **Example:** Start at sampling 5,000. A usable bound of 2,400 leaves the Hint at 5,000 while storing the bound. A bound of 6,400 raises the Hint to 6,400. An exact count of 7,200 replaces it and clears the bound.
 
@@ -92,7 +94,7 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 
 **Possible dependent limitations:** Accept an unfinished count as a bound only when A and E are comparable and A > E. The execution limit respects the configured cap, best complete runtime and remaining tuning budget.
 
-**Relationship to reviewed mechanisms:** The combination connects deadline-triggered cancellation, capture before cleanup, count qualification and evidence-dependent merging. Oracle and Microsoft already disclose feedback for later executions of the same query. Current replanning and plan matching are implementation safeguards, excluded from the proposed protection elements.
+**Technical focus:** Deadline-triggered cancellation, capture before cleanup, count qualification and merging across rounds form a continuous process for retaining usable feedback and evaluating candidate performance.
 
 **Suggested visual:** Show timeout triggering, count qualification, evidence-dependent merging and cardinality correction for the next candidate.
 
@@ -124,6 +126,7 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 
 ## Source and presentation notes
 
+- The title is “An Iterative Query Execution Plan Optimization Method Based on Partial Feedback from Time-Limited Execution.” “Partial” describes the unfinished candidate execution; qualified completed operators can still provide exact counts. Technical facts, embodiment conditions and experimental results remain in the disclosure, while literature assessments and implementation gaps are kept in the [independent audit record](patent-timeout-feedback-manuscript-audit.md). Replanning and original-plan matching are implementation safeguards, excluded from Slide 6's proposed protection elements.
 - Slide 2 was checked against [`feedback_effective_timeout`](../contrib/hint_adviser/hint_adviser_feedback_round.c) and [requirements walkthrough section 3.1](超时EXPLAIN_ANALYZE部分反馈需求串讲.md). The [experiment configuration](../data/patience5-ab-20260928/run-manifest.txt) sets the configurable initial cap to ten seconds. The global budget also reserves eight seconds for cancellation, capture, and replanning.
 - Slide 3 was checked against server functions [`start_completion_capture`, `collect_execution_evidence`, and `emit_partial_snapshot`](../contrib/extopt-gaussdb/extopt_partial_capture.cpp), [`partial_gaussdb_execution_capture_evidence`](../contrib/extopt-gaussdb/extopt_partial_gaussdb.cpp), and [requirements walkthrough sections 4.4–4.5](<../sources/requirements/超时EXPLAIN_ANALYZE需求串讲.md>). The server snapshot contains the executed plan text and the operator statistics obtained so far. The client obtains the complete JSON plan tree by replanning the same candidate. Operators that have not run do not publish zero-row statistics.
 - Slides 4–5 describe the complete qualification and consumption conditions proposed in the disclosure. The prototype already captures, classifies, and merges feedback. Complete coverage of future operator invocations, normalization across invocations, and semantic consistency across rounds still requires work; aggregate performance comparisons do not establish that these checks are fully validated.

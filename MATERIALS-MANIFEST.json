@@ -1,5 +1,5 @@
 {
-  "prepared_date": "2026-10-13",
+  "prepared_date": "2026-10-14",
   "source_repository": "https://gitcode.com/ext-optimizer-group/ext-optimizer",
   "source_base_commit": "7bca7479cfe77bc19c556ecf33a3f8c590263b53",
   "source_state": "working tree snapshot; publishing copies normalize local document links and use LF text line endings",
@@ -27,8 +27,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 8477,
-      "sha256": "4b9e1e994b0d14c170b6ddf4e302c17bb7abe00132a11deb673e351286dd5828"
+      "bytes": 8748,
+      "sha256": "a9923cc610770d7c28d26887bcda134ff49fb31b6bda132d3949c2dc4df6eb0e"
     },
     {
       "path": "contrib/extopt-gaussdb/extopt--1.0.sql",
@@ -257,8 +257,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-disclosure-draft.md",
-      "bytes": 62207,
-      "sha256": "7c25f40bad03bbdfd9655fa7117664eb2646977872553fe8a437d272a0a324b0"
+      "bytes": 41710,
+      "sha256": "1b4a486b94700183f61d640988dae333e26ad36da6dec5b7e5720dc15a62a6cb"
     },
     {
       "path": "design/patent-timeout-feedback-figures/html/fig3-executor-observation-flow.html",
@@ -397,13 +397,13 @@
     },
     {
       "path": "design/patent-timeout-feedback-idea-slides-en.md",
-      "bytes": 15772,
-      "sha256": "47940f4589dd302d324ee34470834a973a8c21bfb827abb76d3bb7ade7b1cfa2"
+      "bytes": 16682,
+      "sha256": "7417838975365cf0f1fccf7b89d0da42e80f34ec1221811595f238e6ad47246b"
     },
     {
       "path": "design/patent-timeout-feedback-idea-slides.md",
-      "bytes": 13976,
-      "sha256": "e77a546304d1492410cf20e424a66857f809e019479b03c6cd8be7864193ea39"
+      "bytes": 14647,
+      "sha256": "a703bbab2c6c1ccee3328ef1462deae0e28687ab3d0a907c46f656d806188769"
     },
     {
       "path": "design/patent-timeout-feedback-job-execution-attribution.md",
@@ -412,8 +412,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-manuscript-audit.md",
-      "bytes": 19429,
-      "sha256": "4590bdab917b2e9383d8798be403dfd32c4f8817bf3dc2e1b77ff71e098f9efb"
+      "bytes": 26957,
+      "sha256": "1b8ec41efdce3f027dcb67b5d8629932ac450bd062b87a871e28f7c56c40f790"
     },
     {
       "path": "design/patent-timeout-feedback-overlap-analysis.md",
