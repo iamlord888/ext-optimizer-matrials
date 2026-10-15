@@ -1,5 +1,5 @@
 {
-  "prepared_date": "2026-10-14",
+  "prepared_date": "2026-10-15",
   "source_repository": "https://gitcode.com/ext-optimizer-group/ext-optimizer",
   "source_base_commit": "7bca7479cfe77bc19c556ecf33a3f8c590263b53",
   "source_state": "working tree snapshot; publishing copies normalize local document links and use LF text line endings",
@@ -27,8 +27,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 8748,
-      "sha256": "a9923cc610770d7c28d26887bcda134ff49fb31b6bda132d3949c2dc4df6eb0e"
+      "bytes": 8890,
+      "sha256": "4e55d3c78543da9f00120b689f801d1bccfc602af58806e8d03000fd43d320c4"
     },
     {
       "path": "contrib/extopt-gaussdb/extopt--1.0.sql",
@@ -429,6 +429,11 @@
       "path": "design/patent-timeout-feedback-primary-review-20261012.md",
       "bytes": 12285,
       "sha256": "09caac1174092d951a32b0d6f5f768915b94bf8f505fc3f50faaa1245f96103f"
+    },
+    {
+      "path": "design/patent-timeout-feedback-prior-art-page-guide.md",
+      "bytes": 13364,
+      "sha256": "3dfd1152b8e38fcedd5ff2c252e8e1e8e360599625e82e1c0982f6f9418cf6af"
     },
     {
       "path": "design/patent-timeout-feedback-prior-art.md",

@@ -26,6 +26,7 @@ The business objective is to bound each slow candidate's trial execution and ret
 - [论文和数据库产品核查 / Papers and database products](design/patent-timeout-feedback-products-papers.md)
 - [与已有方案的重叠分析 / Overlap analysis](design/patent-timeout-feedback-overlap-analysis.md)
 - [五件专利的方法流程分析 / Five patent method analyses](design/patent-five-method-flow-analysis.md)
+- [三件相关专利的原文页码导读 / PDF page guide to three related patents](design/patent-timeout-feedback-prior-art-page-guide.md)
 
 ## 配图 / Figures
 
