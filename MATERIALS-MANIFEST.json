@@ -1,5 +1,5 @@
 {
-  "prepared_date": "2026-10-15",
+  "prepared_date": "2026-10-20",
   "source_repository": "https://gitcode.com/ext-optimizer-group/ext-optimizer",
   "source_base_commit": "7bca7479cfe77bc19c556ecf33a3f8c590263b53",
   "source_state": "working tree snapshot; publishing copies normalize local document links and use LF text line endings",
@@ -27,8 +27,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 8890,
-      "sha256": "4e55d3c78543da9f00120b689f801d1bccfc602af58806e8d03000fd43d320c4"
+      "bytes": 9032,
+      "sha256": "0fe316f53864907a5267ba4a163dc57cec0d52864fe74704873f773b9dab1999"
     },
     {
       "path": "contrib/extopt-gaussdb/extopt--1.0.sql",
@@ -396,6 +396,11 @@
       "sha256": "d589823c0edc4bf5b41fb9580ad8b1d9b6a461576ed1645451d6138ff4974854"
     },
     {
+      "path": "design/patent-timeout-feedback-ibm-papers-manuals.md",
+      "bytes": 9011,
+      "sha256": "8ef990071a9fdc08c477e16153c471b33781e38493423ed811c26ac5464fa612"
+    },
+    {
       "path": "design/patent-timeout-feedback-idea-slides-en.md",
       "bytes": 16682,
       "sha256": "7417838975365cf0f1fccf7b89d0da42e80f34ec1221811595f238e6ad47246b"
@@ -414,6 +419,11 @@
       "path": "design/patent-timeout-feedback-manuscript-audit.md",
       "bytes": 26957,
       "sha256": "1b8ec41efdce3f027dcb67b5d8629932ac450bd062b87a871e28f7c56c40f790"
+    },
+    {
+      "path": "design/patent-timeout-feedback-microsoft-papers-manuals.md",
+      "bytes": 8670,
+      "sha256": "1df31e7c832a0be6d61c0becaa3a741b9a370f0f45180b07fb98be88941a6b67"
     },
     {
       "path": "design/patent-timeout-feedback-overlap-analysis.md",
@@ -442,8 +452,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-products-papers.md",
-      "bytes": 16147,
-      "sha256": "41897c208a9ddde239b70d36097f3363b989f6655bbe37db5a0e570c56b3f8a4"
+      "bytes": 16436,
+      "sha256": "1dfba7dc91bae45268baf4825075b397ee75c3f7e3f62008b219bcb53ee67095"
     },
     {
       "path": "design/patent-timeout-feedback-protection-review-en.md",
@@ -454,6 +464,11 @@
       "path": "design/patent-timeout-feedback-protection-review.md",
       "bytes": 16554,
       "sha256": "6cad9da8df070c64a378aa975279fc81fa4ab4909b066c29bec6dd2e86519d93"
+    },
+    {
+      "path": "design/patent-timeout-feedback-related-papers-manuals.md",
+      "bytes": 12278,
+      "sha256": "984e06285d20b9b8e932102533d1f669a5c939e63b90b1d09b4296b381da0e1d"
     },
     {
       "path": "design/patent-translations/README.md",
