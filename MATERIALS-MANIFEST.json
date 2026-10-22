@@ -1,5 +1,5 @@
 {
-  "prepared_date": "2026-10-20",
+  "prepared_date": "2026-10-22",
   "source_repository": "https://gitcode.com/ext-optimizer-group/ext-optimizer",
   "source_base_commit": "7bca7479cfe77bc19c556ecf33a3f8c590263b53",
   "source_state": "working tree snapshot; publishing copies normalize local document links and use LF text line endings",
@@ -27,8 +27,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 9032,
-      "sha256": "0fe316f53864907a5267ba4a163dc57cec0d52864fe74704873f773b9dab1999"
+      "bytes": 9074,
+      "sha256": "999cc5cc9c3d7a32eb8c04f6f7c73a54ac034845acaf0c77e249797cc7c94dd8"
     },
     {
       "path": "contrib/extopt-gaussdb/extopt--1.0.sql",
@@ -257,8 +257,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-disclosure-draft.md",
-      "bytes": 41710,
-      "sha256": "1b4a486b94700183f61d640988dae333e26ad36da6dec5b7e5720dc15a62a6cb"
+      "bytes": 49068,
+      "sha256": "240bf8a1b5aada517afd925d1e60787eb4060237cad6149dc217f7b6135b698f"
     },
     {
       "path": "design/patent-timeout-feedback-figures/html/fig3-executor-observation-flow.html",
@@ -417,13 +417,13 @@
     },
     {
       "path": "design/patent-timeout-feedback-manuscript-audit.md",
-      "bytes": 26957,
-      "sha256": "1b8ec41efdce3f027dcb67b5d8629932ac450bd062b87a871e28f7c56c40f790"
+      "bytes": 30974,
+      "sha256": "f08ec1b27eb85de4ce7df75b3c1bd0ab8c48417f11b5e905a32bdecffa43e8e4"
     },
     {
       "path": "design/patent-timeout-feedback-microsoft-papers-manuals.md",
-      "bytes": 8670,
-      "sha256": "1df31e7c832a0be6d61c0becaa3a741b9a370f0f45180b07fb98be88941a6b67"
+      "bytes": 9817,
+      "sha256": "f17cea83dbc283752420f3eb38b1afe1512dfb1781709ee42f3508d586aa1286"
     },
     {
       "path": "design/patent-timeout-feedback-overlap-analysis.md",
@@ -467,8 +467,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-related-papers-manuals.md",
-      "bytes": 12278,
-      "sha256": "984e06285d20b9b8e932102533d1f669a5c939e63b90b1d09b4296b381da0e1d"
+      "bytes": 12657,
+      "sha256": "ac56e84803e9ab1b82234bc650a5df7f9eac701c871c45c3323f70c0b9cae3b2"
     },
     {
       "path": "design/patent-translations/README.md",

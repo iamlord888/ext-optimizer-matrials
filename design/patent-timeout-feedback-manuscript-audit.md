@@ -1,6 +1,6 @@
 # 限时执行部分反馈交底书：文献、机制与文稿核对
 
-本笔记记录[交底书正文](patent-timeout-feedback-disclosure-draft.md)的文献依据、文稿一致性和当前代码与方案的差距，不代替专利新颖性检索。核对范围包括用户提供的两篇论文、Oracle 12c 原论文、指定解析博客、所列 Oracle/Microsoft 官方文档及当前仓库源码。以下的“未见公开”仅指所列资料没有描述该步骤，不能推断产品内部绝不存在该能力。第三、四节保留初稿审计时的改写依据；当前待实现条件见第五节；2026-10-14 的逐页核对和正文清理见第六节。这里的审阅意见不属于交底书正文。
+本笔记记录[交底书正文](patent-timeout-feedback-disclosure-draft.md)的文献依据、文稿一致性和当前代码与方案的差距，不代替专利新颖性检索。核对范围包括用户提供的两篇论文、Oracle 12c 原论文、指定解析博客、所列 Oracle/Microsoft 官方文档及当前仓库源码。以下的“未见公开”仅指所列资料没有描述该步骤，不能推断产品内部绝不存在该能力。第三、四节保留初稿审计时的改写依据；当前待实现条件见第五节；2026-10-14 的逐页核对和正文清理见第六节；2026-10-22 的文献及算子结束机制修订见第七节。这里的审阅意见不属于交底书正文。
 
 ## 一、可直接据以写作的事实
 
@@ -110,6 +110,35 @@
 ### 6.4 英文对照
 
 The disclosure and seven-slide manuscript now use the agreed title and the same feedback rules. Both completed and cancelled candidates can supply qualified row feedback; only complete runtimes update the best measured candidate and adaptive deadline. The merge formula explicitly preserves an existing valid exact count against every new lower bound. Drafting guidance and novelty assessments were removed from the disclosure and retained in this audit record. Implementation gaps remain documented here; the rewrite does not establish that the prototype implements every proposed qualification condition. The approximately eleven-second JOB 16b result remains a separately measured recovered candidate, not a formal delivery.
+
+## 七、2026-10-22 最新论文与产品手册成果回写
+
+### 7.1 交底书修改范围
+
+| 位置 | 修改内容及依据 |
+| --- | --- |
+| 1.3.1 IBM POP | 补入完整方法论文与演示论文的关系，以及同一 SQL 内重新优化、实际基数反馈和可选中间结果复用；正文参考资料 [R24][R25] |
+| 1.3.2 Oracle | 分别陈述非等价后续查询的授权主题、Statistics Feedback 和 SQL Plan Directives；将论文的限时统计查询放在 1.4.3，避免与用户主 SQL 混用 |
+| 1.3.4 Microsoft | 补入 2004 论文对算子结束事实的使用，以及 2016 LQS 论文对早期上下界技术的明确引用；正文参考资料 [R26][R27] |
+| 1.4.2 产品观测 | 补入 Db2 的统计接口、SQL Server 的关闭时间及生命周期手册，区分产品接口、扫描结束和目标行数反馈；正文参考资料 [R28]-[R30] |
+| 1.5 方案对照 | 承认已有扫描结束、重复执行、关闭事件、精确上下界和部分执行反馈，比较其与取消时统计采集、适用判定和跨轮合并的数据关系 |
+| 2.1、2.3.3、2.3.4、3.1 | 将上层提前停止、取消清理导致停止的情形纳入行数适用说明，保持本地 EOF 与目标全部输出结束的区分 |
+| 参考资料及英文摘要 | 新增九项论文/手册依据；三件主要专利改用已核验的 PDF 页码，清除把 HTML 元素编号当作 PDF 说明书段号的引用 |
+
+正文继续采用技术说明写法，不写“不能作为区别点”“应当怎样撰写权利要求”等批注。核查结论和实现限制在本记录中保存。
+
+### 7.2 需要持续保持的事实区分
+
+- **公开产品语义与反馈判定不是同一层。** 新增的 [SQL Server 算子手册](https://learn.microsoft.com/en-us/sql/relational-databases/showplan-logical-and-physical-operators-reference?view=sql-server-ver17)使“未见任何结束识别机制”这一概括不成立。本文只保留“所核资料未展示完整取消现场判定及跨轮合并流程”的有限结论。
+- **不同年代和类别分别引用。** 现行产品手册不能直接当作 2004 年论文或 2009 年授权专利逐项记载相同细节的证据，也不能仅凭产品论文证明某产品实施了整件专利的全部权利要求。正文分别列出这些来源，不作授权判断。
+- **IBM 数据与统计分别处理。** POP 可反馈实际基数，并按成本选择是否复用临时物化结果；不能简化成只复用数据、不反馈基数。两篇论文属于同一工作的方法说明和原型演示。
+- **Oracle 限时对象分别处理。** 2017 论文第 3.2.2 节的限时对象是优化阶段统计查询；专利及手册中的主查询反馈、自适应子计划和后续查询复用是另外的处理路径。
+- **方案条件与原型边界分别保存。** 本轮依据文献完善正文条件，原型尚需落实的再次执行、累计计数及跨轮语义等条件仍见第五节和 6.3。本轮文稿修订不代表这些代码差距已解决。
+- **PPT 文稿与实验结论核对。** 七页中英文文稿原有的精确行数/下界、正常完成与取消、期限公式及 16b 恢复候选身份继续适用。新增内容为交底书的现有技术和适用条件细化，没有改变既有实验数据或将约 11 秒候选改为正式交付。
+
+### 7.3 English summary
+
+The disclosure now includes the verified POP papers, Oracle's statistics-query budget and feedback paths, and Microsoft's progress-estimation papers and operator-lifecycle manual. It acknowledges existing operator termination information and separates that information from cancellation-time feedback qualification and merging across tuning rounds. The patent body contains factual technical descriptions, while literature assessments and prototype gaps remain in this audit record. Publication dates, research prototypes, product interfaces, and individual patent claims are treated separately.
 
 ## 来源说明
 

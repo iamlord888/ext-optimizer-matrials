@@ -1,6 +1,6 @@
 # Microsoft US7493337B2：相关论文与产品手册
 
-核查日期：2026-10-20。研究对象为 *Query Progress Estimation*，即 [US7493337B2](https://patents.google.com/patent/US7493337B2/en)。本记录区分早期同一技术工作的论文、后续产品实现论文及官方功能手册。
+初次核查日期：2026-10-20；算子结束机制补充核查：2026-10-22。研究对象为 *Query Progress Estimation*，即 [US7493337B2](https://patents.google.com/patent/US7493337B2/en)。本记录区分早期同一技术工作的论文、后续产品实现论文及官方功能手册。
 
 ## 1. 核查结论
 
@@ -50,10 +50,15 @@
 | 官方页面 | 已公开的产品能力 | 使用条件与可证明范围 |
 | --- | --- | --- |
 | [Live Query Statistics](https://learn.microsoft.com/en-us/sql/relational-databases/performance/live-query-statistics?view=sql-server-ver17) | SSMS 显示活动查询的实时执行计划、整体进度、节点返回行数、已耗时间和算子进度；内部使用 `sys.dm_exec_query_profiles` | 主要用于故障诊断；需启用 profiling。页面提醒其有额外开销，尤其在 SQL Server 2014。证明用户可见的运行中统计功能 |
-| [`sys.dm_exec_query_profiles`](https://learn.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-objects/sys-dm-exec-query-profiles-transact-sql?view=sql-server-ver17) | 按算子、线程给出 `node_id`、`row_count`、`estimate_row_count`、`end_of_scan_count`、`rewind_count`、`rebind_count` 及活动时间 | 需在查询开始前启用 profiling；并行线程需按目标范围汇总。证明真实行数、估算、扫描结束与重复调用相关计数可在执行中取得；这些计数不自动证明未来不会再次调用 |
+| [`sys.dm_exec_query_profiles`](https://learn.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-objects/sys-dm-exec-query-profiles-transact-sql?view=sql-server-ver17) | 按算子、线程给出 `node_id`、`row_count`、`estimate_row_count`、`end_of_scan_count`、`rewind_count`、`rebind_count`、`close_time` 及活动时间 | 需在查询开始前启用 profiling；并行线程需按目标范围汇总。扫描结束、关闭事件与全部目标行数是否可用于后续反馈分别解释 |
 | [Query Profiling Infrastructure](https://learn.microsoft.com/en-us/sql/relational-databases/performance/query-profiling-infrastructure?view=sql-server-ver17) | 解释标准与轻量 profiling、LQS 与 DMV 的统计来源，以及各版本的启用方式 | SQL Server 2016 SP1 至 2017 有轻量 profiling v2；2019 及以后版本有默认启用的 v3。证明采集基础设施的产品化，不直接规定取消后行数反馈合并算法 |
+| [Logical and Physical Showplan Operator Reference](https://learn.microsoft.com/en-us/sql/relational-databases/showplan-logical-and-physical-operators-reference?view=sql-server-ver17) | 说明算子的初始化、取数、关闭、扫描结束及重复执行语义 | 明确一次扫描结束与算子生命周期不同；该产品语义说明应与早期论文及专利分别引用 |
 
-这三个链接为 Microsoft Learn 官方页面，本文核查时使用 `sql-server-ver17` 视图。不同版本的启用、权限及开销条件应以对应版本手册为准。
+这些链接为 Microsoft Learn 官方页面，本文核查时使用 `sql-server-ver17` 视图。不同版本的启用、权限及开销条件应以对应版本手册为准。
+
+### 算子结束机制的补充结论
+
+2004 年论文第 4.2 节利用“算子结束时上下界精确已知”的事实；官方算子手册则进一步描述生命周期与事件语义。因此，不能将资料概括为“Microsoft 没有算子结束信息或识别机制”。论文、生命周期手册及 DMV 字段分别承担算法说明、执行语义说明及观测接口说明，具体事实与引用已写入[交底书第 1.3.4、1.4.2 节](patent-timeout-feedback-disclosure-draft.md)。本次仍未据此确认取消现场完整的目标级基数判定和跨轮 Rows Hint 合并流程。
 
 ## 5. 放入现有技术材料的建议表述
 
@@ -63,4 +68,4 @@
 
 ## English summary
 
-US7493337B2 and the SIGMOD 2004 paper have matching inventors/authors and closely corresponding progress-estimation mechanisms. The SIGMOD 2016 SQL Server Live Query Statistics paper explicitly reuses the 2004 paper's conservative operator cardinality bounds in Section 4.2 and cites it as reference [7]. Microsoft Learn documents the user-visible LQS functionality, operator/thread counters, and profiling infrastructure. These sources establish a research-to-product technical connection, without establishing that every claim of the patent is implemented by a particular SQL Server version.
+US7493337B2 and the SIGMOD 2004 paper have matching inventors/authors and closely corresponding progress-estimation mechanisms. The SIGMOD 2016 SQL Server Live Query Statistics paper explicitly reuses the 2004 paper's conservative operator cardinality bounds in Section 4.2 and cites it as reference [7]. Microsoft Learn documents the user-visible LQS functionality, operator/thread counters, profiling infrastructure, and operator lifecycle. The supplementary review distinguishes these sources from a complete cancellation-time feedback qualification and merge procedure. These sources establish a research-to-product technical connection, without establishing that every claim of the patent is implemented by a particular SQL Server version.

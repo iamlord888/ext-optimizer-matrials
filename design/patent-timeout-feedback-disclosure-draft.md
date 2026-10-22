@@ -52,11 +52,15 @@ LEO 和 Oracle statistics feedback 的上述流程在查询完成或完整执行
 
 IBM 的 Progressive Optimization 在计划中设置 `CHECK` 算子，比较估算基数与执行中已处理的行数。权利要求 1 根据剩余执行时间阈值和估算误差阈值决定是否暂停当前计划，随后重新优化并重新启动查询。说明书还描述：输出越过上界时，可在子流尚未结束前确认偏差；根据输出不足判断低于下界时，则需要等子流返回 EOF。该技术可收集检查点或其他计划节点的基数统计。[R20]
 
+《Robust Query Processing through Progressive Optimization》详细介绍上述 POP 方法，《Progressive Optimization in Action》展示其 Db2 研究原型。CHECK 触发后，系统将已形成的中间结果作为临时物化视图或物化查询表提供给优化器，同时反馈实际基数。优化器比较复用中间结果与重新计算的候选计划，按成本选择；临时视图也可指向已有内存对象。重新优化和后续执行在同一事务中继续完成当前 SQL。[R24][R25]
+
 本方法以每轮候选的执行期限触发取消，在执行器清理前读取原计划节点的统计，并根据全部相关行数是否已经返回、是否还可能再次执行及计数范围，判定可用于下一轮独立候选的反馈类型。
 
 #### 1.3.2 Oracle US11321317B2：运行中换计划与后续统计反馈
 
 Oracle 的该专利描述了三类处理。Adaptive plan 在决策点根据统计收集器取得的行数、选择率等信息选择预置子计划；in-flight reoptimization 根据运行统计与编译估算的差异、剩余操作和更新后的成本，提前终止未完成计划并启动新计划；automatic reoptimization 将完整或部分执行时收集的表、连接、分组和索引统计用于相同、等价或相关的后续查询。其背景还涉及用户或 DBA 终止运行过久的计划。[R19]
+
+该专利授权权利要求 1 还涉及选择保存某个操作的统计，并根据数据库对象和操作，判断统计是否适用于后续非等价查询，再生成第二执行计划。Oracle 产品手册中的 Statistics Feedback 根据执行结果修正后续估算；SQL Plan Directives 按查询表达式保存可复用信息，可供不同 SQL 使用。2017 年论文《Adaptive Statistics in Oracle 12c》进一步描述自适应统计及指令的形成、缓存和后续利用。[R19][R31][R32][R3]
 
 本方法对同一 SQL 的第 i 轮候选设置执行期限，在取消后将合格节点行数用于第 i+1 轮独立规划。行数判定包含本地 EOF、后续再次执行的可能性以及累计行数与估算行数的比较范围，并据此形成精确行数、行数下界或无反馈。
 
@@ -70,6 +74,8 @@ Oracle 的该专利描述了三类处理。Adaptive plan 在决策点根据统�
 
 该专利对当前查询的算子维护已处理行数和预计总行数的上下界，传播边界变化，修正进度估计。权利要求 27 将算子在某时点已返回的项目数设为下界；权利要求 33 涉及多个算子的上下界维护与传播；权利要求 42 允许用户中止查询。[R21]
 
+相关论文《Estimating Progress of Execution for SQL Queries》以查询整体进度估计为目标，利用各算子的输出计数和上下界修正工作量估算，并说明算子结束时上下界精确已知且相等。2016 年的 SQL Server Live Query Statistics 产品论文明确采用这项早期研究的基数边界技术，同时估计查询整体与单个算子的进度。[R26][R27]
+
 本方法使用与估算可直接比较的已返回行数形成下界，在未取得精确行数时仅提高下一轮基数输入；下界与精确行数按不同规则跨轮合并，用于后续独立候选的规划。
 
 ### 1.4 现有技术三：取消候选评价与运行统计
@@ -80,15 +86,33 @@ Oracle 的该专利描述了三类处理。Adaptive plan 在决策点根据统�
 
 本方法采集取消时的节点行数和执行状态，用于下一轮基数修正；候选的部分耗时与完整运行时间分别记录，只有完整运行时间用于更新最佳候选和后续执行期限。
 
-#### 1.4.2 数据库产品的运行观测
+#### 1.4.2 数据库产品的节点统计与执行状态
 
-Oracle SQL Monitor 在取消长查询后仍可显示计划节点的 `Rows (Actual)`；`V$SQL_PLAN_MONITOR.OUTPUT_ROWS` 表示执行开始后的累计输出，可结合 `STARTS` 分析每次启动的平均输出。Microsoft Live Query Statistics 和 `sys.dm_exec_query_profiles` 提供算子级 `row_count`、`end_of_scan_count`、`rewind_count`、`rebind_count` 及估算行数。MariaDB、Redshift、OceanBase 等产品也提供执行中的计划或步骤统计。[R4][R5][R6][R9][R15][R16][R17]
+Db2 的 `section_actuals` 可采集基本算子基数计数，并通过 `EXPLAIN_FROM_ACTIVITY` 查看某次执行的计划及运行统计。该过程的使用说明还列明，通过 `WLM_CAPTURE_ACTIVITY_IN_PROGRESS` 取得的运行中活动记录不包含 section actuals。[R29][R30]
 
-上述观测可用于监控、诊断或进度分析。将其用于后续规划时，还需确定实际行数对应的执行次数，并检查扫描结束后是否仍可能再次执行。
+Oracle SQL Monitor 在取消长查询后仍可显示计划节点的 `Rows (Actual)`；`V$SQL_PLAN_MONITOR.OUTPUT_ROWS` 表示执行开始后的累计输出，可结合 `STARTS` 分析每次启动的平均输出。[R4][R9]
+
+SQL Server 的 `sys.dm_exec_query_profiles` 是系统动态管理视图，按算子和执行线程提供累计返回行数、估算行数、扫描结束次数、重复执行计数及关闭时间。Live Query Statistics 利用运行统计显示查询和算子进度。[R5][R6][R27]
+
+| SQL Server 字段或事件 | 含义 |
+| --- | --- |
+| `row_count`、`estimate_row_count` | 截至当前已返回行数及估算行数 |
+| `end_of_scan_count` | 截至当前发生的扫描结束次数 |
+| `rebind_count`、`rewind_count` | 参数变化后重新执行或重复使用已有结果相关的计数 |
+| `close_time` | 算子关闭时的时间戳 |
+| `thread_id` | 区分同一算子的并行执行线程 |
+
+SQL Server 的算子手册说明，物理算子通过 `Open()` 初始化、通过 `GetRow()` 取数、通过 `Close()` 清理并关闭。到达数据流末尾时，`ActualEndOfScans` 增加；Nested Loop 内侧算子可能多次到达末尾。每个物理算子只接收一次 `Close()`，但该调用不保证发生。手册还给出 Top 提前停止向子节点取数的情形，此时扫描节点可以未读完整个表。[R28]
+
+MariaDB、Redshift、OceanBase 等产品也提供执行中的计划或步骤统计。[R15][R16][R17]
+
+上述运行信息可用于监控、诊断或进度估计。将节点行数用于下一轮基数修正时，需结合对应的扫描或连接、执行次数和线程范围，区分一次扫描结束、算子停止及反馈目标的全部相关行数已返回。
 
 #### 1.4.3 采样式重优化及当前查询自适应执行
 
 Sampling-Based Query Re-Optimization 在正式执行前，对样本运行候选计划，依据连接选择率迭代重规划；采样过程可以设置时间预算，预算到达时返回已有候选中估计成本较好的计划。其估计器具有无偏和强一致性质，有限样本仍存在方差、采样成本及覆盖范围限制。[R2]
+
+Oracle 的《Adaptive Statistics in Oracle 12c》第 3.2.2 节描述，优化阶段的统计查询按历史运行信息分配时间预算，到达期限后停止并使用已取得的部分结果。该时间预算约束用于估算基数的统计查询；Statistics Feedback 手册所述流程则在主查询执行结束时比较节点估算与实际行数，再影响后续执行。[R3][R31]
 
 Oracle adaptive plan、Databricks AQE 等技术在当前查询执行中利用统计收集器或已完成阶段的统计选择后续子计划。限时部分反馈则从真实候选试运行取得节点统计，在本轮取消后用于下一轮独立规划。[R3][R8][R18]
 
@@ -96,10 +120,11 @@ Oracle adaptive plan、Databricks AQE 等技术在当前查询执行中利用统
 
 | 技术环节 | 上述现有技术的处理方式 | 本方法的处理方式 |
 | --- | --- | --- |
-| 触发条件 | 查询完成、计划内检查点、运行统计决策或人工中止 | 每轮候选达到配置或动态调整的执行期限时取消 |
+| 触发条件 | 查询完成、计划内检查点、运行统计决策、人工中止，或优化阶段统计查询达到预算 | 真实候选达到配置或动态调整的单轮期限时取消 |
 | 统计采集 | 运行中或执行后的节点统计、候选部分耗时 | 取消时在执行器清理前保存原计划及节点统计 |
-| 行数判断 | 基数偏差、检查点阈值或进度上下界 | 检查相关输出是否全部返回、是否还会再次执行及实际与估算的计数范围 |
-| 统计应用 | 当前查询换计划、后续查询优化或进度展示 | 按精确行数、合格下界或无反馈，分级合并下一轮基数输入 |
+| 扫描结束与重复执行 | EOF、扫描结束计数、rebind/rewind、算子关闭及结束后的精确上下界 | 结合目标、调用关系和计数范围，判断累计行数的反馈类型 |
+| 已有结果利用 | IBM 提供实际基数并可选择复用物化中间结果；Oracle 保存统计或查询表达式相关信息 | 保留合格节点行数与执行状态，形成后续基数输入 |
+| 统计应用 | 当前查询换计划、后续查询优化、查询整体或算子进度展示 | 按精确行数、合格下界或无反馈，跨轮合并并生成下一轮独立候选 |
 | 候选评价 | 完整或部分计划性能信息 | 完整运行时间用于最佳候选比较和期限调整；部分行数用于后续规划 |
 
 ### 1.6 本发明要解决的技术问题
@@ -120,7 +145,7 @@ Oracle adaptive plan、Databricks AQE 等技术在当前查询执行中利用统
 - 尚不能确认全部相关行数已经返回，但已返回量只会在同一统计范围内累加时，`A_i≤C_i`。若 `A_i>E_i`，形成可用于修正低估的行数下界 `LOWER_BOUND(A_i)`。
 - 未执行、不能确定对应目标、计数范围无法统一，或未确认结束且 `A_i≤E_i` 时，形成 `NONE`，保持已有基数输入。
 
-本地 EOF 表示当前调用已读到数据流结束；它与目标的全部相关输出结束分别判定。候选正常完成时，因提前停止等原因未被全部读取的子节点，也按照相同条件判断其行数能否使用。[R1]
+本地 EOF 表示当前调用已读到数据流结束；它与目标的全部相关输出结束分别判定。因上层提前停止取数或取消清理而停止的节点，若不能确认目标对应结果已全部返回，其行数仍按未完成观测处理。候选正常完成时，未被全部读取的子节点也按照相同条件判断行数能否使用。[R1][R28]
 
 ### 2.2 主要技术处理
 
@@ -191,6 +216,8 @@ terminal = (Instrumentation.status != 0 && !active)
 
 Nested Loop 内侧、参数化 SubPlan 等节点在一次调用返回 EOF 后，仍可能因下一条外侧输入再次执行。行数反馈需结合父算子的调用关系及统计覆盖范围，判断相应扫描或连接是否已返回全部结果。
 
+适配其他执行器时，可将扫描结束计数、关闭事件及重复执行计数作为辅助状态。状态解释应区分正常读到数据流末尾、父算子提前停止取数以及取消时的资源清理；精确行数须满足第 2.1 节的全部相关输出结束条件。
+
 ![图4 取消错误处理期间的统计采集时点](patent-timeout-feedback-figures/png/fig4-capture-window.png)
 
 *图4 在执行入口保存节点对象，在取消错误处理期间、执行器清理前读取统计，随后继续返回原取消错误。*
@@ -202,7 +229,7 @@ Nested Loop 内侧、参数化 SubPlan 等节点在一次调用返回 EOF 后，
 1. **生成候选并设置执行期限。** 原始 SQL 与已有基数反馈共同进入优化器，生成本轮候选 `P_i`，建立独立执行上下文并设置 `T_i`。
 2. **取得本轮节点统计。** 候选正常完成时收集常规执行统计和完整运行时间；超时取消时，在执行器清理前返回原计划、节点估算行数、累计返回行数、Loops 和执行状态。
 3. **确定反馈目标及计数范围。** 确定统计对应的扫描或连接，检查查询块、关系、谓词、连接类型及运行参数是否与待更新目标一致；实际与估算行数按相同执行次数及并行范围比较。无法确定目标或统一计数范围时，该节点不反馈。
-4. **判定精确行数。** 结合本地 EOF 及父子调用关系，检查该目标的全部相关行数是否已经返回，以及候选若继续执行是否还会使其产生输出。满足全部输出结束条件时，形成 `EXACT(A_i)`。
+4. **判定精确行数。** 结合本地 EOF 及父子调用关系，检查该目标的全部相关行数是否已经返回，以及候选若继续执行是否还会使其产生输出。因上层提前停止取数或取消清理而停止的节点，仍需确认其对应结果是否已全部返回。满足全部输出结束条件时，形成 `EXACT(A_i)`。
 5. **判定行数下界。** 尚不能确认全部输出结束时，若已返回量只会在相同目标和计数范围内累加，且 `A_i>E_i`，形成 `LOWER_BOUND(A_i)`。若 `A_i≤E_i`，本轮不以该部分行数修正高估。
 6. **合并节点行数反馈。** 精确行数更新已有值并清除旧下界；下界在尚无精确值时只提高已有输入，多个下界取最大值；已有精确值时保持精确值；无反馈时保持原值。
 7. **更新候选评价并继续迭代。** 仅用完整运行时间更新最佳候选和后续期限；将合并后的基数输入交给同一 SQL 的下一轮独立规划，直至满足停止条件。
@@ -311,8 +338,10 @@ JOB `16b` 的无单轮超时组运行 4 轮后触发全局预算停止条件，�
 
 ### 3.1 关键技术点
 
+以下处理按候选限时执行、取消时保留统计、行数判定、跨轮合并及下一轮规划的顺序衔接。
+
 1. **限时取消时保留统计。** 对同一 SQL 的各轮候选设置执行期限；超时取消时，在执行器清理前取得原计划及节点估算行数、已返回行数和执行状态。
-2. **判定可反馈的行数。** 确定对应扫描或连接，检查执行状态、是否还会再次执行以及实际与估算的计数范围，区分精确行数、可用下界或无反馈。
+2. **判定可反馈的行数。** 确定对应扫描或连接，结合执行状态、再次执行关系及计数范围，判断相关行数是否已全部返回，并区分精确行数、可用下界或无反馈。
 3. **按反馈类型跨轮合并。** 精确行数覆盖已有值，允许上调或下调；尚无精确值时，合格下界仅抬高；已有精确值时保持精确值；无反馈时保持原输入。多个下界取最大值。
 4. **修正下一轮候选。** 合并结果用于同一 SQL 的下一轮独立规划。正常完成也可提供行数反馈；完整运行时间用于比较最佳候选，并调整后续执行期限。
 
@@ -356,7 +385,7 @@ JOB `16b` 在设置初始 10 秒单轮上限后进行了 11 轮部分反馈迭�
 
 - [R1] Stillger 等，*LEO - DB2's LEarning Optimizer*，VLDB 2001，[本地论文 PDF](../sources/papers/P019.pdf)。
 - [R2] Wu 等，*Sampling-Based Query Re-Optimization*，SIGMOD 2016，[本地论文 PDF](../sources/papers/1601.05748v1.pdf)。
-- [R3] Zait 等，*Adaptive Statistics in Oracle 12c*，PVLDB 10(12), 2017，[论文](https://vldb.org/pvldb/vol10/p1813-zait.pdf)。
+- [R3] Chakkappen 等，*Adaptive Statistics in Oracle 12c*，PVLDB 10(12), 1813-1824, 2017，[论文](https://www.vldb.org/pvldb/vol10/p1813-zait.pdf)，DOI [10.14778/3137765.3137785](https://doi.org/10.14778/3137765.3137785)。参见 PDF 第 8-9 页，第 3.2.2、3.3.1-3.3.2 节。
 - [R4] Oracle Database 19c，[Monitoring Database Operations](https://docs.oracle.com/en/database/oracle/oracle-database/19/tgsql/monitoring-database-operations.html#GUID-11748F62-BE24-4511-B77B-F28D5E443A0A)。
 - [R5] Microsoft Learn，[Live Query Statistics](https://learn.microsoft.com/en-us/sql/relational-databases/performance/live-query-statistics?view=sql-server-ver17)。
 - [R6] Microsoft Learn，[sys.dm_exec_query_profiles](https://learn.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-objects/sys-dm-exec-query-profiles-transact-sql?view=sql-server-ver17)。
@@ -368,14 +397,25 @@ JOB `16b` 在设置初始 10 秒单轮上限后进行了 11 轮部分反馈迭�
 - [R16] Amazon Redshift，[`SYS_QUERY_DETAIL`](https://docs.aws.amazon.com/redshift/latest/dg/SYS_QUERY_DETAIL.html) 与 [`SYS_QUERY_HISTORY`](https://docs.aws.amazon.com/redshift/latest/dg/SYS_QUERY_HISTORY.html)。
 - [R17] OceanBase Cloud，[Execution Profile](https://en.oceanbase.com/docs/common-oceanbase-cloud-10000000001725119)。
 - [R18] Databricks，[Adaptive Query Execution](https://docs.databricks.com/aws/en/optimizations/aqe)。
+- [R24] Markl 等，*Robust Query Processing through Progressive Optimization*，SIGMOD 2004，[IBM Research](https://research.ibm.com/publications/robust-query-processing-through-progressive-optimization)，[论文](https://dsf.berkeley.edu/cs286/papers/robust-sigmod2004.pdf)。参见 PDF 第 3 页第 2 节及第 5-6 页第 2.3 节。
+- [R25] Raman 等，*Progressive Optimization in Action*，VLDB 2004，[论文](https://www.vldb.org/conf/2004/DEMP22.PDF)。参见 PDF 第 2 页图 1 及流程说明。
+- [R26] Chaudhuri、Narasayya、Ramamurthy，*Estimating Progress of Execution for SQL Queries*，SIGMOD 2004，[Microsoft Research](https://www.microsoft.com/en-us/research/publication/estimating-progress-of-execution-for-sql-queries/)，[论文](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/progress-1.pdf)。参见 PDF 第 5-6 页第 4.1-4.2 节及第 12 页 Appendix B。
+- [R27] Lee 等，*Operator and Query Progress Estimation in Microsoft SQL Server Live Query Statistics*，SIGMOD 2016，[Microsoft Research](https://www.microsoft.com/en-us/research/publication/operator-and-query-progress-estimation-in-microsoft-sql-server-live-query-statistics/)，[论文](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/qprog.pdf)。参见 PDF 第 6 页第 4.2 节及第 11 页参考文献 [7]。
+- [R28] Microsoft Learn，[Logical and Physical Showplan Operator Reference](https://learn.microsoft.com/en-us/sql/relational-databases/showplan-logical-and-physical-operators-reference?view=sql-server-ver17)。参见 Physical operators、Rebinds, rewinds, and end-of-scans、How to read an execution plan。
+- [R29] IBM Db2 12.1.x，[section_actuals - Section actuals configuration parameter](https://www.ibm.com/docs/en/db2/12.1.x?topic=parameters-section-actuals-section-actuals)。
+- [R30] IBM Db2 11.5.x，[EXPLAIN_FROM_ACTIVITY procedure](https://www.ibm.com/docs/en/db2/11.5.x?topic=er-explain-from-activity-procedure-explain-statement-using-activity-event-monitor-information)。
+- [R31] Oracle Database 12.1，[Reoptimization: Statistics Feedback](https://docs.oracle.com/database/121/TGSQL/tgsql_optcncpt.htm#GUID-739F1F0B-ABE2-44C9-9783-8FA54F4ADB12)。
+- [R32] Oracle Database 12.1，[Optimizer Statistics Concepts: SQL Plan Directives](https://docs.oracle.com/database/121/TGSQL/tgsql_statscon.htm)。
 
 ### 五件重点专利
 
-- [R19] Oracle，*Leveraging query-specific statistics in non-equivalent queries*，`US11321317B2`；较早公开申请 `US20140095475A1`，[授权文本](https://patents.google.com/patent/US11321317B2/en)，[本地原件](patent-originals/US11321317B2.pdf)。参见说明书 `[0009]`、`[0037]`、`[0083]`、`[0084]`、`[0087]`、`[0105]`–`[0107]` 及权利要求 1。
-- [R20] IBM，*System, method, and computer program product for progressive query processing*，`US7716215B2`；较早公开申请 `US20050097078A1`，[授权文本](https://patents.google.com/patent/US7716215B2/en)，[本地原件](patent-originals/US7716215B2.pdf)。参见说明书 `p-0040`、`p-0065`、`p-0088` 及权利要求 1。
-- [R21] Microsoft，*Query progress estimation*，`US7493337B2`；较早公开申请 `US20050222965A1`，[授权文本](https://patents.google.com/patent/US7493337B2/en)，[本地原件](patent-originals/US7493337B2.pdf)。参见权利要求 22、23、27、33、42 及说明书 `p-0089`、`p-0091`。
-- [R22] Microsoft，*System and method for cardinality estimation feedback loops in query processing*，`US11334538B2`；较早公开申请 `US20200379963A1`，[授权文本](https://patents.google.com/patent/US11334538B2/en)，[本地原件](patent-originals/US11334538B2.pdf)。参见说明书 `[0024]`、`[0026]`、`[0028]` 及权利要求 1、5。
-- [R23] Sybase，*System and methodology for automatic tuning of database query optimizer*，`US9213740B2`；较早公开申请 `US20090100004A1`，[授权文本](https://patents.google.com/patent/US9213740B2/en)，[本地原件](patent-originals/US9213740B2.pdf)。参见说明书 `[0130]`、`[0194]` 及权利要求 1。
+- [R19] Oracle，*Leveraging query-specific statistics in non-equivalent queries*，`US11321317B2`，[授权文本](https://patents.google.com/patent/US11321317B2/en)，[本地原件](patent-originals/US11321317B2.pdf)。参见授权 PDF 第 14-20 页的自适应与重新优化说明，以及第 31-32 页的权利要求；权利要求 1 涉及非等价后续查询的统计复用。
+- [R20] IBM，*System, method, and computer program product for progressive query processing*，`US7716215B2`，[授权文本](https://patents.google.com/patent/US7716215B2/en)，[本地原件](patent-originals/US7716215B2.pdf)。参见授权 PDF 第 21-26 页、PDF 第 9 页图 7，以及第 27-28 页权利要求 1。
+- [R21] Microsoft，*Query progress estimation*，`US7493337B2`，[授权文本](https://patents.google.com/patent/US7493337B2/en)，[本地原件](patent-originals/US7493337B2.pdf)。参见授权 PDF 第 20-21 页、PDF 第 13 页图 12，以及第 24-25 页权利要求 22-33、42。
+- [R22] Microsoft，*System and method for cardinality estimation feedback loops in query processing*，`US11334538B2`，[授权文本](https://patents.google.com/patent/US11334538B2/en)，[本地原件](patent-originals/US11334538B2.pdf)。参见节点执行统计与反馈管理说明及权利要求 1、5。
+- [R23] Sybase，*System and methodology for automatic tuning of database query optimizer*，`US9213740B2`，[授权文本](https://patents.google.com/patent/US9213740B2/en)，[本地原件](patent-originals/US9213740B2.pdf)。参见中断候选的部分耗时记录说明及权利要求 1。
+
+上述论文页码从论文 PDF 第一页起算，授权专利页码从封面第一页起算。
 
 ### 当前实现依据
 
@@ -394,6 +434,8 @@ JOB `16b` 在设置初始 10 秒单轮上限后进行了 11 轮部分反馈迭�
 ## English Summary
 
 **Title: An Iterative Query Execution Plan Optimization Method Based on Partial Feedback from Time-Limited Execution**
+
+IBM's POP papers describe checkpoint-triggered reoptimization of the current query, reuse of actual cardinalities, and cost-based selection of materialized intermediate results. Oracle's papers and manuals describe feedback and reusable directives, with separate time budgets for optimization-time statistics queries. Microsoft's progress-estimation research uses operator counts, cardinality bounds, and termination facts; the product documentation also describes scan-end counters, repeated execution, and operator closure. The present method applies qualified counts captured on candidate cancellation to the next independent tuning round through explicit qualification and merge rules.
 
 Each candidate for the same SQL runs with an execution deadline. On timeout cancellation, the original plan and operator estimates, returned rows, invocation state, and local EOF information are captured before executor cleanup. Partial feedback refers to usable operator statistics from a candidate whose execution has not completed; it may include exact counts for qualified operators as well as lower bounds.
 

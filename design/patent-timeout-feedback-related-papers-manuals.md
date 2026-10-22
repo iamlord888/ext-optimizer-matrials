@@ -1,6 +1,6 @@
 # IBM、Oracle、Microsoft 三件专利的相关论文与产品手册
 
-核验日期：2026-10-20。范围为 IBM US7716215B2、Oracle US11321317B2、Microsoft US7493337B2。使用论文原文、作者机构页面、会议出版页面和厂商官方手册核对，不以第三方博客建立产品实现结论。
+初次核验日期：2026-10-20；算子结束机制及交底书对应关系更新：2026-10-22。范围为 IBM US7716215B2、Oracle US11321317B2、Microsoft US7493337B2。使用论文原文、作者机构页面、会议出版页面和厂商官方手册核对，不以第三方博客建立产品实现结论。
 
 本报告区分三种关联：作者与机制直接对应的研究论文；明确说明产品实现的后续论文；公开相近功能及接口的产品手册。作者重合及机制对应可以建立研究关联，但不足以逐项认定某产品实施全部授权权利要求。产品手册版本及本次检索日期也不代表功能的最早公开日。
 
@@ -73,8 +73,9 @@
 | 页面 | 可核对的产品能力 |
 | --- | --- |
 | [Live Query Statistics](https://learn.microsoft.com/en-us/sql/relational-databases/performance/live-query-statistics?view=sql-server-ver17) | SSMS 中显示运行查询的实时计划、查询及算子进度、返回行数和已耗时间 |
-| [sys.dm_exec_query_profiles](https://learn.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-objects/sys-dm-exec-query-profiles-transact-sql?view=sql-server-ver17) | 提供算子及线程级 node_id、row_count、estimate_row_count、end_of_scan_count、rewind_count、rebind_count 等计数 |
+| [sys.dm_exec_query_profiles](https://learn.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-objects/sys-dm-exec-query-profiles-transact-sql?view=sql-server-ver17) | 提供算子及线程级 node_id、row_count、estimate_row_count、end_of_scan_count、rewind_count、rebind_count、close_time 等统计 |
 | [Query Profiling Infrastructure](https://learn.microsoft.com/en-us/sql/relational-databases/performance/query-profiling-infrastructure?view=sql-server-ver17) | 说明统计采集基础设施、标准与轻量 profiling，以及版本相关的启用方式 |
+| [Logical and Physical Showplan Operator Reference](https://learn.microsoft.com/en-us/sql/relational-databases/showplan-logical-and-physical-operators-reference?view=sql-server-ver17) | 说明物理算子生命周期、扫描结束和重复执行；相关语义已补入交底书第 1.4.2 节 |
 
 算法联系由产品论文支持，用户可见功能由手册支持；本报告不据此逐项认定某版本实现了专利全部权利要求。更多作者、页码和版本条件见 [Microsoft 专项核查](patent-timeout-feedback-microsoft-papers-manuals.md)。
 
