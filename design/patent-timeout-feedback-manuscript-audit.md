@@ -1,6 +1,6 @@
 # 限时执行部分反馈交底书：文献、机制与文稿核对
 
-本笔记记录[交底书正文](patent-timeout-feedback-disclosure-draft.md)的文献依据、文稿一致性和当前代码与方案的差距，不代替专利新颖性检索。核对范围包括用户提供的两篇论文、Oracle 12c 原论文、指定解析博客、所列 Oracle/Microsoft 官方文档及当前仓库源码。以下的“未见公开”仅指所列资料没有描述该步骤，不能推断产品内部绝不存在该能力。第三、四节保留初稿审计时的改写依据；当前待实现条件见第五节；2026-10-14 的逐页核对和正文清理见第六节；2026-10-22 的文献及算子结束机制修订见第七节。这里的审阅意见不属于交底书正文。
+本笔记记录[交底书正文](patent-timeout-feedback-disclosure-draft.md)的文献依据、文稿一致性和当前代码与方案的差距，不代替专利新颖性检索。核对范围包括用户提供的两篇论文、Oracle 12c 原论文、指定解析博客、所列 Oracle/Microsoft 官方文档及当前仓库源码。以下的“未见公开”仅指所列资料没有描述该步骤，不能推断产品内部绝不存在该能力。第三、四节保留初稿审计时的改写依据；当前待实现条件见第五节；2026-10-14 的逐页核对和正文清理见第六节；2026-10-22 的文献及算子结束机制修订见第七节；2026-10-26 的现有技术及实施例结构调整见第八、九节。这里的审阅意见不属于交底书正文。
 
 ## 一、可直接据以写作的事实
 
@@ -139,6 +139,37 @@ The disclosure and seven-slide manuscript now use the agreed title and the same 
 ### 7.3 English summary
 
 The disclosure now includes the verified POP papers, Oracle's statistics-query budget and feedback paths, and Microsoft's progress-estimation papers and operator-lifecycle manual. It acknowledges existing operator termination information and separates that information from cancellation-time feedback qualification and merging across tuning rounds. The patent body contains factual technical descriptions, while literature assessments and prototype gaps remain in this audit record. Publication dates, research prototypes, product interfaces, and individual patent claims are treated separately.
+
+## 八、2026-10-26 按 IBM、Oracle、Microsoft 重组现有技术
+
+按照用户要求，交底书不再以“执行反馈”“运行中重优化”“运行观测”分别拆分同一厂商的技术，而是在同一节集中陈述对应专利、论文、产品功能及与本发明的关系。
+
+| 现行章节 | 集中纳入的内容 |
+| --- | --- |
+| 1.2 现有相关技术一：IBM | LEO、US7716215B2、两篇 POP 论文、section_actuals 与 EXPLAIN_FROM_ACTIVITY |
+| 1.3 现有相关技术二：Oracle | US11321317B2、自适应计划、主查询统计反馈、SQL Plan Directives、限时统计查询与 SQL Monitor |
+| 1.4 现有相关技术三：Microsoft | US7493337B2、2004 与 2016 论文、US11334538B2/CE feedback、LQS、DMV 字段及算子生命周期 |
+| 1.5 补充相关技术与综合对照 | Sybase、采样重优化、Databricks 及其他产品观测；综合表也按厂商排列 |
+
+三节统一使用“现有技术方案—与本发明的关系”结构。改写前后第一章使用的 27 个文献引用编号相同。第 2 章的结构调整见第九节，实验数据、参考文献和英文摘要继续保留。专项核查文件中的现行章节指向同步更新；第六、七节的旧章节号作为有日期的历史记录保留。
+
+English: The related-art chapter now groups IBM, Oracle, and Microsoft into the three principal sections. Each section combines its patents, papers, product interfaces, and relationship to the proposed method. Other work remains supplementary. The literature citation set is preserved; the accompanying Chapter 2 restructuring is recorded below.
+
+## 九、2026-10-26 按技术要点重组具体实施例
+
+按用户追加要求，第 2 章改为以下顺序：第 2.1 节用一段话说明技术问题，第 2.2 节用一段话概括主要发明要点；第 2.3 节介绍系统架构或应用场景；第 2.4 节将各技术要点组织为连续编号的具体实施例。
+
+| 现行实施例 | 集中说明的内容 |
+| --- | --- |
+| 2.4.1 实施例一：限时试运行与期限调整 | 候选生成、正常完成与取消两条结果路径、初始上限、1.25 倍期限规则、全局预算和继续迭代 |
+| 2.4.2 实施例二：超时统计采集与返回 | QueryDesc/PlanState/Plan/Instrumentation 字段来源、清理前采集、active/terminal 公式、原取消错误保留、GaussDB 及客户端读取方式 |
+| 2.4.3 实施例三：行数适用与再次执行判定 | 目标 k、A/E/C、语义及执行次数一致、本地 EOF、后续调用、提前停止及累计计数反例 |
+| 2.4.4 实施例四：分类、合并与下一轮应用 | EXACT/LOWER_BOUND/NONE、精确值优先、下界取最大值、同轮与跨轮规则、零行编码及两组更新案例 |
+| 2.4.5 实施例五：GaussDB 调优与效果验证 | 原 JOB/JOB-complex 对照方法、两类评估、调优收益及未正式交付恢复候选的说明 |
+
+原来分散的对象定义、统计采集、核心流程及补充小例子分别归入相应实施例。合并公式、执行状态公式、期限公式、原始性能表及恢复候选身份保留；第 3.3 节的期限说明更新为引用现行第 2.4.1 节。方案条件与原型仍有的差距继续保存在第五节和 6.3，不以结构重组代替实现验证。
+
+English: Chapter 2 now begins with two short paragraphs covering the problem and the principal inventive approach, followed by system architecture and five numbered embodiments. The runtime formulas, classification and merge conditions, performance evidence, and recovered-candidate distinction are retained. Section references are updated without adding implementation claims.
 
 ## 来源说明
 

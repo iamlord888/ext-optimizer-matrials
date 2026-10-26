@@ -75,7 +75,7 @@
 | [Live Query Statistics](https://learn.microsoft.com/en-us/sql/relational-databases/performance/live-query-statistics?view=sql-server-ver17) | SSMS 中显示运行查询的实时计划、查询及算子进度、返回行数和已耗时间 |
 | [sys.dm_exec_query_profiles](https://learn.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-objects/sys-dm-exec-query-profiles-transact-sql?view=sql-server-ver17) | 提供算子及线程级 node_id、row_count、estimate_row_count、end_of_scan_count、rewind_count、rebind_count、close_time 等统计 |
 | [Query Profiling Infrastructure](https://learn.microsoft.com/en-us/sql/relational-databases/performance/query-profiling-infrastructure?view=sql-server-ver17) | 说明统计采集基础设施、标准与轻量 profiling，以及版本相关的启用方式 |
-| [Logical and Physical Showplan Operator Reference](https://learn.microsoft.com/en-us/sql/relational-databases/showplan-logical-and-physical-operators-reference?view=sql-server-ver17) | 说明物理算子生命周期、扫描结束和重复执行；相关语义已补入交底书第 1.4.2 节 |
+| [Logical and Physical Showplan Operator Reference](https://learn.microsoft.com/en-us/sql/relational-databases/showplan-logical-and-physical-operators-reference?view=sql-server-ver17) | 说明物理算子生命周期、扫描结束和重复执行；相关语义已集中写入交底书第 1.4 节：现有相关技术三 |
 
 算法联系由产品论文支持，用户可见功能由手册支持；本报告不据此逐项认定某版本实现了专利全部权利要求。更多作者、页码和版本条件见 [Microsoft 专项核查](patent-timeout-feedback-microsoft-papers-manuals.md)。
 
