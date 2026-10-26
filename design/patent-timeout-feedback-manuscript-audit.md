@@ -1,6 +1,6 @@
 # 限时执行部分反馈交底书：文献、机制与文稿核对
 
-本笔记记录[交底书正文](patent-timeout-feedback-disclosure-draft.md)的文献依据、文稿一致性和当前代码与方案的差距，不代替专利新颖性检索。核对范围包括用户提供的两篇论文、Oracle 12c 原论文、指定解析博客、所列 Oracle/Microsoft 官方文档及当前仓库源码。以下的“未见公开”仅指所列资料没有描述该步骤，不能推断产品内部绝不存在该能力。第三、四节保留初稿审计时的改写依据；当前待实现条件见第五节；2026-10-14 的逐页核对和正文清理见第六节；2026-10-22 的文献及算子结束机制修订见第七节；2026-10-26 的组织结构、对照精简、效果验证及全文语言修订见第八至十二节。这里的审阅意见不属于交底书正文。
+本笔记记录[交底书正文](patent-timeout-feedback-disclosure-draft.md)的文献依据、文稿一致性和当前代码与方案的差距，不代替专利新颖性检索。核对范围包括用户提供的两篇论文、Oracle 12c 原论文、指定解析博客、所列 Oracle/Microsoft 官方文档及当前仓库源码。以下的“未见公开”仅指所列资料没有描述该步骤，不能推断产品内部绝不存在该能力。第三、四节保留初稿审计时的改写依据；当前待实现条件见第五节；2026-10-14 的逐页核对和正文清理见第六节；2026-10-22 的文献及算子结束机制修订见第七节；2026-10-26 的组织结构、全文语言及现有技术重点修订见第八至十三节。这里的审阅意见不属于交底书正文。
 
 ## 一、可直接据以写作的事实
 
@@ -219,6 +219,18 @@ PPT 中英文文稿第 3 页同步明确指针与对象的关系；中文第 4-5
 本轮保留三家现有技术的分节方式、四个技术实施例及第 3.3 节效果验证的位置。执行期限、状态判定、行数分类和合并公式保持原文；实验表中的数据及恢复候选身份保留。英文摘要核对后保留，其概括的技术规则与修订后的中文一致。原型尚未落实的条件继续见第五节和 6.3。
 
 English: The Chinese disclosure was reviewed throughout for explicit object ownership, pointer targets, action subjects, counting ranges and evaluation procedures. The corresponding slide-manuscript wording was aligned. The structure, formulas, measurements, reference identifiers and recovered-candidate distinction are retained; this language revision does not change implementation behavior.
+
+## 十三、2026-10-26 调整 Oracle 与 Microsoft 的对照重点
+
+按用户要求，现有相关技术二改为突出单条查询执行过程中的重新优化，以及保存完整或部分执行信息供后续查询规划使用。关系说明据此对照本发明在全局预算内组织的多轮独立候选调优，不再以统计匹配条件作为主要比较线索。
+
+现有相关技术三集中于 US7493337B2、2004 年查询进度论文、2016 年 LQS 产品论文及相关统计接口。移除交底书中的 US11334538B2/CE feedback 段落及对应参考项 [R22]、[R14]，关系说明只比较当前查询进度估计与后续候选计划优化的不同用途。综合表、章节标题和英文概述同步调整。
+
+为保持三节各自的重点，IBM 关系说明仅保留 CHECK 触发与物化中间结果复用的对照，并承认其同样使用实际基数。Oracle 比较查询内调整、后续执行信息利用与外部多轮调优；Microsoft 比较进度估计与下一轮规划。
+
+本轮是交底书选题和叙述范围调整，原独立核查报告、US11334538B2 原件及其检索记录保留，不据此推断 Microsoft 没有基数反馈能力。代码实现、四个实施例、公式、实验数据和恢复候选身份保留。
+
+English: The Oracle comparison now covers in-flight reoptimization and stored execution information for later queries. The Microsoft related-art section is limited to progress estimation and associated LQS interfaces, contrasting that purpose with next-round plan optimization. CE-feedback material is omitted from the disclosure while its independent research evidence is preserved.
 
 ## 来源说明
 

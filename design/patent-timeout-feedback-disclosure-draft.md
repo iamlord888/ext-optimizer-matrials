@@ -50,13 +50,13 @@ Db2 产品也提供运行统计采集接口。通过配置参数 `section_actual
 
 #### 1.2.2 与本发明的关系
 
-IBM POP 由计划中的检查点触发，在同一事务中为当前 SQL 重新生成执行计划。优化器既利用实际基数，也可选择复用已物化的中间结果。本发明由外部调优器为每轮候选计划设置执行期限；当前轮被取消后，调优器将保存的节点统计用于下一轮规划，各轮分别创建执行上下文。[R20][R24][R25]
+IBM POP 由计划中的 CHECK 条件触发重新优化。优化器既利用实际基数，也可按成本选择复用已经物化的中间结果。本发明达到单轮执行期限时取消慢候选计划，并在执行器清理前保存节点行数和执行状态，供后续规划使用。[R20][R24][R25]
 
-### 1.3 现有相关技术二：Oracle 的自适应计划与统计反馈
+### 1.3 现有相关技术二：Oracle 的执行中重新优化与执行信息复用
 
 #### 1.3.1 现有技术方案
 
-Oracle 专利 US11321317B2 介绍了三种利用执行统计的处理方式。自适应计划（Adaptive Plan）根据统计收集器取得的行数、选择率等信息，在执行期间选择预先准备的子计划。执行中重新优化（In-Flight Reoptimization）根据实际统计与编译期估算的差异，结合剩余操作和重新计算的成本，提前终止未完成计划并启动新计划。专利背景还讨论了用户或 DBA 终止运行过久的计划的情况。[R19]
+Oracle 专利 US11321317B2 将执行统计用于当前查询的计划调整，以及后续查询的规划优化。在当前查询执行期间，自适应计划（Adaptive Plan）根据统计收集器取得的行数、选择率等信息，选择预先准备的子计划。执行中重新优化（In-Flight Reoptimization）则根据实际统计与编译期估算的差异，结合剩余操作和重新计算的成本，提前终止未完成计划并启动新计划。专利背景还讨论了用户或 DBA 终止运行过久的计划的情况。[R19]
 
 自动重新优化（Automatic Reoptimization）将在完整或部分执行期间收集的表、连接、分组和索引统计，用于后续相同、等价或相关查询。该专利的授权权利要求 1 还涉及选择保存某个操作的统计，根据数据库对象和操作判断其是否适用于后续非等价查询，再生成第二执行计划。[R19]
 
@@ -68,17 +68,15 @@ Oracle SQL Monitor 还可以在长查询被取消后显示计划节点的 `Rows 
 
 #### 1.3.2 与本发明的关系
 
-Oracle 根据数据库对象、操作或查询表达式，确定已有的完整或部分执行统计可用于哪些后续查询。本发明在使用取消时取得的行数前，还要确认统计对应的扫描或连接，以及实际行数与估算行数所对应的执行次数是否一致，再判断该行数能作为精确值、下界，还是不应反馈。[R19][R31][R32]
+Oracle 的相关技术一方面根据运行统计，对单条查询尚未完成的计划进行重新优化；另一方面保存完整或部分执行取得的信息，供后续查询规划使用。本发明面向同一 SQL 的外部调优任务，由调优器逐轮生成并试运行新的候选计划，各轮使用独立的执行上下文。每轮取得的可用节点行数用于修正下一轮的规划输入，完整运行时间用于比较候选性能，从而在全局调优预算内寻找更优计划。[R19][R31][R32]
 
-### 1.4 现有相关技术三：Microsoft 的查询进度估计与基数反馈
+### 1.4 现有相关技术三：Microsoft 的查询进度估计
 
 #### 1.4.1 现有技术方案
 
-Microsoft 专利 US7493337B2 分别记录各算子已经返回的行数，并维护各算子最终输出行数的上下界。系统传播这些边界的变化，用于修正查询进度估计。权利要求 27 将某时点已返回的数据项数量设为下界；权利要求 33 涉及多个算子的上下界维护与传播；权利要求 42 允许用户中止查询。[R21]
+Microsoft 专利 US7493337B2 关注查询执行进度的估计。其方法分别记录各算子已经返回的行数，维护各算子最终输出行数的上下界，并传播边界变化，以修正进度估计。权利要求 27 将某时点已返回的数据项数量设为下界；权利要求 33 涉及多个算子的上下界维护与传播；权利要求 42 允许用户中止查询。[R21]
 
 相关论文《Estimating Progress of Execution for SQL Queries》以查询整体进度估计为目标，根据算子输出计数和基数上下界，修正预计总工作量。论文说明，算子结束时，其输出行数的上下界精确已知且相等。2016 年的 SQL Server Live Query Statistics 产品论文明确采用了这一早期研究的基数边界技术，并同时估计查询整体和单个算子的进度。[R26][R27]
-
-在基数反馈方面，专利 US11334538B2 描述了查询执行期间及完成时产生监测事件的方式。系统收集各节点的估算基数和实际基数，根据二者的差异生成反馈建议，用于后续相同或相似查询。SQL Server 的 CE feedback 产品功能也根据重复查询的估算偏差，调整后续规划使用的基数估计模型，并保存相应反馈。[R22][R14]
 
 SQL Server 提供系统动态管理视图 `sys.dm_exec_query_profiles`，按算子和执行线程返回累计行数、估算行数、扫描结束次数、重复执行计数及关闭时间。实时查询统计功能（Live Query Statistics）使用这些统计信息显示查询和算子的执行进度。[R5][R6][R27]
 
@@ -95,7 +93,7 @@ SQL Server 的算子手册说明，物理算子通过 `Open()` 初始化，通�
 
 #### 1.4.2 与本发明的关系
 
-Microsoft 使用节点计数和上下界估计当前查询的总工作量及完成比例，CE feedback 则通过调整基数估计模型改进后续计划。本发明将满足条件的节点行数写入下一轮使用的 Rows Hint 等基数输入：精确行数可以提高或降低已保存的值，尚无精确值时，行数下界只用于提高该值。[R21][R26][R27][R22][R14]
+Microsoft 将算子已返回行数、预计总行数及其上下界用于查询进度估计，帮助用户判断当前查询已经完成多少工作，以及应继续执行还是中止。本发明将满足条件的节点行数用于修正下一轮候选的基数输入，使优化器能够重新选择访问路径、连接顺序或连接方法。[R21][R26][R27]
 
 ### 1.5 补充相关技术与综合对照
 
@@ -114,8 +112,8 @@ Databricks AQE 在查询执行期间，根据已完成阶段的统计选择后�
 | 相关技术 | 主要处理方式 | 本发明对应的处理 |
 | --- | --- | --- |
 | IBM | 检查点触发当前查询重优化，利用实际基数并可选复用物化结果 | 外部调优器控制各轮试运行期限，将保存的节点统计用于后续规划 |
-| Oracle | 根据数据库对象、操作或查询表达式，匹配可复用的执行信息 | 核对节点统计对应的结果及执行次数，确定行数的可用类型 |
-| Microsoft | 将节点上下界用于进度估计，通过调整估算模型影响后续计划 | 根据行数反馈类型确定更新方向和优先级，生成下一轮规划输入 |
+| Oracle | 对当前查询执行中的计划进行重新优化，或保存执行信息供后续查询使用 | 将同一 SQL 的调优组织为预算内的多轮候选试运行 |
+| Microsoft | 根据节点输出行数及其上下界，估计当前查询和算子的执行进度 | 将可用节点行数交给优化器，生成下一轮候选计划 |
 | 其他相关技术 | 利用部分耗时评价计划，或对样本重规划及显示运行统计 | 使用候选计划实际执行时产生的节点统计，继续进行限时迭代 |
 
 ### 1.6 本发明要解决的技术问题
@@ -360,7 +358,6 @@ JOB `16b` 在无单轮超时组中运行 4 轮后触发全局预算停止条件�
 - [R7] Microsoft Learn，[Query Profiling Infrastructure](https://learn.microsoft.com/en-us/sql/relational-databases/performance/query-profiling-infrastructure?view=sql-server-ver17)。
 - [R8] Oracle Database 12c，[How Adaptive Query Plans Work](https://docs.oracle.com/database/121/TGSQL/tgsql_optcncpt.htm#GUID-A42B8874-95AF-4D5B-B5D9-F0376F91D15E)。
 - [R9] Oracle Database 19c，[`V$SQL_PLAN_MONITOR`](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/V-SQL_PLAN_MONITOR.html)。
-- [R14] Microsoft Learn，[Cardinality Estimation Feedback](https://learn.microsoft.com/en-us/sql/relational-databases/performance/intelligent-query-processing-cardinality-estimation-feedback?view=sql-server-ver17)。
 - [R15] MariaDB，[`SHOW ANALYZE FOR`](https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/show/show-analyze)。
 - [R16] Amazon Redshift，[`SYS_QUERY_DETAIL`](https://docs.aws.amazon.com/redshift/latest/dg/SYS_QUERY_DETAIL.html) 与 [`SYS_QUERY_HISTORY`](https://docs.aws.amazon.com/redshift/latest/dg/SYS_QUERY_HISTORY.html)。
 - [R17] OceanBase Cloud，[Execution Profile](https://en.oceanbase.com/docs/common-oceanbase-cloud-10000000001725119)。
@@ -375,12 +372,11 @@ JOB `16b` 在无单轮超时组中运行 4 轮后触发全局预算停止条件�
 - [R31] Oracle Database 12.1，[Reoptimization: Statistics Feedback](https://docs.oracle.com/database/121/TGSQL/tgsql_optcncpt.htm#GUID-739F1F0B-ABE2-44C9-9783-8FA54F4ADB12)。
 - [R32] Oracle Database 12.1，[Optimizer Statistics Concepts: SQL Plan Directives](https://docs.oracle.com/database/121/TGSQL/tgsql_statscon.htm)。
 
-### 五件重点专利
+### 相关专利
 
 - [R19] Oracle，*Leveraging query-specific statistics in non-equivalent queries*，`US11321317B2`，[授权文本](https://patents.google.com/patent/US11321317B2/en)，[本地原件](patent-originals/US11321317B2.pdf)。参见授权 PDF 第 14-20 页的自适应与重新优化说明，以及第 31-32 页的权利要求；权利要求 1 涉及非等价后续查询的统计复用。
 - [R20] IBM，*System, method, and computer program product for progressive query processing*，`US7716215B2`，[授权文本](https://patents.google.com/patent/US7716215B2/en)，[本地原件](patent-originals/US7716215B2.pdf)。参见授权 PDF 第 21-26 页、PDF 第 9 页图 7，以及第 27-28 页权利要求 1。
 - [R21] Microsoft，*Query progress estimation*，`US7493337B2`，[授权文本](https://patents.google.com/patent/US7493337B2/en)，[本地原件](patent-originals/US7493337B2.pdf)。参见授权 PDF 第 20-21 页、PDF 第 13 页图 12，以及第 24-25 页权利要求 22-33、42。
-- [R22] Microsoft，*System and method for cardinality estimation feedback loops in query processing*，`US11334538B2`，[授权文本](https://patents.google.com/patent/US11334538B2/en)，[本地原件](patent-originals/US11334538B2.pdf)。参见节点执行统计与反馈管理说明及权利要求 1、5。
 - [R23] Sybase，*System and methodology for automatic tuning of database query optimizer*，`US9213740B2`，[授权文本](https://patents.google.com/patent/US9213740B2/en)，[本地原件](patent-originals/US9213740B2.pdf)。参见中断候选的部分耗时记录说明及权利要求 1。
 
 上述论文页码从论文 PDF 第一页起算，授权专利页码从封面第一页起算。
@@ -403,7 +399,7 @@ JOB `16b` 在无单轮超时组中运行 4 轮后触发全局预算停止条件�
 
 **Title: An Iterative Query Execution Plan Optimization Method Based on Partial Feedback from Time-Limited Execution**
 
-IBM's POP papers describe checkpoint-triggered reoptimization of the current query, reuse of actual cardinalities, and cost-based selection of materialized intermediate results. Oracle's papers and manuals describe feedback and reusable directives, with separate time budgets for optimization-time statistics queries. Microsoft's progress-estimation research uses operator counts, cardinality bounds, and termination facts; the product documentation also describes scan-end counters, repeated execution, and operator closure. The present method applies qualified counts captured on candidate cancellation to the next independent tuning round through explicit qualification and merge rules.
+IBM's POP papers describe checkpoint-triggered reoptimization of the current query, reuse of actual cardinalities, and cost-based selection of materialized intermediate results. Oracle's related work covers reoptimization during an individual query and saving full or partial execution information for later query optimization. Microsoft's progress-estimation research uses operator counts, cardinality bounds, and termination facts; the product documentation also describes scan-end counters, repeated execution, and operator closure. The present method applies qualified counts captured on candidate cancellation to the next independent tuning round through explicit qualification and merge rules.
 
 Each candidate for the same SQL runs with an execution deadline. On timeout cancellation, the original plan and operator estimates, returned rows, invocation state, and local EOF information are captured before executor cleanup. Partial feedback refers to usable operator statistics from a candidate whose execution has not completed; it may include exact counts for qualified operators as well as lower bounds.
 
