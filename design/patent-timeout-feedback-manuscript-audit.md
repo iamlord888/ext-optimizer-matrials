@@ -1,6 +1,6 @@
 # 限时执行部分反馈交底书：文献、机制与文稿核对
 
-本笔记记录[交底书正文](patent-timeout-feedback-disclosure-draft.md)的文献依据、文稿一致性和当前代码与方案的差距，不代替专利新颖性检索。核对范围包括用户提供的两篇论文、Oracle 12c 原论文、指定解析博客、所列 Oracle/Microsoft 官方文档及当前仓库源码。以下的“未见公开”仅指所列资料没有描述该步骤，不能推断产品内部绝不存在该能力。第三、四节保留初稿审计时的改写依据；当前待实现条件见第五节；2026-10-14 的逐页核对和正文清理见第六节；2026-10-22 的文献及算子结束机制修订见第七节；2026-10-26 的现有技术及实施例结构调整见第八、九节。这里的审阅意见不属于交底书正文。
+本笔记记录[交底书正文](patent-timeout-feedback-disclosure-draft.md)的文献依据、文稿一致性和当前代码与方案的差距，不代替专利新颖性检索。核对范围包括用户提供的两篇论文、Oracle 12c 原论文、指定解析博客、所列 Oracle/Microsoft 官方文档及当前仓库源码。以下的“未见公开”仅指所列资料没有描述该步骤，不能推断产品内部绝不存在该能力。第三、四节保留初稿审计时的改写依据；当前待实现条件见第五节；2026-10-14 的逐页核对和正文清理见第六节；2026-10-22 的文献及算子结束机制修订见第七节；2026-10-26 的组织结构及对照精简见第八至十节。这里的审阅意见不属于交底书正文。
 
 ## 一、可直接据以写作的事实
 
@@ -170,6 +170,20 @@ English: The related-art chapter now groups IBM, Oracle, and Microsoft into the 
 原来分散的对象定义、统计采集、核心流程及补充小例子分别归入相应实施例。合并公式、执行状态公式、期限公式、原始性能表及恢复候选身份保留；第 3.3 节的期限说明更新为引用现行第 2.4.1 节。方案条件与原型仍有的差距继续保存在第五节和 6.3，不以结构重组代替实现验证。
 
 English: Chapter 2 now begins with two short paragraphs covering the problem and the principal inventive approach, followed by system architecture and five numbered embodiments. The runtime formulas, classification and merge conditions, performance evidence, and recovered-candidate distinction are retained. Section references are updated without adding implementation claims.
+
+## 十、2026-10-26 精简三家技术与本发明关系的重复内容
+
+三处均采用“与本发明的关系”标题。原先各节反复描述取消、行数分类、合并和下一轮规划，本轮将整体流程集中到第 1.5.2 节，并分别保留直接关联该厂商技术的比较重点。
+
+| 厂商 | 关系章节的比较重点 |
+| --- | --- |
+| IBM | CHECK 驱动的当前查询重优化与外部限时候选迭代：比较触发方式、执行上下文和中间结果复用；保留 IBM 同时利用实际基数的事实 |
+| Oracle | 对象、操作或表达式相关性与节点观测可用性：比较统计的匹配条件，以及行数覆盖的目标和执行次数 |
+| Microsoft | 查询进度和估算模型反馈与下一轮行数输入：比较反馈去向、更新方向及精确值/下界的合并优先级 |
+
+综合表按这三个维度对应陈述。现有技术方案部分及第 2 章起的实现、公式、实验、参考资料和英文摘要保持上一发布版本的内容；本轮只精简第一章的关系说明和综合对照。实施例仍按第九节的五个技术环节组织。
+
+English: The three relationship sections now focus respectively on execution control and result reuse, statistical matching and row-count qualification, and feedback destination and merge policy. The common workflow is stated once in the comparison section. The technical embodiments and evidence remain those of the preceding published version.
 
 ## 来源说明
 
