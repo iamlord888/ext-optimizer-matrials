@@ -39,8 +39,8 @@ Source: [Patent disclosure draft](patent-timeout-feedback-disclosure-draft.md). 
 
 **Core operation: On timeout cancellation, read and return operator row counts and execution state before executor cleanup, for subsequent feedback qualification.**
 
-1. **Save operator objects:** Obtain the top-level operator's `PlanState` from `QueryDesc.planstate`, traverse the execution-state tree and save operator pointers.
-2. **Read counts:** Read `Plan.plan_node_id` and `Plan.plan_rows` through `PlanState.plan` for the node ID and estimate E. Read `Instrumentation.ntuples` and `nloops` through `PlanState.instrument` for cumulative returned rows A and Loops.
+1. **Save operator pointers:** Follow the `planstate` pointer in `QueryDesc` to the top-level operator's `PlanState` object, then traverse the execution-state tree and save operator pointers.
+2. **Read plan information and counts:** The `plan` pointer in `PlanState` points to a `Plan` object containing the node ID and estimate E. The `instrument` pointer points to an `Instrumentation` object containing cumulative returned rows A and Loops.
 3. **Read execution state:** Derive `active` from the call-start timestamp in `Instrumentation`. `active=false` means no `get_next` call is in progress. If `Instrumentation.status != 0` also holds, record `terminal=true` to indicate local EOF.
 4. **Return round statistics:** Return the executed plan text, operator counts and state so the client can qualify counts and update later cardinality feedback.
 

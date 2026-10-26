@@ -1,6 +1,6 @@
 # 限时执行部分反馈交底书：文献、机制与文稿核对
 
-本笔记记录[交底书正文](patent-timeout-feedback-disclosure-draft.md)的文献依据、文稿一致性和当前代码与方案的差距，不代替专利新颖性检索。核对范围包括用户提供的两篇论文、Oracle 12c 原论文、指定解析博客、所列 Oracle/Microsoft 官方文档及当前仓库源码。以下的“未见公开”仅指所列资料没有描述该步骤，不能推断产品内部绝不存在该能力。第三、四节保留初稿审计时的改写依据；当前待实现条件见第五节；2026-10-14 的逐页核对和正文清理见第六节；2026-10-22 的文献及算子结束机制修订见第七节；2026-10-26 的组织结构、对照精简及效果验证归位见第八至十一节。这里的审阅意见不属于交底书正文。
+本笔记记录[交底书正文](patent-timeout-feedback-disclosure-draft.md)的文献依据、文稿一致性和当前代码与方案的差距，不代替专利新颖性检索。核对范围包括用户提供的两篇论文、Oracle 12c 原论文、指定解析博客、所列 Oracle/Microsoft 官方文档及当前仓库源码。以下的“未见公开”仅指所列资料没有描述该步骤，不能推断产品内部绝不存在该能力。第三、四节保留初稿审计时的改写依据；当前待实现条件见第五节；2026-10-14 的逐页核对和正文清理见第六节；2026-10-22 的文献及算子结束机制修订见第七节；2026-10-26 的组织结构、对照精简、效果验证及全文语言修订见第八至十二节。这里的审阅意见不属于交底书正文。
 
 ## 一、可直接据以写作的事实
 
@@ -198,6 +198,27 @@ English: The three relationship sections now focus respectively on execution con
 背景及效果说明中的实验章节引用统一改为第 3.3 节。验证内容按原文迁移，统计值、实验方法、31.89%/41.84% 降幅及约 11 秒恢复候选未正式交付的说明保留。原始参考资料及英文摘要保持一致。
 
 English: Four technical embodiments remain in Chapter 2. The complete GaussDB workload evaluation is now in Section 3.3 under the invention's principal innovations and corresponding technical effects. Optional implementation variations are folded into their relevant embodiments, while measurements and evaluation distinctions are preserved.
+
+## 十二、2026-10-26 全文中文表达复核
+
+本轮通读交底书的摘要、背景、三家现有技术、系统架构、四个实施例、创新点与技术效果、实验说明、图注、表格及实现依据，集中处理省略对象关系、动作主体不清、代码式短语和指代不明等问题。通过 CodeGraph 核对 GaussDB 适配文件中的对象定义，确认 `plan` 与 `instrument` 都是执行状态对象中的指针成员，分别指向计划信息和执行统计。
+
+| 问题类型及原表达 | 修改方式 |
+| --- | --- |
+| 对象关系省略：“每个 PlanState 通过 plan 关联静态 Plan，通过 instrument 关联运行时 Instrumentation” | 明确 PlanState 包含两个指针，分别说明所指对象及其保存的数据；字段表按“数据所在对象—读取字段—字段含义”组织 |
+| 把数据当作动作主体：“完整运行时间更新最佳候选”“节点统计进入行数反馈” | 说明由调优器比较完整运行时间、选择最佳计划；节点统计交由行数判定单元处理 |
+| 计数含义不完整：“实际与估算覆盖相同执行次数” | 分别写明实际行数和估算行数，要求二者对应相同执行次数及并行汇总范围 |
+| 更新对象模糊：“精确行数覆盖已有输入”“行数下界只抬高” | 明确更新的是调优器保存的规划输入值；新精确值替换旧值，尚无精确值时下界才提高该值 |
+| 不同阶段的数值混淆 | 分别说明计划估算 E 和调优器保存的值 B，解释判断下界是否可用与判断 Hint 是否变化是两个步骤 |
+| 动作与结果混写：“形成独立完整执行约 11 秒的恢复候选” | 分开说明依据累计 Hint 生成候选、进行独立完整执行测量，以及原调优过程中未正式交付 |
+| 统计说明不直观：“未交付查询回填原 SQL” | 明确在计算执行时间时，对未交付查询使用原始 SQL 的执行时间 |
+| 裸露英文功能名和压缩短语 | 在正文首次使用时先说明中文含义，再保留英文标准术语；补全调用、比较和使用统计的主体 |
+
+PPT 中英文文稿第 3 页同步明确指针与对象的关系；中文第 4-5 页同步改写相同执行次数和更新规则的表述。此处更新的是 Markdown 文稿。
+
+本轮保留三家现有技术的分节方式、四个技术实施例及第 3.3 节效果验证的位置。执行期限、状态判定、行数分类和合并公式保持原文；实验表中的数据及恢复候选身份保留。英文摘要核对后保留，其概括的技术规则与修订后的中文一致。原型尚未落实的条件继续见第五节和 6.3。
+
+English: The Chinese disclosure was reviewed throughout for explicit object ownership, pointer targets, action subjects, counting ranges and evaluation procedures. The corresponding slide-manuscript wording was aligned. The structure, formulas, measurements, reference identifiers and recovered-candidate distinction are retained; this language revision does not change implementation behavior.
 
 ## 来源说明
 
