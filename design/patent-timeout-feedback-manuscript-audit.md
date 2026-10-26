@@ -1,6 +1,6 @@
 # 限时执行部分反馈交底书：文献、机制与文稿核对
 
-本笔记记录[交底书正文](patent-timeout-feedback-disclosure-draft.md)的文献依据、文稿一致性和当前代码与方案的差距，不代替专利新颖性检索。核对范围包括用户提供的两篇论文、Oracle 12c 原论文、指定解析博客、所列 Oracle/Microsoft 官方文档及当前仓库源码。以下的“未见公开”仅指所列资料没有描述该步骤，不能推断产品内部绝不存在该能力。第三、四节保留初稿审计时的改写依据；当前待实现条件见第五节；2026-10-14 的逐页核对和正文清理见第六节；2026-10-22 的文献及算子结束机制修订见第七节；2026-10-26 的组织结构及对照精简见第八至十节。这里的审阅意见不属于交底书正文。
+本笔记记录[交底书正文](patent-timeout-feedback-disclosure-draft.md)的文献依据、文稿一致性和当前代码与方案的差距，不代替专利新颖性检索。核对范围包括用户提供的两篇论文、Oracle 12c 原论文、指定解析博客、所列 Oracle/Microsoft 官方文档及当前仓库源码。以下的“未见公开”仅指所列资料没有描述该步骤，不能推断产品内部绝不存在该能力。第三、四节保留初稿审计时的改写依据；当前待实现条件见第五节；2026-10-14 的逐页核对和正文清理见第六节；2026-10-22 的文献及算子结束机制修订见第七节；2026-10-26 的组织结构、对照精简及效果验证归位见第八至十一节。这里的审阅意见不属于交底书正文。
 
 ## 一、可直接据以写作的事实
 
@@ -159,7 +159,7 @@ English: The related-art chapter now groups IBM, Oracle, and Microsoft into the 
 
 按用户追加要求，第 2 章改为以下顺序：第 2.1 节用一段话说明技术问题，第 2.2 节用一段话概括主要发明要点；第 2.3 节介绍系统架构或应用场景；第 2.4 节将各技术要点组织为连续编号的具体实施例。
 
-| 现行实施例 | 集中说明的内容 |
+| 该轮实施例（后续调整见第十一节） | 集中说明的内容 |
 | --- | --- |
 | 2.4.1 实施例一：限时试运行与期限调整 | 候选生成、正常完成与取消两条结果路径、初始上限、1.25 倍期限规则、全局预算和继续迭代 |
 | 2.4.2 实施例二：超时统计采集与返回 | QueryDesc/PlanState/Plan/Instrumentation 字段来源、清理前采集、active/terminal 公式、原取消错误保留、GaussDB 及客户端读取方式 |
@@ -181,9 +181,23 @@ English: Chapter 2 now begins with two short paragraphs covering the problem and
 | Oracle | 对象、操作或表达式相关性与节点观测可用性：比较统计的匹配条件，以及行数覆盖的目标和执行次数 |
 | Microsoft | 查询进度和估算模型反馈与下一轮行数输入：比较反馈去向、更新方向及精确值/下界的合并优先级 |
 
-综合表按这三个维度对应陈述。现有技术方案部分及第 2 章起的实现、公式、实验、参考资料和英文摘要保持上一发布版本的内容；本轮只精简第一章的关系说明和综合对照。实施例仍按第九节的五个技术环节组织。
+综合表按这三个维度对应陈述。现有技术方案部分及第 2 章起的实现、公式、实验、参考资料和英文摘要保持上一发布版本的内容；该轮只精简第一章的关系说明和综合对照，并沿用第九节的结构。效果验证的后续移位见第十一节。
 
 English: The three relationship sections now focus respectively on execution control and result reuse, statistical matching and row-count qualification, and feedback destination and merge policy. The common workflow is stated once in the comparison section. The technical embodiments and evidence remain those of the preceding published version.
+
+## 十一、2026-10-26 将实验验证移入创新点与技术效果章节
+
+按用户要求，原第 2.4.5 节的 GaussDB/JOB/JOB-complex 对照验证不再作为技术实施例。第 2.4 节现只保留四个技术实施例；第 3 章改为“本发明的主要创新点及其对应的技术效果”，按主要创新点、对应技术效果和效果验证组织。
+
+| 原位置 | 现行位置与处理 |
+| --- | --- |
+| 2.4.5 GaussDB 调优与效果验证 | 完整移至 3.3 技术效果验证，保留实验条件、表格、图 8/9、正式交付与恢复候选的区别 |
+| 3.1 关键技术点、3.2 有益效果 | 分别调整为主要创新点、对应的技术效果，并保留技术处理与效果的对应表 |
+| 原 3.3 其他实施方式 | 可配置期限和倍率归入实施例一；消息/结构化统计接口归入实施例二；其他基数输入接口归入实施例四；原有不反馈及失效条件已在实施例三、四说明 |
+
+背景及效果说明中的实验章节引用统一改为第 3.3 节。验证内容按原文迁移，统计值、实验方法、31.89%/41.84% 降幅及约 11 秒恢复候选未正式交付的说明保留。原始参考资料及英文摘要保持一致。
+
+English: Four technical embodiments remain in Chapter 2. The complete GaussDB workload evaluation is now in Section 3.3 under the invention's principal innovations and corresponding technical effects. Optional implementation variations are folded into their relevant embodiments, while measurements and evaluation distinctions are preserved.
 
 ## 来源说明
 

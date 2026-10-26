@@ -257,8 +257,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-disclosure-draft.md",
-      "bytes": 47606,
-      "sha256": "5fdc8719dd23f2481155464950b419b0bfac2c280be33e3ba74842a633dacc40"
+      "bytes": 47041,
+      "sha256": "eedf22e690990298ad34df4389f2d06f5faf6cce20f01aefbb08f8f5b67cda3c"
     },
     {
       "path": "design/patent-timeout-feedback-figures/html/fig3-executor-observation-flow.html",
@@ -417,8 +417,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-manuscript-audit.md",
-      "bytes": 36174,
-      "sha256": "8592e15cd19d04acd5088055851bd80f54c1d35ee7475cd04c37b8d8553dcfe8"
+      "bytes": 37809,
+      "sha256": "a92832020a56ba6ca166a23217df29cefd449aaa5d6108fe63532880f620cfed"
     },
     {
       "path": "design/patent-timeout-feedback-microsoft-papers-manuals.md",
