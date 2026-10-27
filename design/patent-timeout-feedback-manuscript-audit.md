@@ -242,6 +242,16 @@ English: The Oracle comparison now covers in-flight reoptimization and stored ex
 
 English: Embodiment 2 now explains how to locate node statistics, preserve them before cleanup, distinguish invocation state from local EOF, and pass the observations to feedback qualification. A short GaussDB example remains, while function names, field formulas, transport details and client-side plan reconstruction are omitted from the main narrative. The technical limits and the other embodiments are unchanged.
 
+## 十五、2026-10-27 补充实施例二的具体数据来源和采集示例
+
+用户指出具体实施例不宜过度抽象。本轮保留连续自然段和中英文不加空格的写法，补回执行开始时从QueryDesc.planstate取得最上层PlanState、遍历并保存节点指针、从Plan读取节点ID及估算行数、从Instrumentation读取累计行数及执行循环计数的具体过程。
+
+状态说明以调用起始时间的秒、微秒分量和status字段为依据，解释active与terminal的含义，同时保留本地EOF不能证明无后续执行的边界。新增估算1000行、取消时已返回2400行且取数调用未结束的说明性示例；该示例不作为实测数据，是否可作为下界仍按实施例三判断。
+
+本轮通过CodeGraph核对当前GaussDB实现中的对象定义和partial_gaussdb_execution_capture_evidence，确认累计行数直接读取ntuples，nloops为已结束的执行循环计数，active由调用起始时间确定，terminal由非零status与无正在进行的调用共同确定。正文继续使用数据库执行器、统计采集单元和调优器说明处理过程，不展开通信协议、错误捕获函数和重新规划匹配细节。其他实施例、实验数据和反馈合并规则不变。
+
+English: Embodiment 2 restores concrete GaussDB data sources, pointer traversal, capture timing and invocation/EOF interpretation while keeping prose paragraphs. A hypothetical node with an estimate of 1000 rows and 2400 rows returned before cancellation illustrates the captured facts. Qualification remains in Embodiment 3; transport and plan-reconstruction details remain outside this narrative.
+
 ## 来源说明
 
 - 两篇 PDF 已按其本地文件的 **PDF 页码**逐页核对，论文内印刷页号可能不同。
