@@ -24,6 +24,15 @@ BODY_SIZE = 12
 REPO = Path(__file__).resolve().parents[2]
 PUBLIC_BASE = "https://github.com/iamlord888/ext-optimizer-matrials/blob/main/"
 INLINE = re.compile(r"(`[^`]+`|\*\*[^*]+\*\*|\*[^*\n]+\*|\[[^\]]+\]\([^)]+\))")
+# Only the manuscript's mathematical symbols use subscript notation. Ordinary
+# code identifiers such as plan_node_id and get_next retain their underscores.
+MATH_SUBSCRIPT = re.compile(
+    r"(?<![A-Za-z0-9_])([ABCEPTt])"
+    r"(?:_\{(i(?:[+-][0-9]+)?|[0-9]+|best|cap)\}"
+    r"|_(i|[0-9]+|best|cap)|([₀₁₂₃₄₅₆₇₈₉ᵢ]))"
+    r"(?![A-Za-z0-9_])"
+)
+SUBSCRIPT_CHARACTERS = str.maketrans("₀₁₂₃₄₅₆₇₈₉ᵢ", "0123456789i")
 
 
 def apply_font(properties, size=BODY_SIZE, bold=False, italic=False):
@@ -83,8 +92,20 @@ def link_target(value, source):
 
 
 def add_run(paragraph, value, bold=False, italic=False):
-    run = paragraph.add_run(value)
-    apply_font(run._r.get_or_add_rPr(), bold=bold, italic=italic)
+    """Use native text subscripts so indices flow with Chinese punctuation."""
+    position = 0
+    for match in MATH_SUBSCRIPT.finditer(value):
+        suffix = next(item for item in match.groups()[1:] if item is not None)
+        for text, is_subscript in ((value[position:match.start()], False), (match[1], False), (suffix.translate(SUBSCRIPT_CHARACTERS), True)):
+            if text:
+                run = paragraph.add_run(text)
+                apply_font(run._r.get_or_add_rPr(), bold=bold, italic=italic)
+                if is_subscript:
+                    run.font.subscript = True
+        position = match.end()
+    if position < len(value):
+        run = paragraph.add_run(value[position:])
+        apply_font(run._r.get_or_add_rPr(), bold=bold, italic=italic)
 
 
 def add_inline(paragraph, value, source):
@@ -247,7 +268,8 @@ def create_document(source, output):
     footer._p.append(field)
     output.parent.mkdir(parents=True, exist_ok=True)
     doc.save(output)
-    manifest = {"source": str(source), "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(), "output": str(output), "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(), "font": FONT_NAME, "body_size_pt": BODY_SIZE, "line_spacing": 1.5, "body_first_line_characters": 2, "paragraphs": len(doc.paragraphs), "editable_display_equations": 1}
+    inline_subscripts = sum(1 for item in doc.element.iter(qn("w:vertAlign")) if item.get(qn("w:val")) == "subscript")
+    manifest = {"source": str(source), "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(), "output": str(output), "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(), "font": FONT_NAME, "body_size_pt": BODY_SIZE, "line_spacing": 1.5, "body_first_line_characters": 2, "paragraphs": len(doc.paragraphs), "editable_display_equations": 1, "inline_subscript_runs": inline_subscripts, "native_subscripts": inline_subscripts + sum(1 for item in doc.element.iter(qn("m:sSub")))}
     output.with_suffix(".word-sync.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(manifest, ensure_ascii=False, indent=2))
 

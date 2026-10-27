@@ -6,6 +6,8 @@
 
 使用[export_word.py](export_word.py)从配对Markdown重新生成Word。脚本保留文稿文字、层级、引用和可编辑的期限公式，并生成本机同步校验信息。需要Python和python-docx；在Codex中应使用已加载的工作区Python运行。
 
+正文中的数学变量使用Word原生下标格式，包括`A_i`、`B_i(k)`、`P_i`、`T_i`、`t_best`和`T₀`等写法；独立公式继续使用可编辑的Word公式。下划线不直接显示在数学变量中；`plan_node_id`、`get_next`等代码标识仍保留原有拼写。
+
 ```bash
 python3 export_word.py
 ```

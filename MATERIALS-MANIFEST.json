@@ -472,18 +472,18 @@
     },
     {
       "path": "design/patent-timeout-feedback-review-20261027/WORD_FORMAT.md",
-      "bytes": 1425,
-      "sha256": "e5f1f2fcbf245cdde4839d8068057f2e2201fac9172d2e7f932f4f6281328226"
+      "bytes": 1712,
+      "sha256": "992b2724077cc7e5639a14ed7bfe6e6035bd644eb27f213e828ea19658988d7b"
     },
     {
       "path": "design/patent-timeout-feedback-review-20261027/export_word.py",
-      "bytes": 10861,
-      "sha256": "bd2fd89308cdcb74661acf6541d9d39327b03c33d0ab464a1ad2ecfbd2a5351f"
+      "bytes": 12242,
+      "sha256": "b0cfce3023901f5c91bc9e280744e6e1fe9b673005225ae8c75c71c5b5990109"
     },
     {
       "path": "design/patent-timeout-feedback-review-20261027/revised-manuscript.docx",
-      "bytes": 52079,
-      "sha256": "38b553036583562695f9191fe6d9ec5c4c12414c7e1822544b48b936062b6d66"
+      "bytes": 52393,
+      "sha256": "479d8952c3a9def07ab9183359d72aea6e588c9164e224b0650a45de2ea2b8ec"
     },
     {
       "path": "design/patent-timeout-feedback-review-20261027/revised-manuscript.md",
