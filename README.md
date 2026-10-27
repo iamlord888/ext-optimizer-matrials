@@ -18,6 +18,8 @@ The business objective is to bound each slow candidate's trial execution and ret
 - [完整修订稿Word版 / Complete revised manuscript in Word](design/patent-timeout-feedback-review-20261027/revised-manuscript.docx)
 - [配对Markdown正文 / Paired manuscript source](design/patent-timeout-feedback-review-20261027/revised-manuscript.md)
 - [Word排版与同步约定 / Word formatting and synchronization](design/patent-timeout-feedback-review-20261027/WORD_FORMAT.md)
+- [缩略语与关键术语Word / Abbreviations and terminology](design/patent-timeout-feedback-terminology-20261027/terms.docx)：7项缩略语、15条术语解释 / 7 abbreviations and 15 definitions
+- [术语文字稿 / Terminology source](design/patent-timeout-feedback-terminology-20261027/terms.md) · [HTML阅读版 / HTML reading copy](design/patent-timeout-feedback-terminology-20261027/Terms.html)
 - [七页中文汇报文稿 / Chinese slide text](design/patent-timeout-feedback-idea-slides.md)
 - [英文汇报文稿 / English slide text](design/patent-timeout-feedback-idea-slides-en.md)
 - [PPT 内容与拟保护点修订建议 / Slide and protection recommendations](design/patent-timeout-feedback-protection-review.md)
