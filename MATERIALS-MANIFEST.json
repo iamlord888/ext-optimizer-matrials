@@ -257,8 +257,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-disclosure-draft.md",
-      "bytes": 47601,
-      "sha256": "c241eec4d3980800046bf9e00b4075d4036a72e9be7c37bdbe957a106957eb88"
+      "bytes": 49540,
+      "sha256": "18bf5b5d28d8a931e178545a28f8b1695f9e9a499334331c3b92333490f2e77e"
     },
     {
       "path": "design/patent-timeout-feedback-figures/html/fig3-executor-observation-flow.html",
@@ -402,13 +402,13 @@
     },
     {
       "path": "design/patent-timeout-feedback-idea-slides-en.md",
-      "bytes": 16722,
-      "sha256": "569f04e5d6a718448b5e1c961d16ee5fa0541498afdb1976a25bb77a1e7abcb1"
+      "bytes": 16816,
+      "sha256": "dbd71a2ad2c2e82c551bcbfc2952668a34bac76a67352d91ed32a6062eed9def"
     },
     {
       "path": "design/patent-timeout-feedback-idea-slides.md",
-      "bytes": 14715,
-      "sha256": "a52c6207339f9da3cddf6b07df0174dc19aba4fbb3889b048b43eccfd0b8ed0e"
+      "bytes": 14547,
+      "sha256": "b3921b0d2097411189c18232ed2727d475210ae9da0a4a0305b08c56ab7d2095"
     },
     {
       "path": "design/patent-timeout-feedback-job-execution-attribution.md",
@@ -417,8 +417,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-manuscript-audit.md",
-      "bytes": 45911,
-      "sha256": "dc58083646277dee64c9b1ba02e7af183cbf6601e0c8e47e8376ca302896ca12"
+      "bytes": 48250,
+      "sha256": "2cf6bd8bc5f628f2ccce57fafb9fd6791f59b1930def99b6e5b8a27cefefd43a"
     },
     {
       "path": "design/patent-timeout-feedback-microsoft-papers-manuals.md",
@@ -469,6 +469,11 @@
       "path": "design/patent-timeout-feedback-related-papers-manuals.md",
       "bytes": 12685,
       "sha256": "9d2936c8dc48fe4a5bbbf89c09cda580dc731da5ff9552b993db9dca62b382fb"
+    },
+    {
+      "path": "design/patent-timeout-feedback-review-20261027/revised-manuscript.md",
+      "bytes": 30014,
+      "sha256": "96ed87956f3ada519b7b8b561c0b32d39de17b6d40d3e24545a56299161fd2bf"
     },
     {
       "path": "design/patent-translations/README.md",

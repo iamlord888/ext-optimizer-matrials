@@ -252,6 +252,18 @@ English: Embodiment 2 now explains how to locate node statistics, preserve them 
 
 English: Embodiment 2 restores concrete GaussDB data sources, pointer traversal, capture timing and invocation/EOF interpretation while keeping prose paragraphs. A hypothetical node with an estimate of 1000 rows and 2400 rows returned before cancellation illustrates the captured facts. Qualification remains in Embodiment 3; transport and plan-reconstruction details remain outside this narrative.
 
+## 十六、2026-10-27 将联合审阅意见写回正文
+
+本轮根据用户自整理稿及两轮Gemini网页复核结果，实际修订交底书正文，并生成保留用户章节结构的完整修订稿`patent-timeout-feedback-review-20261027/revised-manuscript.md`。原始粘贴文本保持不变；修改前的交底书和核对记录保存在同目录的before-revision文件中。
+
+正文已落实的修改包括：减少背景重复并限定部分反馈含义；补充Oracle首次完整或部分执行用于同一或等价查询后续优化的事实；明确统计采集单元与调优工具的衔接；将自适应期限的完整时间来源限定为反馈迭代中正常完成并保留的候选；补充再次执行、累计行数比较和提前停止取数的具体处理；提前定义B并补齐跨轮合并前提；用B=E=5000时2400为NONE、6400为下界、7200为精确值的完整示例替换旧例；创新点改为自然段；补全历史实验条件，保留约11秒恢复候选未正式交付的身份。中英文之间的空格和调优工具的称呼同步统一。
+
+交底书与PPT中英文文稿的期限来源、合并前提和数值示例同步调整。图5、图6等既有配图中的判定规则和独立节点示例未使用被替换的B5000/下界2400流程，因此没有重绘图片或重新导出PPTX；本轮PPT相关修改限于Markdown文稿。
+
+源码边界仍保持明确：本地EOF不能普遍证明无未来首次再次执行，当前累计计数没有在所有路径上统一，正常完成路径也未完整判断提前停止子树。跨轮有效性与矛盾统计不参与合并是本次正文明确的方法条件，当前原型仍采用原有优先级与诊断处理；本文修订不代表已开发新的适用性校验或完成相关回归。具体依据和逐章节落实记录见`patent-timeout-feedback-review-20261027/implementation-evidence.md`及`revision-notes.md`。
+
+English: The joint review has now been applied to the disclosure and to a complete manuscript following the user's structure. The deadline source, qualified-merge conditions, coherent B=E example and experimental distinctions are aligned with the slide manuscripts. Proposed qualification and conflict conditions remain separate from implementation gaps; no runtime changes or new benchmark results are claimed.
+
 ## 来源说明
 
 - 两篇 PDF 已按其本地文件的 **PDF 页码**逐页核对，论文内印刷页号可能不同。
