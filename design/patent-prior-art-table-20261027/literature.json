@@ -1,6 +1,6 @@
 {
   "title": "现有技术文献信息表",
-  "scope": "共13项文献。专利位置按B2原始PDF定位；PDF页码从文件第1页起算，书内页码另注。",
+  "scope": "共13项文献。专利位置按A1原始PDF定位；PDF页码从文件第1页起算，书内页码另注。",
   "headers": [
     "国别及文献号／非专利文献出版信息（卷期或版本）",
     "公开日期",
@@ -10,14 +10,14 @@
   "records": [
     {
       "english_title": "System, Method, and Computer Program Product for Progressive Query Processing",
-      "publication": "United States (US): US7716215B2; application publication: US20080177722A1",
-      "date": "2008-07-24（A1公开）；2010-05-11（B2授权公告）",
+      "publication": "United States (US): US20080177722A1",
+      "date": "2008-07-24",
       "sources": [
         {
-          "url": "https://patentimages.storage.googleapis.com/b1/07/18/edc8bbe72b0545/US7716215.pdf"
+          "url": "https://patentimages.storage.googleapis.com/98/17/13/f551757d85a3c6/US20080177722A1.pdf"
         }
       ],
-      "locations": "B2：PDF第21–25页（栏5–14）；第9页图7；第27–28页权利要求1。"
+      "locations": "PDF第20–24页；第8页图7。"
     },
     {
       "english_title": "LEO - DB2's LEarning Optimizer",
@@ -54,14 +54,14 @@
     },
     {
       "english_title": "Leveraging Query-Specific Statistics in Non-Equivalent Queries",
-      "publication": "United States (US): US11321317B2; application publication: US20170357692A1",
-      "date": "2017-12-14（A1公开）；2022-05-03（B2授权公告）",
+      "publication": "United States (US): US20170357692A1",
+      "date": "2017-12-14",
       "sources": [
         {
-          "url": "https://patentimages.storage.googleapis.com/cb/c7/fc/7708e63e84221e/US11321317.pdf"
+          "url": "https://patentimages.storage.googleapis.com/d6/b3/46/ea4d370f789666/US20170357692A1.pdf"
         }
       ],
-      "locations": "B2：PDF第14–15页；第3–4页图1–2；第18–20页；第6页图4；第31–32页权利要求1、7、10–12、16。"
+      "locations": "PDF第13–14页、第17–20页；第2–3页图1–2；第5页图4。"
     },
     {
       "english_title": "Adaptive Statistics in Oracle 12c",
@@ -87,14 +87,14 @@
     },
     {
       "english_title": "Query Progress Estimation",
-      "publication": "United States (US): US7493337B2; application publication: US20050222965A1",
-      "date": "2005-10-06（A1公开）；2009-02-17（B2授权公告）",
+      "publication": "United States (US): US20050222965A1",
+      "date": "2005-10-06",
       "sources": [
         {
-          "url": "https://patentimages.storage.googleapis.com/b8/cf/5c/890c5855ff3c28/US7493337.pdf"
+          "url": "https://patentimages.storage.googleapis.com/4e/ca/94/ff92902d607fdb/US20050222965A1.pdf"
         }
       ],
-      "locations": "B2：PDF第20–21页；第13页图12；第24–25页权利要求22–33、42。"
+      "locations": "PDF第19–20页；第12页图12。"
     },
     {
       "english_title": "Estimating Progress of Execution for SQL Queries",
