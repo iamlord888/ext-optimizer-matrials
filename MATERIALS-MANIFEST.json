@@ -27,8 +27,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 9074,
-      "sha256": "0eac552c484b9d0af91c7e59fd32083ddb871cabe9c673c007c4110b3b45ab24"
+      "bytes": 9463,
+      "sha256": "53e91fa5f377a3b33c35164a3fe5e7a689a5e3a8cd642a9ff419e6411af4b8ab"
     },
     {
       "path": "contrib/extopt-gaussdb/extopt--1.0.sql",
@@ -469,6 +469,21 @@
       "path": "design/patent-timeout-feedback-related-papers-manuals.md",
       "bytes": 12685,
       "sha256": "9d2936c8dc48fe4a5bbbf89c09cda580dc731da5ff9552b993db9dca62b382fb"
+    },
+    {
+      "path": "design/patent-timeout-feedback-review-20261027/WORD_FORMAT.md",
+      "bytes": 1425,
+      "sha256": "e5f1f2fcbf245cdde4839d8068057f2e2201fac9172d2e7f932f4f6281328226"
+    },
+    {
+      "path": "design/patent-timeout-feedback-review-20261027/export_word.py",
+      "bytes": 10861,
+      "sha256": "bd2fd89308cdcb74661acf6541d9d39327b03c33d0ab464a1ad2ecfbd2a5351f"
+    },
+    {
+      "path": "design/patent-timeout-feedback-review-20261027/revised-manuscript.docx",
+      "bytes": 52079,
+      "sha256": "38b553036583562695f9191fe6d9ec5c4c12414c7e1822544b48b936062b6d66"
     },
     {
       "path": "design/patent-timeout-feedback-review-20261027/revised-manuscript.md",

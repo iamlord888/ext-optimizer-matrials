@@ -14,7 +14,10 @@ The business objective is to bound each slow candidate's trial execution and ret
 
 ## 文稿 / Documents
 
-- [专利交底书底稿（2026-10-26 修订）/ Disclosure draft, revised 2026-10-26](design/patent-timeout-feedback-disclosure-draft.md)
+- [专利交底书底稿（2026-10-27修订）/ Disclosure draft, revised 2026-10-27](design/patent-timeout-feedback-disclosure-draft.md)
+- [完整修订稿Word版 / Complete revised manuscript in Word](design/patent-timeout-feedback-review-20261027/revised-manuscript.docx)
+- [配对Markdown正文 / Paired manuscript source](design/patent-timeout-feedback-review-20261027/revised-manuscript.md)
+- [Word排版与同步约定 / Word formatting and synchronization](design/patent-timeout-feedback-review-20261027/WORD_FORMAT.md)
 - [七页中文汇报文稿 / Chinese slide text](design/patent-timeout-feedback-idea-slides.md)
 - [英文汇报文稿 / English slide text](design/patent-timeout-feedback-idea-slides-en.md)
 - [PPT 内容与拟保护点修订建议 / Slide and protection recommendations](design/patent-timeout-feedback-protection-review.md)
