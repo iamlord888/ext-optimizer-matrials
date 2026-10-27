@@ -1,0 +1,155 @@
+{
+  "title": "现有技术文献信息表",
+  "scope": "共13项文献。专利位置按B2原始PDF定位；PDF页码从文件第1页起算，书内页码另注。",
+  "headers": [
+    "国别及文献号／非专利文献出版信息（卷期或版本）",
+    "公开日期",
+    "文档来源",
+    "相关段落、图、页码或章节"
+  ],
+  "records": [
+    {
+      "english_title": "System, Method, and Computer Program Product for Progressive Query Processing",
+      "publication": "United States (US): US7716215B2; application publication: US20080177722A1",
+      "date": "2008-07-24（A1公开）；2010-05-11（B2授权公告）",
+      "sources": [
+        {
+          "url": "https://patentimages.storage.googleapis.com/b1/07/18/edc8bbe72b0545/US7716215.pdf"
+        }
+      ],
+      "locations": "B2：PDF第21–25页（栏5–14）；第9页图7；第27–28页权利要求1。"
+    },
+    {
+      "english_title": "LEO - DB2's LEarning Optimizer",
+      "publication": "Proceedings of the 27th International Conference on Very Large Data Bases (VLDB 2001), pp.19–28.",
+      "date": "2001-09-11",
+      "sources": [
+        {
+          "url": "https://www.vldb.org/conf/2001/P019.pdf"
+        }
+      ],
+      "locations": "PDF第3页§3、图1；第5页§4.2–4.3。"
+    },
+    {
+      "english_title": "Robust Query Processing through Progressive Optimization",
+      "publication": "Proceedings of the 2004 ACM SIGMOD International Conference on Management of Data, pp.659–670.",
+      "date": "2004-06-13",
+      "sources": [
+        {
+          "url": "https://dsf.berkeley.edu/cs286/papers/robust-sigmod2004.pdf"
+        }
+      ],
+      "locations": "PDF第3页§2、图1；第5–6页§2.3；第6–7页§3.1–3.3。"
+    },
+    {
+      "english_title": "Progressive Optimization in Action",
+      "publication": "Proceedings of the 30th International Conference on Very Large Data Bases (VLDB 2004), pp.1337–1340.",
+      "date": "2004年",
+      "sources": [
+        {
+          "url": "https://www.vldb.org/conf/2004/DEMP22.PDF"
+        }
+      ],
+      "locations": "PDF第2页图1；第3页§3.1–3.2。"
+    },
+    {
+      "english_title": "Leveraging Query-Specific Statistics in Non-Equivalent Queries",
+      "publication": "United States (US): US11321317B2; application publication: US20170357692A1",
+      "date": "2017-12-14（A1公开）；2022-05-03（B2授权公告）",
+      "sources": [
+        {
+          "url": "https://patentimages.storage.googleapis.com/cb/c7/fc/7708e63e84221e/US11321317.pdf"
+        }
+      ],
+      "locations": "B2：PDF第14–15页；第3–4页图1–2；第18–20页；第6页图4；第31–32页权利要求1、7、10–12、16。"
+    },
+    {
+      "english_title": "Adaptive Statistics in Oracle 12c",
+      "publication": "Proceedings of the VLDB Endowment (PVLDB), 2017, Vol.10, No.12, pp.1813–1824.",
+      "date": "2017-08",
+      "sources": [
+        {
+          "url": "https://www.vldb.org/pvldb/vol10/p1813-zait.pdf"
+        }
+      ],
+      "locations": "PDF第8页§3.2.2、§3.3.1；第9页§3.3.2。"
+    },
+    {
+      "english_title": "Oracle Database SQL Tuning Guide",
+      "publication": "12c Release 1 (12.1), E49106-14, July 2017.",
+      "date": "2017-07（所引版本）",
+      "sources": [
+        {
+          "url": "https://docs.oracle.com/database/121/TGSQL/E49106-14.pdf"
+        }
+      ],
+      "locations": "§4.4.1.2：PDF第74页／书内4-14；§4.4.2.2.1：PDF第81–82页／书内4-21至4-22；§10.4.2–10.4.2.2：PDF第286–290页／书内10-18至10-22。"
+    },
+    {
+      "english_title": "Query Progress Estimation",
+      "publication": "United States (US): US7493337B2; application publication: US20050222965A1",
+      "date": "2005-10-06（A1公开）；2009-02-17（B2授权公告）",
+      "sources": [
+        {
+          "url": "https://patentimages.storage.googleapis.com/b8/cf/5c/890c5855ff3c28/US7493337.pdf"
+        }
+      ],
+      "locations": "B2：PDF第20–21页；第13页图12；第24–25页权利要求22–33、42。"
+    },
+    {
+      "english_title": "Estimating Progress of Execution for SQL Queries",
+      "publication": "Proceedings of the 2004 ACM SIGMOD International Conference on Management of Data, pp.803–814.",
+      "date": "2004-06-13",
+      "sources": [
+        {
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/progress-1.pdf"
+        }
+      ],
+      "locations": "PDF第5–6页§4.1–4.2；第12页Appendix B。"
+    },
+    {
+      "english_title": "Operator and Query Progress Estimation in Microsoft SQL Server Live Query Statistics",
+      "publication": "Proceedings of the 2016 International Conference on Management of Data (SIGMOD2016), pp.1753–1764.",
+      "date": "2016-06-26",
+      "sources": [
+        {
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/qprog.pdf"
+        }
+      ],
+      "locations": "PDF第6页§4.2；第12页Appendix A；第11页参考文献[7]。"
+    },
+    {
+      "english_title": "Live query statistics",
+      "publication": "Microsoft Learn, SQL Server documentation, view=sql-server-ver17 (online).",
+      "date": "首次公开日期未载明",
+      "sources": [
+        {
+          "url": "https://learn.microsoft.com/en-us/sql/relational-databases/performance/live-query-statistics?view=sql-server-ver17"
+        }
+      ],
+      "locations": "页面引言；“View live query statistics for one query”；“View live query statistics for any query”；“Remarks”。"
+    },
+    {
+      "english_title": "sys.dm_exec_query_profiles (Transact-SQL)",
+      "publication": "Microsoft Learn, SQL Server documentation, view=sql-server-ver17 (online).",
+      "date": "首次公开日期未载明",
+      "sources": [
+        {
+          "url": "https://learn.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-objects/sys-dm-exec-query-profiles-transact-sql?view=sql-server-ver17"
+        }
+      ],
+      "locations": "“Table Returned”；“General Remarks”；“Examples”。"
+    },
+    {
+      "english_title": "Logical and physical showplan operator reference",
+      "publication": "Microsoft Learn, SQL Server documentation, view=sql-server-ver17 (online).",
+      "date": "首次公开日期未载明",
+      "sources": [
+        {
+          "url": "https://learn.microsoft.com/en-us/sql/relational-databases/showplan-logical-and-physical-operators-reference?view=sql-server-ver17"
+        }
+      ],
+      "locations": "“Physical operators”；“Rebinds, rewinds, and end-of-scans”；“How to read an execution plan”。"
+    }
+  ]
+}
