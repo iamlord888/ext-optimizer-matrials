@@ -232,6 +232,16 @@ English: The Chinese disclosure was reviewed throughout for explicit object owne
 
 English: The Oracle comparison now covers in-flight reoptimization and stored execution information for later queries. The Microsoft related-art section is limited to progress estimation and associated LQS interfaces, contrasting that purpose with next-round plan optimization. CE-feedback material is omitted from the disclosure while its independent research evidence is preserved.
 
+## 十四、2026-10-27 按统计采集的核心过程简化实施例二
+
+实施例二改为“找到节点统计—清理前保存—识别调用状态和本地 EOF—交由后续行数判定”四个步骤，统一使用数据库执行器和调优器两个已在系统架构中说明的对象。不再以服务端、客户端、适配层的分工作为叙述主线。
+
+正文删除具体函数名、字段清单、active/terminal 的字段计算式、通信和错误处理细节，以及客户端重新规划并核对计划的实现过程。保留 GaussDB 的简短对象示例，说明 PlanState 中的指针分别指向计划信息和执行统计；实现依据仍见 [C2]、[C3] 所列源码，图 3、图 4 继续展示具体来源与采集时点。
+
+技术边界保留：统计在取消清理前取得，本地 EOF 与当前无调用不能证明后续不会再次执行，缺少统计不等于零行，正常完成也可提供行数反馈。实施例三、四继续负责行数适用条件、分类和合并。本轮只调整实施例二及其图注，其他实施例、期限与合并公式、实验数据及恢复候选身份不变。
+
+English: Embodiment 2 now explains how to locate node statistics, preserve them before cleanup, distinguish invocation state from local EOF, and pass the observations to feedback qualification. A short GaussDB example remains, while function names, field formulas, transport details and client-side plan reconstruction are omitted from the main narrative. The technical limits and the other embodiments are unchanged.
+
 ## 来源说明
 
 - 两篇 PDF 已按其本地文件的 **PDF 页码**逐页核对，论文内印刷页号可能不同。

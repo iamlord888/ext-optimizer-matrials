@@ -1,5 +1,5 @@
 {
-  "prepared_date": "2026-10-26",
+  "prepared_date": "2026-10-27",
   "source_repository": "https://gitcode.com/ext-optimizer-group/ext-optimizer",
   "source_base_commit": "7bca7479cfe77bc19c556ecf33a3f8c590263b53",
   "source_state": "working tree snapshot; publishing copies normalize local document links and use LF text line endings",
@@ -257,8 +257,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-disclosure-draft.md",
-      "bytes": 49909,
-      "sha256": "bb5db553535c1218480ff08fda8dc50e6fe3019fcf8a807d8e568efda31d4e72"
+      "bytes": 47096,
+      "sha256": "6fea26beda7906c289bf403cb1c0c7ffe2225d6f3c433bd47cdb7cc12093af98"
     },
     {
       "path": "design/patent-timeout-feedback-figures/html/fig3-executor-observation-flow.html",
@@ -417,8 +417,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-manuscript-audit.md",
-      "bytes": 42562,
-      "sha256": "d96730e6750b86b3a7be615cd9e2cb611b14c3f2168ec80da4706dcfe839800f"
+      "bytes": 44125,
+      "sha256": "704923c6d88668b588d8a517990cbff16f5fe678c7e7924ec87f0f0baf7e3894"
     },
     {
       "path": "design/patent-timeout-feedback-microsoft-papers-manuals.md",
