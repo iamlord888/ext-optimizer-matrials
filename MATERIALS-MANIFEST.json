@@ -27,8 +27,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 9463,
-      "sha256": "53e91fa5f377a3b33c35164a3fe5e7a689a5e3a8cd642a9ff419e6411af4b8ab"
+      "bytes": 9675,
+      "sha256": "43efe24945e237ed5d07a2d5bbf37b185833484b886685f211c96083d022f51e"
     },
     {
       "path": "contrib/extopt-gaussdb/extopt--1.0.sql",
@@ -267,8 +267,8 @@
     },
     {
       "path": "design/patent-timeout-feedback-figures/html/index.html",
-      "bytes": 5654,
-      "sha256": "adcc6e68ce8c47d3d56928b594a55304c40a2c287f17b60ec2aa993341c0ffcc"
+      "bytes": 5656,
+      "sha256": "95576d7c59f39779565f02e03693b18b8789cbe48ad7c29e81e5306067ce2b35"
     },
     {
       "path": "design/patent-timeout-feedback-figures/png/fig1-conventional.png",
@@ -307,13 +307,13 @@
     },
     {
       "path": "design/patent-timeout-feedback-figures/png/fig8-tuning-duration.png",
-      "bytes": 95307,
-      "sha256": "f09857caf969fd6f1c0c6f2efda5d0269ed472cca53d02c3315a34270da83ee1"
+      "bytes": 128521,
+      "sha256": "3939765ff68ca36851aadc1caf8200be57ab4f1c0369c0b9eb200f89879c2103"
     },
     {
       "path": "design/patent-timeout-feedback-figures/png/fig9-execution-effect.png",
-      "bytes": 117736,
-      "sha256": "7f9fce8eaa6e31d5f9c052daa28a1aa2687cfecb7920557957e09a52927977b9"
+      "bytes": 136072,
+      "sha256": "8739f78a4254e270d2b8c506b503cb9dab2aa3d9571f9f5cd11f565a12be3a63"
     },
     {
       "path": "design/patent-timeout-feedback-figures/pptx/fig1-conventional.pptx",
@@ -352,13 +352,13 @@
     },
     {
       "path": "design/patent-timeout-feedback-figures/pptx/fig8-tuning-duration.pptx",
-      "bytes": 21083,
-      "sha256": "3a4aac2b5649c2325328de2bac257fbc709761db050b80a53118cb1f48c495ef"
+      "bytes": 26240,
+      "sha256": "847f2c283a20a605f1354f6d206e13f6d7457e05c184a68124b66ebba8db2a48"
     },
     {
       "path": "design/patent-timeout-feedback-figures/pptx/fig9-execution-effect.pptx",
-      "bytes": 22285,
-      "sha256": "af8f1e69cab0e2600810791ccaecdd45cb9c099af40ba5788a8bf1328bcfe5f7"
+      "bytes": 33255,
+      "sha256": "55140024d30266bce67fa3bc6d35871face8c2f22cbdaa3e0a4cdfd1b8489289"
     },
     {
       "path": "design/patent-timeout-feedback-figures/svg/fig1-conventional.svg",

@@ -34,9 +34,9 @@ The business objective is to bound each slow candidate's trial execution and ret
 
 ## 配图 / Figures
 
-每张图只保留当前版本，同一图在不同格式中使用相同文件名。PNG 和 SVG 为约一页 16:9 PPT 高度的三分之一，PPTX 中的文字、形状和图表可以编辑。
+每张图只保留当前版本，同一图在不同格式中使用相同文件名。图1—7沿用横向版式；图8、图9两张柱状图按16:9幻灯片的四分之一面积排版（半页宽、半页高），PNG为1920×1080像素。PPTX中的文字、形状和图表均可编辑。
 
-Each figure has one current version and the same filename across formats. PNG and SVG figures occupy about one third of a 16:9 slide's height. Text, shapes and charts in the PPTX files remain editable.
+Each figure has one current version and the same filename across formats. Figures 1–7 retain their horizontal layout. The bar charts in Figures 8 and 9 occupy one quarter of a 16:9 slide (half its width and half its height); their PNGs are 1920×1080 pixels. Text, shapes and charts in the PPTX files remain editable.
 
 - [PNG](design/patent-timeout-feedback-figures/png/)：9 张图片 / 9 images
 - [SVG](design/patent-timeout-feedback-figures/svg/)：7 张技术图 / 7 technical diagrams
