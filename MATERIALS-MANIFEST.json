@@ -257,8 +257,8 @@
     },
     {
       "path": "design/patent-prior-art-table-20261027/Literature.html",
-      "bytes": 7572,
-      "sha256": "b47ae1aa558446e6a5d70b0c6c3533768e7413c0254b3b85fd96a51dee146ea6"
+      "bytes": 7563,
+      "sha256": "c23dacd327143e73235ec073b5783f42f8dbcb0cca737f293d3191018f76f18d"
     },
     {
       "path": "design/patent-prior-art-table-20261027/build_table.py",
@@ -272,18 +272,18 @@
     },
     {
       "path": "design/patent-prior-art-table-20261027/literature.docx",
-      "bytes": 40370,
-      "sha256": "f80d4cd83aafb108a150defc94625c83c5eedc76ce7ab14edc1552266f4ca238"
+      "bytes": 40362,
+      "sha256": "498fca0872d826b40d985cff2d722038d015e68bb79dc65b77119d0cbb5a52b0"
     },
     {
       "path": "design/patent-prior-art-table-20261027/literature.json",
-      "bytes": 6729,
-      "sha256": "ed45c88f1ac40913f238ab8d8baf3f0b08a6614f64062e79710591e30ba8018b"
+      "bytes": 6720,
+      "sha256": "2fb12e5803922cd6af0348b69dd04d19a019353f98f148aaab2d021307195f60"
     },
     {
       "path": "design/patent-prior-art-table-20261027/literature.md",
-      "bytes": 4472,
-      "sha256": "52096aa2853934b4d3e00c65c99bc636b63ff2be9ef88fc15788c6aaebe91273"
+      "bytes": 4463,
+      "sha256": "7680175b36970d96c456e77d9229bb59a6f32d51046cb0e0fb443631d2bd933a"
     },
     {
       "path": "design/patent-timeout-feedback-disclosure-draft.md",
