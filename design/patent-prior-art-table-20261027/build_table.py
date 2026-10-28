@@ -17,6 +17,7 @@ from pathlib import Path
 from docx import Document
 from docx.enum.section import WD_ORIENT
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_CELL_VERTICAL_ALIGNMENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Inches, Mm, Pt
@@ -39,7 +40,7 @@ def display_date(value):
 def record_cells(record):
     """Keep document identity, dates, source links and exact locations together."""
     identity = f"**{record['english_title']}**\n{record['publication']}"
-    sources = "\n".join(f"[{item['url']}]({item['url']})" for item in record["sources"][:1] if item["url"])
+    sources = "\n".join(f"[{item['label']}]({item['url']})" for item in record["sources"][:1] if item["url"])
     return [identity, display_date(record["date"]), sources, record["locations"]]
 
 
@@ -64,7 +65,7 @@ def build_word(data):
         table.alignment = WD_TABLE_ALIGNMENT.CENTER
         table.autofit = False
         table.style = "Table Grid"
-        widths = (4.5, 1.2, 2.5, 2.3)
+        widths = (4.5, 1.2, 1.0, 2.3)
         for column, width in zip(table.columns, widths):
             column.width = Inches(width)
         for index, (row, values) in enumerate(zip(table.rows, cells)):
@@ -72,13 +73,16 @@ def build_word(data):
             properties.append(OxmlElement("w:cantSplit"))
             if index == 0:
                 properties.append(OxmlElement("w:tblHeader"))
-            for cell, width, value in zip(row.cells, widths, values):
+            for column_index, (cell, width, value) in enumerate(zip(row.cells, widths, values)):
                 cell.width = Inches(width)
                 cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.TOP
                 paragraph = cell.paragraphs[0]
                 WORD.format_paragraph(paragraph, indent=False)
                 paragraph.paragraph_format.space_before = Pt(3)
                 paragraph.paragraph_format.space_after = Pt(3)
+                if column_index == 2:
+                    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                    cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
                 if index == 0:
                     run = paragraph.add_run(value)
                     WORD.apply_font(run._r.get_or_add_rPr(), bold=True)
@@ -87,6 +91,14 @@ def build_word(data):
                     cell._tc.get_or_add_tcPr().append(fill)
                 else:
                     WORD.add_inline(paragraph, value, ROOT / "literature.md")
+                    if column_index == 2:
+                        for properties in paragraph._p.xpath(".//w:hyperlink/w:r/w:rPr"):
+                            color = OxmlElement("w:color")
+                            color.set(qn("w:val"), "315B78")
+                            properties.append(color)
+                            underline = OxmlElement("w:u")
+                            underline.set(qn("w:val"), "single")
+                            properties.append(underline)
         anchor._p.addnext(table._tbl)
         output = ROOT / "literature.docx"
         document.save(output)
@@ -111,12 +123,12 @@ def build_html(data):
     for record in data["records"]:
         identity = f'<strong>{esc(record["english_title"])}</strong><p>{esc(record["publication"])}</p>'
         dates = esc(display_date(record["date"])).replace("\n", "<br>")
-        sources = '<br>'.join(f'<a href="{esc(item["url"], quote=True)}" target="_blank" rel="noreferrer">{esc(item["url"])}</a>' for item in record['sources'][:1] if item['url'])
+        sources = '<br>'.join(f'<a href="{esc(item["url"], quote=True)}" target="_blank" rel="noreferrer">{esc(item["label"])}</a>' for item in record['sources'][:1] if item['url'])
         rows.append('<tr>' + ''.join('<td>' + value + '</td>' for value in [identity, dates, sources, esc(record['locations'])]) + '</tr>')
     headers = '<tr>' + ''.join('<th scope="col">' + esc(value) + '</th>' for value in data['headers']) + '</tr>'
     page = '''<!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="data:,"><title>现有技术文献信息表</title><style>
-doc-page:not(:defined){visibility:hidden}body{margin:0}doc-page{font-family:"Songti SC","SimSun",serif;font-size:16px;line-height:1.75;color:#202020}h1{font-size:27px;line-height:1.4;margin:0 0 18px}h2{font-size:21px;margin:32px 0 14px}p{margin:12px 0;overflow-wrap:break-word}nav{display:flex;flex-wrap:wrap;gap:12px 24px;margin-bottom:24px;font-family:-apple-system,"PingFang SC",sans-serif;font-size:14px}a{color:#315b78;text-underline-offset:4px}table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15px;line-height:1.65}th,td{padding:11px;border:1px solid #c8c8c8;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#f2f2f2;font-weight:700}td p{margin:8px 0 0}th:nth-child(1){width:37%}th:nth-child(2){width:14%}th:nth-child(3){width:26%}th:nth-child(4){width:23%}@media screen and (max-width:1250px){doc-page{min-width:0;padding:24px 16px;--doc-page-w:min(12in,calc(100vw - 32px))!important;--doc-page-margin:24px!important}}@media screen and (max-width:600px){doc-page{font-size:15px}table{font-size:13px}th,td{padding:7px}h1{font-size:23px}}@media print{nav{display:none}}
+doc-page:not(:defined){visibility:hidden}body{margin:0}doc-page{font-family:"Songti SC","SimSun",serif;font-size:16px;line-height:1.75;color:#202020}h1{font-size:27px;line-height:1.4;margin:0 0 18px}h2{font-size:21px;margin:32px 0 14px}p{margin:12px 0;overflow-wrap:break-word}nav{display:flex;flex-wrap:wrap;gap:12px 24px;margin-bottom:24px;font-family:-apple-system,"PingFang SC",sans-serif;font-size:14px}a{color:#315b78;text-underline-offset:4px}table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15px;line-height:1.65}th,td{padding:11px;border:1px solid #c8c8c8;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#f2f2f2;font-weight:700}td p{margin:8px 0 0}th:nth-child(1){width:48%}th:nth-child(2){width:13%}th:nth-child(3){width:11%}th:nth-child(4){width:28%}td:nth-child(3),th:nth-child(3){text-align:center;vertical-align:middle;white-space:nowrap}@media screen and (max-width:1250px){doc-page{min-width:0;padding:24px 16px;--doc-page-w:min(12in,calc(100vw - 32px))!important;--doc-page-margin:24px!important}}@media screen and (max-width:600px){doc-page{font-size:15px}table{font-size:13px}th,td{padding:7px}h1{font-size:23px}}@media print{nav{display:none}}
 </style></head><body><doc-page orientation="landscape" margin="0.55in"><h1>''' + esc(data['title']) + '''</h1><nav aria-label="文档操作"><a href="literature.docx" download>下载Word</a><a href="literature.md" download>下载文字表格</a><a href="../patent-timeout-feedback-terminology-20261027/Terms.html">缩略语与关键术语</a></nav><p>''' + esc(data['scope']) + '</p><table><thead>' + headers + '</thead><tbody>' + '\n'.join(rows) + '</tbody></table></doc-page><script src="doc-page.js"></script></body></html>\n'
     output = ROOT / "Literature.html"
     output.write_text(page, encoding="utf-8")

@@ -14,7 +14,8 @@
       "date": "2008-07-24",
       "sources": [
         {
-          "url": "https://patentimages.storage.googleapis.com/98/17/13/f551757d85a3c6/US20080177722A1.pdf"
+          "url": "https://patentimages.storage.googleapis.com/98/17/13/f551757d85a3c6/US20080177722A1.pdf",
+          "label": "原文PDF"
         }
       ],
       "locations": "PDF第20–24页；第8页图7。"
@@ -25,7 +26,8 @@
       "date": "2001-09-11",
       "sources": [
         {
-          "url": "https://www.vldb.org/conf/2001/P019.pdf"
+          "url": "https://www.vldb.org/conf/2001/P019.pdf",
+          "label": "原文PDF"
         }
       ],
       "locations": "PDF第3页§3、图1；第5页§4.2–4.3。"
@@ -36,7 +38,8 @@
       "date": "2004-06-13",
       "sources": [
         {
-          "url": "https://dsf.berkeley.edu/cs286/papers/robust-sigmod2004.pdf"
+          "url": "https://dsf.berkeley.edu/cs286/papers/robust-sigmod2004.pdf",
+          "label": "原文PDF"
         }
       ],
       "locations": "PDF第3页§2、图1；第5–6页§2.3；第6–7页§3.1–3.3。"
@@ -47,7 +50,8 @@
       "date": "2004年",
       "sources": [
         {
-          "url": "https://www.vldb.org/conf/2004/DEMP22.PDF"
+          "url": "https://www.vldb.org/conf/2004/DEMP22.PDF",
+          "label": "原文PDF"
         }
       ],
       "locations": "PDF第2页图1；第3页§3.1–3.2。"
@@ -58,7 +62,8 @@
       "date": "2017-12-14",
       "sources": [
         {
-          "url": "https://patentimages.storage.googleapis.com/d6/b3/46/ea4d370f789666/US20170357692A1.pdf"
+          "url": "https://patentimages.storage.googleapis.com/d6/b3/46/ea4d370f789666/US20170357692A1.pdf",
+          "label": "原文PDF"
         }
       ],
       "locations": "PDF第13–14页、第17–20页；第2–3页图1–2；第5页图4。"
@@ -69,7 +74,8 @@
       "date": "2017-08",
       "sources": [
         {
-          "url": "https://www.vldb.org/pvldb/vol10/p1813-zait.pdf"
+          "url": "https://www.vldb.org/pvldb/vol10/p1813-zait.pdf",
+          "label": "原文PDF"
         }
       ],
       "locations": "PDF第8页§3.2.2、§3.3.1；第9页§3.3.2。"
@@ -80,7 +86,8 @@
       "date": "2017-07（所引版本）",
       "sources": [
         {
-          "url": "https://docs.oracle.com/database/121/TGSQL/E49106-14.pdf"
+          "url": "https://docs.oracle.com/database/121/TGSQL/E49106-14.pdf",
+          "label": "原文PDF"
         }
       ],
       "locations": "§4.4.1.2：PDF第74页／书内4-14；§4.4.2.2.1：PDF第81–82页／书内4-21至4-22；§10.4.2–10.4.2.2：PDF第286–290页／书内10-18至10-22。"
@@ -91,7 +98,8 @@
       "date": "2005-10-06",
       "sources": [
         {
-          "url": "https://patentimages.storage.googleapis.com/4e/ca/94/ff92902d607fdb/US20050222965A1.pdf"
+          "url": "https://patentimages.storage.googleapis.com/4e/ca/94/ff92902d607fdb/US20050222965A1.pdf",
+          "label": "原文PDF"
         }
       ],
       "locations": "PDF第19–20页；第12页图12。"
@@ -102,7 +110,8 @@
       "date": "2004-06-13",
       "sources": [
         {
-          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/progress-1.pdf"
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/progress-1.pdf",
+          "label": "原文PDF"
         }
       ],
       "locations": "PDF第5–6页§4.1–4.2；第12页Appendix B。"
@@ -113,7 +122,8 @@
       "date": "2016-06-26",
       "sources": [
         {
-          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/qprog.pdf"
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/qprog.pdf",
+          "label": "原文PDF"
         }
       ],
       "locations": "PDF第6页§4.2；第12页Appendix A；第11页参考文献[7]。"
@@ -124,7 +134,8 @@
       "date": "首次公开日期未载明",
       "sources": [
         {
-          "url": "https://learn.microsoft.com/en-us/sql/relational-databases/performance/live-query-statistics?view=sql-server-ver17"
+          "url": "https://learn.microsoft.com/en-us/sql/relational-databases/performance/live-query-statistics?view=sql-server-ver17",
+          "label": "官方文档"
         }
       ],
       "locations": "页面引言；“View live query statistics for one query”；“View live query statistics for any query”；“Remarks”。"
@@ -135,7 +146,8 @@
       "date": "首次公开日期未载明",
       "sources": [
         {
-          "url": "https://learn.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-objects/sys-dm-exec-query-profiles-transact-sql?view=sql-server-ver17"
+          "url": "https://learn.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-objects/sys-dm-exec-query-profiles-transact-sql?view=sql-server-ver17",
+          "label": "官方文档"
         }
       ],
       "locations": "“Table Returned”；“General Remarks”；“Examples”。"
@@ -146,7 +158,8 @@
       "date": "首次公开日期未载明",
       "sources": [
         {
-          "url": "https://learn.microsoft.com/en-us/sql/relational-databases/showplan-logical-and-physical-operators-reference?view=sql-server-ver17"
+          "url": "https://learn.microsoft.com/en-us/sql/relational-databases/showplan-logical-and-physical-operators-reference?view=sql-server-ver17",
+          "label": "官方文档"
         }
       ],
       "locations": "“Physical operators”；“Rebinds, rewinds, and end-of-scans”；“How to read an execution plan”。"
